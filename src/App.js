@@ -1,28 +1,41 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View, Text, TextInput} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const dic = require('./tokipona-portuguese.json');
 
-const App: () => React$Node = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Toki Pona</Text>
-    </View>
-  );
-};
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      translation: '',
+    };
+  }
+
+  onTextInputChangeText(text) {
+    this.setState({
+      translation: dic[text] || '',
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>TokiPona - Português:</Text>
+
+        <Text style={styles.subtitle}>Digite:</Text>
+        <TextInput
+          onChangeText={text => this.onTextInputChangeText(text)}
+          value={this.state.input}
+          style={styles.inputText}
+        />
+
+        <Text style={styles.subtitle}>Tradução:</Text>
+        <Text style={styles.translation}>{this.state.translation}</Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -32,11 +45,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontSize: 60,
-    color: 'orange',
+  title: {
+    fontSize: 30,
     color: '#337ab7',
   },
+  subtitle: {
+    marginTop: 20,
+    fontSize: 20,
+    color: '#337ab7',
+  },
+  inputText: {
+    backgroundColor: '#fff',
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    padding: 10,
+    width: 300,
+  },
+  translation: {
+    backgroundColor: '#fff',
+    marginTop: 10,
+    padding: 10,
+    width: 300,
+    fontSize: 20,
+  },
 });
-
-export default App;
