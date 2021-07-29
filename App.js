@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 
+import Translation from './components/Translation'
+
 const dic = require('./tokipona-portuguese.json');
 
 export default class App extends Component {
@@ -8,38 +10,27 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      numWords: 1,
-      words: [],
+      translations: [],
     };
   }
 
-  onTextInputChange(text) {
+  // TODO: Remove words on delete
+  onTextInput(text) {
     const typedWords = text.trim().split(' ');
 
-    this.setState({
-      words: typedWords
-    });
-
-    this.setState({
-      numWords: typedWords.length
-    });
-  }
-
-  translations() {
-    const words = (word) => {
-      const list = dic[word] || ''
-      if (list === '') {
-        return null
-      }
-
-      return (
-        <Text>{list}</Text>
-      )
+    const alreadyHasTranslation = (translation) => {
+      return this.state.translations.indexOf(translation) !== -1;
     }
 
-    return (
-      this.state.words.map((word, index) => <Text key={index} style={styles.translation}>{words(word)}</Text>)
-    )
+    typedWords.forEach(word => {
+      const translation = dic[word];
+
+      if (translation !== undefined && !alreadyHasTranslation(translation)) {
+        this.setState({
+          translations: [...this.state.translations, translation]
+        });
+      }
+    })
   }
 
   render() {
@@ -48,13 +39,20 @@ export default class App extends Component {
         <Text style={styles.title}>TokiPona - Português</Text>
 
         <TextInput
-          onChangeText={(text) => this.onTextInputChange(text)}
+          onChangeText={text => this.onTextInput(text)}
           style={styles.inputText}
           placeholder="Digite..."
+          autoFocus={true}
         />
 
         <View style={styles.translations}>
-          { this.translations() }
+          {
+            this.state.translations.map((translation, index) => {
+              return (
+                <Translation text={translation} key={index} />
+              );
+            })
+          }
         </View>
       </View>
     );
@@ -90,17 +88,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: '60%',
     borderRadius: 10,
-  },
-  translation: {
-    backgroundColor: '#dae5ef',
-    alignSelf: 'center',
-    padding: 10,
-    margin: 10,
-    fontSize: 20,
-    height: '60%',
-    borderRadius: 10,
-    flexGrow: 1,
-    flexBasis: 0,
-    width: '100%',
   },
 });
