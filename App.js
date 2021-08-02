@@ -1,36 +1,45 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, TextInput, StyleSheet} from 'react-native';
 
 import Translation from './components/Translation'
 
-const dic = require('./tokipona-portuguese.json');
+const dic = require('./data/tokipona-portuguese.json');
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      words: [],
       translations: [],
     };
   }
 
-  // TODO: Remove words on delete
   onTextInput(text) {
-    const typedWords = text.trim().split(' ');
-
-    const alreadyHasTranslation = (translation) => {
-      return this.state.translations.indexOf(translation) !== -1;
-    }
+    const typedWords = this.sanitizeInput(text).split(' ');
+    let list = [];
 
     typedWords.forEach(word => {
       const translation = dic[word];
 
-      if (translation !== undefined && !alreadyHasTranslation(translation)) {
-        this.setState({
-          translations: [...this.state.translations, translation]
-        });
+      if (translation === undefined) {
+        return;
       }
+
+      this.setState({
+        words: typedWords
+      });
+
+      list.push(translation);
     })
+
+    this.setState({
+      translations: list
+    });
+  }
+
+  sanitizeInput(input) {
+    return input.toLowerCase().replace(/[^a-z\s]/g, '');
   }
 
   render() {
@@ -45,15 +54,15 @@ export default class App extends Component {
           autoFocus={true}
         />
 
-        <View style={styles.translations}>
+        <ScrollView style={styles.translations}>
           {
             this.state.translations.map((translation, index) => {
               return (
-                <Translation text={translation} key={index} />
+                <Translation word={this.state.words[index]} text={translation} key={index} />
               );
             })
           }
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -61,32 +70,32 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     height: '100%',
     backgroundColor: '#42455a',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 30,
   },
   title: {
     fontSize: 30,
     color: '#c3c3c3',
+    marginTop: 40,
     marginBottom: 20,
   },
   inputText: {
-    backgroundColor: '#dae5ef',
+    backgroundColor: '#d6e2ec',
     fontSize: 20,
     marginTop: 10,
-    marginBottom: 15,
+    marginBottom: 30,
     padding: 10,
-    width: 300,
     borderRadius: 10,
+    width: '100%',
   },
   translations: {
     display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
     fontSize: 20,
     height: '60%',
     borderRadius: 10,
+    width: '100%',
   },
 });

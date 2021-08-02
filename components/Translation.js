@@ -1,22 +1,30 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 const Translation = (props) => {
   return (
-    <Text style={styles.translation}>{props.text}</Text>
+    <View style={styles.translationBox}>
+      <Text style={styles.word}>{props.word}</Text>
+      <Text style={styles.translation}>{props.text}</Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  translation: {
-    backgroundColor: '#dae5ef',
-    alignSelf: 'center',
+  translationBox: {
+    backgroundColor: '#d6e2ec',
     padding: 10,
-    margin: 10,
-    fontSize: 20,
+    marginBottom: 15,
     borderRadius: 10,
-    flexGrow: 1,
     width: '100%',
+  },
+  word: {
+    fontSize: 20,
+    color: '#42455a',
+    fontWeight: 'bold',
+  },
+  translation: {
+    fontSize: 20,
   },
 });
 
