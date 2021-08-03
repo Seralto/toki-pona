@@ -1,9 +1,26 @@
 import React, {Component} from 'react';
-import {View, ScrollView, Text, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Text,
+  TextInput,
+  StyleSheet,
+  Button
+} from 'react-native';
 
 import Translation from './components/Translation'
 
-const dic = require('./data/tokipona-portuguese.json');
+const dictionaries = {
+  portuguese: require('./data/tokipona-portuguese.json'),
+  english: require('./data/tokipona-english.json'),
+  spanish: require('./data/tokipona-spanish.json')
+}
+
+const texts = {
+  portuguese: require('./data/texts-portuguese.json'),
+  english: require('./data/texts-english.json'),
+  spanish: require('./data/texts-spanish.json')
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -12,15 +29,16 @@ export default class App extends Component {
     this.state = {
       words: [],
       translations: [],
+      language: 'portuguese',
     };
   }
 
-  onTextInput(text) {
+  onTextInput(text, dictionary) {
     const typedWords = this.sanitizeInput(text).split(' ');
     let list = [];
 
     typedWords.forEach(word => {
-      const translation = dic[word];
+      const translation = dictionary[word];
 
       if (translation === undefined) {
         return;
@@ -42,15 +60,56 @@ export default class App extends Component {
     return input.toLowerCase().replace(/[^a-z\s]/g, '');
   }
 
+  loadText(language) {
+    return texts[language];
+  }
+
+  loadDictionary(language) {
+    return dictionaries[language];
+  }
+
+  changeLanguage(language) {
+    this.setState({
+      language: language
+    });
+
+    this.clear();
+  }
+
+  clear() {
+    this.setState({
+      translations: []
+    });
+
+    this.textInput.clear();
+    this.textInput.focus();
+  }
+
   render() {
+    const text = this.loadText(this.state.language);
+    const dictionary = this.loadDictionary(this.state.language);
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>TokiPona - Português</Text>
+        <Button
+          onPress={() => this.changeLanguage('portuguese')}
+          title="Português"
+          accessibilityLabel="Mude o idioma para português"
+        />
+
+        <Button
+          onPress={() => this.changeLanguage('english')}
+          title="English"
+          accessibilityLabel="Change language to english"
+        />
+
+        <Text style={styles.title}>TokiPona - {text.language}</Text>
 
         <TextInput
-          onChangeText={text => this.onTextInput(text)}
+          onChangeText={text => this.onTextInput(text, dictionary)}
           style={styles.inputText}
-          placeholder="Digite..."
+          placeholder={text.placeholder}
+          ref={input => this.textInput = input}
           autoFocus={true}
         />
 
