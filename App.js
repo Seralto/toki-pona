@@ -90,48 +90,55 @@ export default class App extends Component {
     const dictionary = this.loadDictionary(this.state.language);
 
     return (
-      <View style={styles.container}>
-        <Button
-          onPress={() => this.changeLanguage('portuguese')}
-          title="Português"
-          accessibilityLabel="Mude o idioma para português"
-        />
+      <View style={styles.app}>
+        <ScrollView>
+          <View style={styles.container}>
+            <Text style={styles.title}>TokiPona - {text.language}</Text>
 
-        <Button
-          onPress={() => this.changeLanguage('english')}
-          title="English"
-          accessibilityLabel="Change language to english"
-        />
+            <TextInput
+              onChangeText={text => this.onTextInput(text, dictionary)}
+              style={styles.inputText}
+              placeholder={text.placeholder}
+              ref={input => this.textInput = input}
+              autoFocus={true}
+            />
 
-        <Text style={styles.title}>TokiPona - {text.language}</Text>
-
-        <TextInput
-          onChangeText={text => this.onTextInput(text, dictionary)}
-          style={styles.inputText}
-          placeholder={text.placeholder}
-          ref={input => this.textInput = input}
-          autoFocus={true}
-        />
-
-        <ScrollView style={styles.translations}>
-          {
-            this.state.translations.map((translation, index) => {
-              return (
-                <Translation word={this.state.words[index]} text={translation} key={index} />
-              );
-            })
-          }
+            <ScrollView style={styles.translations}>
+              {
+                this.state.translations.map((translation, index) => {
+                  return (
+                    <Translation word={this.state.words[index]} text={translation} key={index} />
+                  );
+                })
+              }
+            </ScrollView>
+          </View>
         </ScrollView>
+
+        <View style={styles.menu}>
+          <Button
+              onPress={() => this.changeLanguage('portuguese')}
+              title="Português"
+              accessibilityLabel="Mude o idioma para português"
+            />
+
+          <Button
+            onPress={() => this.changeLanguage('english')}
+            title="English"
+            accessibilityLabel="Change language to english"
+          />
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
+  app: {
+    flex: 1,
     backgroundColor: '#42455a',
-    justifyContent: 'center',
+  },
+  container: {
     alignItems: 'center',
     padding: 30,
   },
@@ -151,10 +158,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   translations: {
-    display: 'flex',
     fontSize: 20,
-    height: '60%',
-    borderRadius: 10,
     width: '100%',
   },
+  menu: {
+    // position: 'absolute',
+    // bottom: 0,
+    // width: '100%',
+  }
 });
