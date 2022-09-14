@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
@@ -14,13 +14,13 @@ const dictionaries = {
   portuguese: require('./data/tokipona-portuguese.json'),
   english: require('./data/tokipona-english.json'),
   spanish: require('./data/tokipona-spanish.json')
-}
+};
 
 const texts = {
   portuguese: require('./data/texts-portuguese.json'),
   english: require('./data/texts-english.json'),
   spanish: require('./data/texts-spanish.json')
-}
+};
 
 export default class App extends Component {
   constructor(props) {
@@ -33,8 +33,8 @@ export default class App extends Component {
     };
   }
 
-  onTextInput(text, dictionary) {
-    const typedWords = this.sanitizeInput(text).split(' ');
+  translate(text, dictionary) {
+    const typedWords = this.sanitizeInput(text).split(' ').filter((word) => word);
     let list = [];
 
     typedWords.forEach(word => {
@@ -69,19 +69,10 @@ export default class App extends Component {
   }
 
   changeLanguage(language) {
-    this.setState({
-      language: language
-    });
+    const dictionary = this.loadDictionary(language);
+    const text = this.state.words.join(' ');
 
-    this.clear();
-  }
-
-  clear() {
-    this.setState({
-      translations: []
-    });
-
-    this.textInput.clear();
+    this.translate(text, dictionary);
     this.textInput.focus();
   }
 
@@ -96,7 +87,7 @@ export default class App extends Component {
             <Text style={styles.title}>TokiPona - {text.language}</Text>
 
             <TextInput
-              onChangeText={text => this.onTextInput(text, dictionary)}
+              onChangeText={text => this.translate(text, dictionary)}
               style={styles.inputText}
               placeholder={text.placeholder}
               ref={input => this.textInput = input}
@@ -116,13 +107,13 @@ export default class App extends Component {
         </ScrollView>
 
         <View style={styles.menu}>
-          <Button
-              onPress={() => this.changeLanguage('portuguese')}
-              title="Português"
-              accessibilityLabel="Mude o idioma para português"
-            />
+          <Button style={styles.languageButton}
+            onPress={() => this.changeLanguage('portuguese')}
+            title="Português"
+            accessibilityLabel="Mude o idioma para português"
+          />
 
-          <Button
+          <Button style={styles.languageButton}
             onPress={() => this.changeLanguage('english')}
             title="English"
             accessibilityLabel="Change language to english"
@@ -162,8 +153,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   menu: {
-    // position: 'absolute',
-    // bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'stretch',
+    flex: '1 1 auto'
     // width: '100%',
   }
 });
