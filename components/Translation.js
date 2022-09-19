@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 const Translation = (props) => {
   return (
@@ -8,20 +8,20 @@ const Translation = (props) => {
       <Text style={styles.translation}>{props.text}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   translationBox: {
-    backgroundColor: '#d6e2ec',
+    backgroundColor: "#d6e2ec",
     padding: 10,
     marginBottom: 15,
     borderRadius: 10,
-    width: '100%',
+    width: "100%",
   },
   word: {
     fontSize: 20,
-    color: '#42455a',
-    fontWeight: 'bold',
+    color: "#42455a",
+    fontWeight: "bold",
   },
   translation: {
     fontSize: 20,

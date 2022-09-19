@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-
 import Translation from "./components/Translation";
+import BottomMenu from "./components/BottomMenu";
 
 const dictionaries = {
   portuguese: require("./data/tokipona-portuguese.json"),
@@ -71,6 +71,8 @@ export default class App extends Component {
   }
 
   changeLanguage(language) {
+    this.textInput.focus();
+
     if (language === this.state.language) {
       return;
     }
@@ -81,7 +83,6 @@ export default class App extends Component {
     const text = this.state.words.join(" ");
 
     this.translate(text, dictionary);
-    this.textInput.focus();
   }
 
   render() {
@@ -116,28 +117,9 @@ export default class App extends Component {
           </View>
         </ScrollView>
 
-        <View style={styles.menu}>
-          <Button
-            style={styles.languageButton}
-            onPress={() => this.changeLanguage("portuguese")}
-            title="Português"
-            accessibilityLabel="Mude o idioma para português"
-          />
-
-          <Button
-            style={styles.languageButton}
-            onPress={() => this.changeLanguage("english")}
-            title="English"
-            accessibilityLabel="Change language to english"
-          />
-
-          <Button
-            style={styles.languageButton}
-            onPress={() => this.changeLanguage("spanish")}
-            title="Español"
-            accessibilityLabel="Cambiar idioma a español"
-          />
-        </View>
+        <BottomMenu
+          onChangeLanguage={(language) => this.changeLanguage(language)}
+        />
       </View>
     );
   }
@@ -168,14 +150,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   translations: {
-    fontSize: 20,
     width: "100%",
-  },
-  menu: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#2f3245",
-    paddingTop: 6,
-    paddingBottom: 6,
   },
 });
