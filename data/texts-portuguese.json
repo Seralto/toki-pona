@@ -1,4 +1,9 @@
 {
   "language": "Português",
-  "placeholder": "Digite..."
+  "placeholder": "Digite...",
+  "translator": "Tradutor",
+  "dictionary": "Dicionário",
+  "aboutMe": "Sobre mim",
+  "tokiPona": "Toki Pona",
+  "close": "Fechar"
 }

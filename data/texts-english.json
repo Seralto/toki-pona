@@ -1,4 +1,9 @@
 {
   "language": "English",
-  "placeholder": "Type..."
+  "placeholder": "Type...",
+  "translator": "Translator",
+  "dictionary": "Dictionary",
+  "aboutMe": "About Me",
+  "tokiPona": "Toki Pona",
+  "close": "Close"
 }

@@ -1,4 +1,9 @@
 {
   "language": "Español",
-  "placeholder": "Escriba aquí..."
+  "placeholder": "Escriba aquí...",
+  "translator": "Translator",
+  "dictionary": "Diccionario",
+  "aboutMe": "Sobre Mí",
+  "tokiPona": "Toki Pona",
+  "close": "Cerrar"
 }

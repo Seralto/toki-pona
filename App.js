@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   Button,
+  Modal,
 } from "react-native";
 import Translation from "./components/Translation";
 import BottomMenu from "./components/BottomMenu";
@@ -30,6 +31,8 @@ export default class App extends Component {
       words: [],
       translations: [],
       language: "portuguese",
+      isModalVisible: false,
+      mode: "translator",
     };
   }
 
@@ -85,12 +88,44 @@ export default class App extends Component {
     this.translate(text, dictionary);
   }
 
+  showModal(state) {
+    this.setState({
+      isModalVisible: state,
+    });
+  }
+
   render() {
     const text = this.loadText(this.state.language);
     const dictionary = this.loadDictionary(this.state.language);
 
     return (
       <View style={styles.app}>
+        <Modal visible={this.state.isModalVisible} animationType="slide">
+          {this.state.mode == "dictionary" ? (
+            <Button
+              onPress={() => props.changePage("translator")}
+              title={text.translator}
+            />
+          ) : (
+            <Button
+              onPress={() => props.changePage("dictionary")}
+              title={text.dictionary}
+            />
+          )}
+
+          <Button
+            onPress={() => props.changePage("about")}
+            title={text.aboutMe}
+          />
+
+          <Button
+            onPress={() => props.changePage("tokipona")}
+            title={text.tokiPona}
+          />
+
+          <Button onPress={() => this.showModal(false)} title={text.close} />
+        </Modal>
+
         <ScrollView>
           <View style={styles.container}>
             <Text style={styles.title}>Toki Pona - {text.language}</Text>
@@ -119,6 +154,7 @@ export default class App extends Component {
 
         <BottomMenu
           onChangeLanguage={(language) => this.changeLanguage(language)}
+          onShowModal={() => this.showModal(true)}
         />
       </View>
     );
