@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { View, ScrollView, StyleSheet, Button, Modal } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 
 import Translator from "./components/Translator";
+import Dictionary from "./components/Dictionary";
+import About from "./components/About";
+import TokiPona from "./components/TokiPona";
+import OptionsModal from "./components/OptionsModal";
 import BottomMenu from "./components/BottomMenu";
 
 const dictionaries = {
@@ -25,7 +29,7 @@ export default class App extends Component {
     this.state = {
       words: [],
       translations: [],
-      mode: "translator",
+      page: "translator",
       language: defaultLanguage,
       isModalVisible: false,
       dictionary: this.loadDictionary(defaultLanguage),
@@ -47,13 +51,8 @@ export default class App extends Component {
       list.push(translation);
     });
 
-    this.setState({
-      words: typedWords,
-    });
-
-    this.setState({
-      translations: list,
-    });
+    this.setState({ words: typedWords });
+    this.setState({ translations: list });
   }
 
   sanitizeInput(input) {
@@ -84,9 +83,16 @@ export default class App extends Component {
   }
 
   showModal(state) {
-    this.setState({
-      isModalVisible: state,
-    });
+    this.setState({ isModalVisible: state });
+  }
+
+  changePage(page) {
+    this.setState({ page: page });
+    this.showModal(false);
+  }
+
+  isPage(page) {
+    return this.state.page === page;
   }
 
   render() {
@@ -94,40 +100,30 @@ export default class App extends Component {
 
     return (
       <View style={styles.app}>
-        <Modal visible={this.state.isModalVisible} animationType="slide">
-          {this.state.mode == "dictionary" ? (
-            <Button
-              onPress={() => props.changePage("translator")}
-              title={text.translator}
-            />
-          ) : (
-            <Button
-              onPress={() => props.changePage("dictionary")}
-              title={text.dictionary}
+        <ScrollView>
+          {this.isPage("dictionary") && <Dictionary />}
+
+          {this.isPage("about") && <About />}
+
+          {this.isPage("tokipona") && <TokiPona />}
+
+          {this.isPage("translator") && (
+            <Translator
+              text={text}
+              onEnterText={(enteredText) => this.translate(enteredText)}
+              translations={this.state.translations}
+              words={this.state.words}
             />
           )}
-
-          <Button
-            onPress={() => props.changePage("about")}
-            title={text.aboutMe}
-          />
-
-          <Button
-            onPress={() => props.changePage("tokipona")}
-            title={text.tokiPona}
-          />
-
-          <Button onPress={() => this.showModal(false)} title={text.close} />
-        </Modal>
-
-        <ScrollView>
-          <Translator
-            text={text}
-            onEnterText={(enteredText) => this.translate(enteredText)}
-            translations={this.state.translations}
-            words={this.state.words}
-          />
         </ScrollView>
+
+        <OptionsModal
+          text={text}
+          page={this.state.page}
+          modalVisibility={this.state.isModalVisible}
+          onChangePage={(page) => this.changePage(page)}
+          onShowModal={(state) => this.showModal(state)}
+        />
 
         <BottomMenu
           onChangeLanguage={(language) => this.changeLanguage(language)}
@@ -142,15 +138,5 @@ const styles = StyleSheet.create({
   app: {
     flex: 1,
     backgroundColor: "#42455a",
-  },
-  container: {
-    alignItems: "center",
-    padding: 30,
-  },
-  title: {
-    fontSize: 30,
-    color: "#c3c3c3",
-    marginTop: 40,
-    marginBottom: 20,
   },
 });

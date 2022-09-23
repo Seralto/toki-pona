@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Translation = (props) => {
+const Translation = ({ word, text }) => {
   return (
     <View style={styles.translationBox}>
-      <Text style={styles.word}>{props.word}</Text>
-      <Text style={styles.translation}>{props.text}</Text>
+      <Text style={styles.word}>{word}</Text>
+      <Text style={styles.translation}>{text}</Text>
     </View>
   );
 };
