@@ -78,7 +78,6 @@ export default class App extends Component {
     this.state.dictionary = this.loadDictionary(language);
 
     const text = this.state.words.join(" ");
-
     this.translate(text);
   }
 
@@ -105,9 +104,9 @@ export default class App extends Component {
             <Dictionary text={text} dictionary={this.state.dictionary} />
           )}
 
-          {this.isPage("about") && <About text={text} />}
+          {this.isPage("about") && <About text={text.aboutMe} />}
 
-          {this.isPage("tokipona") && <TokiPona text={text} />}
+          {this.isPage("tokipona") && <TokiPona text={text.tokiPona} />}
 
           {this.isPage("translator") && (
             <Translator

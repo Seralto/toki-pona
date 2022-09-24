@@ -15,7 +15,7 @@ const OptionsModal = ({
           <View style={styles.button}>
             <Button
               onPress={() => onChangePage("translator")}
-              title={text.translator}
+              title={text.pages.translator}
             />
           </View>
         )}
@@ -24,19 +24,22 @@ const OptionsModal = ({
           <View style={styles.button}>
             <Button
               onPress={() => onChangePage("dictionary")}
-              title={text.dictionary}
+              title={text.pages.dictionary}
             />
           </View>
         )}
 
         <View style={styles.button}>
-          <Button onPress={() => onChangePage("about")} title={text.aboutMe} />
+          <Button
+            onPress={() => onChangePage("about")}
+            title={text.pages.aboutMe}
+          />
         </View>
 
         <View style={styles.button}>
           <Button
             onPress={() => onChangePage("tokipona")}
-            title={text.tokiPona}
+            title={text.pages.tokiPona}
           />
         </View>
 
