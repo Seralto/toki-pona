@@ -101,11 +101,13 @@ export default class App extends Component {
     return (
       <View style={styles.app}>
         <ScrollView>
-          {this.isPage("dictionary") && <Dictionary />}
+          {this.isPage("dictionary") && (
+            <Dictionary text={text} dictionary={this.state.dictionary} />
+          )}
 
-          {this.isPage("about") && <About />}
+          {this.isPage("about") && <About text={text} />}
 
-          {this.isPage("tokipona") && <TokiPona />}
+          {this.isPage("tokipona") && <TokiPona text={text} />}
 
           {this.isPage("translator") && (
             <Translator
