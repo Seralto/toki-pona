@@ -6,7 +6,7 @@ import Translation from "./Translation";
 const Dictionary = ({ text, dictionary }) => {
   return (
     <View style={styles.dictionary}>
-      <Text style={styles.title}>{text.dictionary}</Text>
+      <Text style={styles.title}>{text.pages.dictionary}</Text>
 
       <ScrollView>
         {Object.keys(dictionary).map((key) => {

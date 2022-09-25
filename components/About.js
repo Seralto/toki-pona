@@ -4,8 +4,6 @@ import { View, Text, StyleSheet, Linking } from "react-native";
 const About = ({ text }) => {
   return (
     <View style={styles.about}>
-      <Text style={styles.title}>{text.aboutMe}</Text>
-
       <Text style={styles.title}>{text.title}</Text>
       <Text style={styles.content}>{text.content}</Text>
 
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     color: "#c3c3c3",
-    marginVertical: 20,
+    marginTop: 40,
     textAlign: "center",
   },
   content: {

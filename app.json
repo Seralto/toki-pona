@@ -2,7 +2,7 @@
   "expo": {
     "name": "Toki Pona",
     "slug": "TokiPona",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -25,7 +25,8 @@
         "backgroundColor": "#545771"
       },
       "package": "com.seralto.tokipona",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
