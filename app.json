@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#d6e2ec"
       },
-      "package": "com.seralto.tokipona"
+      "package": "com.seralto.tokipona",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
