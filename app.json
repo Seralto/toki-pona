@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#d6e2ec"
-      }
+      },
+      "package": "com.seralto.tokipona"
     },
     "web": {
       "favicon": "./assets/favicon.png"
