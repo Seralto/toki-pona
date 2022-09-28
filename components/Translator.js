@@ -9,7 +9,7 @@ const Translator = ({ text, onEnterText, translations, words }) => {
       <Text style={styles.title}>Toki Pona - {text.language}</Text>
 
       <TextInput
-        onChangeText={(enteredText) => onEnterText(enteredText)}
+        onChangeText={onEnterText}
         style={styles.inputText}
         placeholder={text.placeholder}
         // ref={(input) => (this.textInput = input)}
