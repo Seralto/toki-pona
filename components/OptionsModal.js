@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Modal, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Modal,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 
 const OptionsModal = ({
   page,
@@ -12,44 +19,38 @@ const OptionsModal = ({
     <Modal visible={modalVisibility} animationType="slide">
       <View style={styles.optionsModal}>
         {page !== "translator" && (
-          <View style={styles.button}>
-            <Button
-              onPress={() => onChangePage("translator")}
-              title={text.pages.translator}
-            />
-          </View>
+          <TouchableOpacity onPress={() => onChangePage("translator")}>
+            <Text style={styles.button}>
+              {text.pages.translator.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
         )}
 
         {page !== "dictionary" && (
-          <View style={styles.button}>
-            <Button
-              onPress={() => onChangePage("dictionary")}
-              title={text.pages.dictionary}
-            />
-          </View>
+          <TouchableOpacity onPress={() => onChangePage("dictionary")}>
+            <Text style={styles.button}>
+              {text.pages.dictionary.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
         )}
 
-        <View style={styles.button}>
-          <Button
-            onPress={() => onChangePage("about")}
-            title={text.pages.aboutMe}
-          />
-        </View>
+        {/* {page !== "about" && ( */}
+        <TouchableOpacity onPress={() => onChangePage("about")}>
+          <Text style={styles.button}>{text.pages.aboutMe.toUpperCase()}</Text>
+        </TouchableOpacity>
+        {/* )} */}
 
-        <View style={styles.button}>
-          <Button
-            onPress={() => onChangePage("tokipona")}
-            title={text.pages.tokiPona}
-          />
-        </View>
+        {page !== "tokipona" && (
+          <TouchableOpacity onPress={() => onChangePage("tokipona")}>
+            <Text style={styles.button}>
+              {text.pages.tokiPona.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        )}
 
-        <View style={styles.button}>
-          <Button
-            color="#0f5389"
-            onPress={() => onShowModal(false)}
-            title={text.close}
-          />
-        </View>
+        <TouchableOpacity onPress={() => onShowModal(false)}>
+          <Text style={styles.button}>{text.close.toUpperCase()}</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -60,11 +61,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#2f3245",
     justifyContent: "center",
-    alignItems: "center",
   },
   button: {
-    width: "60%",
+    backgroundColor: "#2196f3",
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
     marginVertical: 15,
+    marginHorizontal: 50,
+    borderRadius: 5,
   },
 });
 
