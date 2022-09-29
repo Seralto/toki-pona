@@ -34,11 +34,13 @@ const OptionsModal = ({
           </TouchableOpacity>
         )}
 
-        {/* {page !== "about" && ( */}
-        <TouchableOpacity onPress={() => onChangePage("about")}>
-          <Text style={styles.button}>{text.pages.aboutMe.toUpperCase()}</Text>
-        </TouchableOpacity>
-        {/* )} */}
+        {page !== "about" && (
+          <TouchableOpacity onPress={() => onChangePage("about")}>
+            <Text style={styles.button}>
+              {text.pages.aboutMe.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {page !== "tokipona" && (
           <TouchableOpacity onPress={() => onChangePage("tokipona")}>
