@@ -7,6 +7,7 @@ const TokiPona = ({ text }) => {
       <Text style={styles.title}>{text.title}</Text>
       <Text style={styles.content}>{text.content}</Text>
 
+      <Text style={styles.info}>{text.official}</Text>
       <Text
         style={styles.info}
         onPress={() => {
@@ -37,10 +38,9 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   info: {
-    textAlign: "center",
     fontSize: 20,
+    textAlign: "center",
     color: "#c3c3c3",
-    marginBottom: 10,
   },
 });
 

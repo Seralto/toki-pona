@@ -23,6 +23,7 @@
   "tokiPona": {
     "title": "What is Toki Pona?",
     "content": "Toki Pona is a language created by the Canadian linguist and translator Sonja Lang and was first published on the internet in 2001. \n\nIt is a minimalist language, composed of only 14 phonemes and 120 words (currently there are some other unofficial words). \n\nThe language focuses on simple concepts and elements that are relatively universal. Inspired by Taoist philosophy, Toki Pona is not intended to be an auxiliary language, but a \"yoga for the mind\", aiming to express maximum meaning with minimum complexity.",
-    "site": "Official website: https://tokipona.org"
+    "official": "Official website: ",
+    "site": "https://tokipona.org"
   }
 }
