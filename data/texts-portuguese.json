@@ -1,11 +1,11 @@
 {
   "language": "Português",
-  "placeholder": "Digite...",
+  "placeholder": "Digite aqui...",
   "close": "Fechar",
   "pages": {
     "translator": "Tradutor",
     "dictionary": "Dicionário",
-    "aboutMe": "Sobre mim",
+    "aboutMe": "Sobre Mim",
     "tokiPona": "Toki Pona"
   },
   "aboutMe": {
