@@ -26,6 +26,8 @@ export default class App extends Component {
 
     const defaultLanguage = "portuguese";
 
+    this.textInput = React.createRef();
+
     this.state = {
       words: [],
       translations: [],
@@ -68,7 +70,9 @@ export default class App extends Component {
   }
 
   changeLanguage(language) {
-    // this.textInput.focus();
+    if (this.isPage("translator")) {
+      this.textInput.current.focus();
+    }
 
     if (language === this.state.language) {
       return;
@@ -88,6 +92,13 @@ export default class App extends Component {
   changePage(page) {
     this.setState({ page: page });
     this.showModal(false);
+  }
+
+  clearTranslation() {
+    this.setState({ words: [] });
+    this.setState({ translations: [] });
+    this.textInput.current.clear();
+    this.textInput.current.focus();
   }
 
   isPage(page) {
@@ -111,9 +122,11 @@ export default class App extends Component {
           {this.isPage("translator") && (
             <Translator
               text={text}
-              onEnterText={(enteredText) => this.translate(enteredText)}
               translations={this.state.translations}
               words={this.state.words}
+              inputRef={this.textInput}
+              onEnterText={(enteredText) => this.translate(enteredText)}
+              onClearTranslation={() => this.clearTranslation()}
             />
           )}
         </ScrollView>

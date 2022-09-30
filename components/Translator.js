@@ -1,20 +1,43 @@
 import React from "react";
-import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
 import Translation from "./Translation";
 
-const Translator = ({ text, onEnterText, translations, words }) => {
+const Translator = ({
+  text,
+  translations,
+  words,
+  inputRef,
+  onEnterText,
+  onClearTranslation,
+}) => {
   return (
     <View style={styles.translator}>
       <Text style={styles.title}>Toki Pona - {text.language}</Text>
 
-      <TextInput
-        onChangeText={onEnterText}
-        style={styles.inputText}
-        placeholder={text.placeholder}
-        // ref={(input) => (this.textInput = input)}
-        autoFocus={true}
-      />
+      <View style={styles.inputBox}>
+        <TextInput
+          onChangeText={onEnterText}
+          style={styles.inputText}
+          placeholder={text.placeholder}
+          ref={inputRef}
+          autoFocus={true}
+        />
+        <TouchableOpacity onPress={onClearTranslation}>
+          <Image
+            style={styles.clearImage}
+            source={require("../assets/clear.png")}
+          />
+        </TouchableOpacity>
+      </View>
 
       <ScrollView style={styles.translations}>
         {translations.map((translation, index) => {
@@ -38,14 +61,23 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
   },
-  inputText: {
-    backgroundColor: "#d6e2ec",
-    fontSize: 20,
+  inputBox: {
+    flexDirection: "row",
     marginTop: 10,
     marginBottom: 30,
-    padding: 10,
+  },
+  inputText: {
+    flex: 1,
+    backgroundColor: "#d6e2ec",
+    fontSize: 20,
     borderRadius: 10,
-    width: "100%",
+    padding: 10,
+    marginRight: 8,
+  },
+  clearImage: {
+    width: 38,
+    height: 48,
+    alignSelf: "center",
   },
   translations: {
     width: "100%",

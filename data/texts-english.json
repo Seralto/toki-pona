@@ -18,11 +18,11 @@
     "site": "http://sergiotoledo.com.br",
     "email": "contato@sergiotoledo.com.br",
     "title": "Thank you for using the \nToki Pona app!",
-    "content": "Hello! Here is Sérgio Toledo from Brazil, I am a Software Engineer and passionate about programming. \n\nThis free app was developed to help you learn the Toki Pona language."
+    "content": "Hello! This is Sérgio Toledo from Brazil, I am a Software Engineer and passionate about programming. \n\nThis free app was developed to help you learn the Toki Pona language."
   },
   "tokiPona": {
     "title": "What is Toki Pona?",
-    "content": "Toki Pona is a language created by the Canadian linguist and translator Sonja Lang and was first published on the internet in 2001. \n\nIt is a minimalist language, composed of only 14 phonemes and 120 words (currently there are some other unofficial words). \n\nThe language focuses on simple concepts and elements that are relatively universal. Inspired by Taoist philosophy, Toki Pona is not intended to be an auxiliary language, but a \"yoga for the mind\", aiming to express maximum meaning with minimum complexity.",
+    "content": "Toki Pona is a language created by the Canadian linguist and translator Sonja Lang and it was first published on the internet in 2001. \n\nIt is a minimalist language, composed of only 14 phonemes and 120 words (currently, there are some other unofficial words). \n\nThe language focuses on simple concepts and elements that are relatively universal. Inspired by Taoist philosophy, Toki Pona is not intended to be an auxiliary language, but a \"yoga for the mind\", aiming to express maximum meaning with minimum complexity.",
     "official": "Official website: ",
     "site": "https://tokipona.org"
   }
