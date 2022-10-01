@@ -10,7 +10,7 @@ import {
 
 const OptionsModal = ({
   page,
-  text,
+  pageTexts,
   modalVisibility,
   onChangePage,
   onShowModal,
@@ -21,7 +21,7 @@ const OptionsModal = ({
         {page !== "translator" && (
           <TouchableOpacity onPress={() => onChangePage("translator")}>
             <Text style={styles.button}>
-              {text.pages.translator.toUpperCase()}
+              {pageTexts.pages.translator.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
@@ -29,7 +29,7 @@ const OptionsModal = ({
         {page !== "dictionary" && (
           <TouchableOpacity onPress={() => onChangePage("dictionary")}>
             <Text style={styles.button}>
-              {text.pages.dictionary.toUpperCase()}
+              {pageTexts.pages.dictionary.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
@@ -37,7 +37,7 @@ const OptionsModal = ({
         {page !== "about" && (
           <TouchableOpacity onPress={() => onChangePage("about")}>
             <Text style={styles.button}>
-              {text.pages.aboutMe.toUpperCase()}
+              {pageTexts.pages.aboutMe.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
@@ -45,13 +45,13 @@ const OptionsModal = ({
         {page !== "tokipona" && (
           <TouchableOpacity onPress={() => onChangePage("tokipona")}>
             <Text style={styles.button}>
-              {text.pages.tokiPona.toUpperCase()}
+              {pageTexts.pages.tokiPona.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
 
         <TouchableOpacity onPress={() => onShowModal(false)}>
-          <Text style={styles.button}>{text.close.toUpperCase()}</Text>
+          <Text style={styles.button}>{pageTexts.close.toUpperCase()}</Text>
         </TouchableOpacity>
       </View>
     </Modal>

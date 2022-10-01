@@ -29,7 +29,7 @@ export default class App extends Component {
     this.textInput = React.createRef();
 
     this.state = {
-      words: [],
+      enteredWords: [],
       translations: [],
       page: "translator",
       language: defaultLanguage,
@@ -53,7 +53,7 @@ export default class App extends Component {
       list.push(translation);
     });
 
-    this.setState({ words: typedWords });
+    this.setState({ enteredWords: typedWords });
     this.setState({ translations: list });
   }
 
@@ -81,7 +81,7 @@ export default class App extends Component {
     this.state.language = language;
     this.state.dictionary = this.loadDictionary(language);
 
-    const text = this.state.words.join(" ");
+    const text = this.state.enteredWords.join(" ");
     this.translate(text);
   }
 
@@ -95,7 +95,7 @@ export default class App extends Component {
   }
 
   clearTranslation() {
-    this.setState({ words: [] });
+    this.setState({ enteredWords: [] });
     this.setState({ translations: [] });
     this.textInput.current.clear();
     this.textInput.current.focus();
@@ -112,18 +112,25 @@ export default class App extends Component {
       <View style={styles.app}>
         <ScrollView>
           {this.isPage("dictionary") && (
-            <Dictionary text={text} dictionary={this.state.dictionary} />
+            <Dictionary
+              pageTexts={this.state.appTexts}
+              dictionary={this.state.dictionary}
+            />
           )}
 
-          {this.isPage("about") && <About text={text.aboutMe} />}
+          {this.isPage("about") && (
+            <About pageTexts={this.state.appTexts.aboutMe} />
+          )}
 
-          {this.isPage("tokipona") && <TokiPona text={text.tokiPona} />}
+          {this.isPage("tokipona") && (
+            <TokiPona pageTexts={this.state.appTexts.tokiPona} />
+          )}
 
           {this.isPage("translator") && (
             <Translator
-              text={text}
+              pageTexts={this.state.appTexts}
               translations={this.state.translations}
-              words={this.state.words}
+              enteredWords={this.state.enteredWords}
               inputRef={this.textInput}
               onEnterText={(enteredText) => this.translate(enteredText)}
               onClearTranslation={() => this.clearTranslation()}
@@ -132,7 +139,7 @@ export default class App extends Component {
         </ScrollView>
 
         <OptionsModal
-          text={text}
+          pageTexts={this.state.appTexts}
           page={this.state.page}
           modalVisibility={this.state.isModalVisible}
           onChangePage={(page) => this.changePage(page)}

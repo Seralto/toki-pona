@@ -12,24 +12,25 @@ import {
 import Translation from "./Translation";
 
 const Translator = ({
-  text,
+  pageTexts,
   translations,
-  words,
+  enteredWords,
   inputRef,
   onEnterText,
   onClearTranslation,
 }) => {
   return (
     <View style={styles.translator}>
-      <Text style={styles.title}>Toki Pona - {text.language}</Text>
+      <Text style={styles.title}>Toki Pona - {pageTexts.language}</Text>
 
       <View style={styles.inputBox}>
         <TextInput
           onChangeText={onEnterText}
           style={styles.inputText}
-          placeholder={text.placeholder}
+          placeholder={pageTexts.placeholder}
           ref={inputRef}
           autoFocus={true}
+          autoCapitalize="none"
         />
         <TouchableOpacity onPress={onClearTranslation}>
           <Image
@@ -42,7 +43,11 @@ const Translator = ({
       <ScrollView style={styles.translations}>
         {translations.map((translation, index) => {
           return (
-            <Translation word={words[index]} text={translation} key={index} />
+            <Translation
+              word={enteredWords[index]}
+              text={translation}
+              key={index}
+            />
           );
         })}
       </ScrollView>

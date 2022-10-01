@@ -1,50 +1,50 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
 
-const About = ({ text }) => {
+const About = ({ pageTexts }) => {
   return (
     <View style={styles.about}>
-      <Text style={styles.title}>{text.title}</Text>
-      <Text style={styles.content}>{text.content}</Text>
+      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={styles.content}>{pageTexts.content}</Text>
 
       <Text
         style={styles.link}
         onPress={() => {
-          Linking.openURL(text.linkedinUrl);
+          Linking.openURL(pageTexts.linkedinUrl);
         }}
       >
-        {text.linkedin}
+        {pageTexts.linkedin}
       </Text>
 
       <Text
         style={styles.link}
         onPress={() => {
-          Linking.openURL(text.githubUrl);
+          Linking.openURL(pageTexts.githubUrl);
         }}
       >
-        {text.github}
+        {pageTexts.github}
       </Text>
 
       <Text
         style={styles.link}
         onPress={() => {
-          Linking.openURL(text.youtubeUrl);
+          Linking.openURL(pageTexts.youtubeUrl);
         }}
       >
-        {text.youtube}
+        {pageTexts.youtube}
       </Text>
 
       <View style={styles.infoBox}>
         <Text
           style={styles.info}
           onPress={() => {
-            Linking.openURL(text.site);
+            Linking.openURL(pageTexts.site);
           }}
         >
-          {text.site}
+          {pageTexts.site}
         </Text>
 
-        <Text style={styles.info}>{text.email}</Text>
+        <Text style={styles.info}>{pageTexts.email}</Text>
       </View>
     </View>
   );

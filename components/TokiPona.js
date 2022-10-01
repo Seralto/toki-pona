@@ -1,20 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
 
-const TokiPona = ({ text }) => {
+const TokiPona = ({ pageTexts }) => {
   return (
     <View style={styles.TokiPona}>
-      <Text style={styles.title}>{text.title}</Text>
-      <Text style={styles.content}>{text.content}</Text>
+      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={styles.content}>{pageTexts.content}</Text>
 
-      <Text style={styles.info}>{text.official}</Text>
+      <Text style={styles.info}>{pageTexts.official}</Text>
       <Text
         style={styles.info}
         onPress={() => {
-          Linking.openURL(text.site);
+          Linking.openURL(pageTexts.site);
         }}
       >
-        {text.site}
+        {pageTexts.site}
       </Text>
     </View>
   );

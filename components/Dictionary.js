@@ -3,10 +3,10 @@ import { View, ScrollView, Text, StyleSheet } from "react-native";
 
 import Translation from "./Translation";
 
-const Dictionary = ({ text, dictionary }) => {
+const Dictionary = ({ pageTexts, dictionary }) => {
   return (
     <View style={styles.dictionary}>
-      <Text style={styles.title}>{text.pages.dictionary}</Text>
+      <Text style={styles.title}>{pageTexts.pages.dictionary}</Text>
 
       <ScrollView>
         {Object.keys(dictionary).map((key) => {
