@@ -24,37 +24,65 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    const defaultLanguage = "portuguese";
-
     this.textInput = React.createRef();
 
+    const defaultLanguage = "portuguese";
+    const dictionary = this.loadDictionary(defaultLanguage);
+
     this.state = {
-      enteredWords: [],
+      validEnteredWords: [],
       translations: [],
       page: "translator",
+      enteredText: "",
       language: defaultLanguage,
       isModalVisible: false,
-      dictionary: this.loadDictionary(defaultLanguage),
+      dictionary: dictionary,
+      tokiPonaWords: Object.keys(dictionary),
+      appTexts: this.loadText(defaultLanguage),
     };
   }
 
   translate(enteredText) {
-    const list = [];
-    const typedWords = this.sanitizeInput(enteredText)
+    const validTokiPonaWords = this.sanitizeInput(enteredText)
       .split(" ")
-      .filter((word) => word);
+      .filter((word) => this.state.tokiPonaWords.includes(word));
 
-    typedWords.forEach((word) => {
-      const translation = this.state.dictionary[word];
-      if (translation === undefined) {
-        return;
-      }
+    const translations = validTokiPonaWords.map(
+      (word) => this.state.dictionary[word]
+    );
 
-      list.push(translation);
+    this.setState({ enteredText: enteredText });
+    this.setState({ validEnteredWords: validTokiPonaWords });
+    this.setState({ translations: translations });
+  }
+
+  changeLanguage(language) {
+    if (this.isPage("translator")) {
+      this.textInput.current.focus();
+    }
+
+    if (language === this.state.language) {
+      return;
+    }
+
+    this.setState({ language: language });
+    this.setState({ appTexts: this.loadText(language) });
+    this.setState({ dictionary: this.loadDictionary(language) }, () => {
+      this.translate(this.state.enteredText);
     });
+  }
 
-    this.setState({ enteredWords: typedWords });
-    this.setState({ translations: list });
+  changePage(page) {
+    this.setState({ page: page });
+    this.showModal(false);
+  }
+
+  clearTranslation() {
+    this.setState({ validEnteredWords: [] });
+    this.setState({ translations: [] });
+    this.setState({ enteredText: "" });
+    this.textInput.current.clear();
+    this.textInput.current.focus();
   }
 
   sanitizeInput(input) {
@@ -69,36 +97,8 @@ export default class App extends Component {
     return dictionaries[language];
   }
 
-  changeLanguage(language) {
-    if (this.isPage("translator")) {
-      this.textInput.current.focus();
-    }
-
-    if (language === this.state.language) {
-      return;
-    }
-
-    this.state.language = language;
-    this.state.dictionary = this.loadDictionary(language);
-
-    const text = this.state.enteredWords.join(" ");
-    this.translate(text);
-  }
-
   showModal(state) {
     this.setState({ isModalVisible: state });
-  }
-
-  changePage(page) {
-    this.setState({ page: page });
-    this.showModal(false);
-  }
-
-  clearTranslation() {
-    this.setState({ enteredWords: [] });
-    this.setState({ translations: [] });
-    this.textInput.current.clear();
-    this.textInput.current.focus();
   }
 
   isPage(page) {
@@ -106,8 +106,6 @@ export default class App extends Component {
   }
 
   render() {
-    const text = this.loadText(this.state.language);
-
     return (
       <View style={styles.app}>
         <ScrollView>
@@ -130,7 +128,8 @@ export default class App extends Component {
             <Translator
               pageTexts={this.state.appTexts}
               translations={this.state.translations}
-              enteredWords={this.state.enteredWords}
+              validEnteredWords={this.state.validEnteredWords}
+              enteredText={this.state.enteredText}
               inputRef={this.textInput}
               onEnterText={(enteredText) => this.translate(enteredText)}
               onClearTranslation={() => this.clearTranslation()}

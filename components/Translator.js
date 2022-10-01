@@ -14,7 +14,8 @@ import Translation from "./Translation";
 const Translator = ({
   pageTexts,
   translations,
-  enteredWords,
+  validEnteredWords,
+  enteredText,
   inputRef,
   onEnterText,
   onClearTranslation,
@@ -31,6 +32,7 @@ const Translator = ({
           ref={inputRef}
           autoFocus={true}
           autoCapitalize="none"
+          value={enteredText}
         />
         <TouchableOpacity onPress={onClearTranslation}>
           <Image
@@ -44,7 +46,7 @@ const Translator = ({
         {translations.map((translation, index) => {
           return (
             <Translation
-              word={enteredWords[index]}
+              word={validEnteredWords[index]}
               text={translation}
               key={index}
             />
