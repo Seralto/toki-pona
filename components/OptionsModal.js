@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Modal,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, Modal, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const OptionsModal = ({
   page,
@@ -14,13 +7,14 @@ const OptionsModal = ({
   modalVisibility,
   onChangePage,
   onShowModal,
+  onQuit,
 }) => {
   return (
     <Modal visible={modalVisibility} animationType="slide">
       <View style={styles.optionsModal}>
         {page !== "translator" && (
           <TouchableOpacity onPress={() => onChangePage("translator")}>
-            <Text style={styles.button}>
+            <Text style={styles.menuButton}>
               {pageTexts.pages.translator.toUpperCase()}
             </Text>
           </TouchableOpacity>
@@ -28,7 +22,7 @@ const OptionsModal = ({
 
         {page !== "dictionary" && (
           <TouchableOpacity onPress={() => onChangePage("dictionary")}>
-            <Text style={styles.button}>
+            <Text style={styles.menuButton}>
               {pageTexts.pages.dictionary.toUpperCase()}
             </Text>
           </TouchableOpacity>
@@ -36,7 +30,7 @@ const OptionsModal = ({
 
         {page !== "about" && (
           <TouchableOpacity onPress={() => onChangePage("about")}>
-            <Text style={styles.button}>
+            <Text style={styles.menuButton}>
               {pageTexts.pages.aboutMe.toUpperCase()}
             </Text>
           </TouchableOpacity>
@@ -44,14 +38,22 @@ const OptionsModal = ({
 
         {page !== "tokipona" && (
           <TouchableOpacity onPress={() => onChangePage("tokipona")}>
-            <Text style={styles.button}>
+            <Text style={styles.menuButton}>
               {pageTexts.pages.tokiPona.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
 
         <TouchableOpacity onPress={() => onShowModal(false)}>
-          <Text style={styles.button}>{pageTexts.close.toUpperCase()}</Text>
+          <Text style={styles.controllButton}>
+            {pageTexts.back.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onQuit}>
+          <Text style={styles.controllButton}>
+            {pageTexts.quit.toUpperCase()}
+          </Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -64,8 +66,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#2f3245",
     justifyContent: "center",
   },
-  button: {
+  menuButton: {
     backgroundColor: "#2196f3",
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    marginVertical: 15,
+    marginHorizontal: 50,
+    borderRadius: 5,
+  },
+  controllButton: {
+    backgroundColor: "#0f5389",
     textAlign: "center",
     color: "#fff",
     fontSize: 20,

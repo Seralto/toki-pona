@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet, BackHandler } from "react-native";
 
 import Translator from "./components/Translator";
 import Dictionary from "./components/Dictionary";
@@ -101,6 +101,10 @@ export default class App extends Component {
     this.setState({ isModalVisible: state });
   }
 
+  quitApp() {
+    BackHandler.exitApp();
+  }
+
   isPage(page) {
     return this.state.page === page;
   }
@@ -143,9 +147,11 @@ export default class App extends Component {
           modalVisibility={this.state.isModalVisible}
           onChangePage={(page) => this.changePage(page)}
           onShowModal={(state) => this.showModal(state)}
+          onQuit={() => this.quitApp()}
         />
 
         <BottomMenu
+          pageTexts={this.state.appTexts}
           onChangeLanguage={(language) => this.changeLanguage(language)}
           onShowModal={() => this.showModal(true)}
         />

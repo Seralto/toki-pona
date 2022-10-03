@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button, StyleSheet } from "react-native";
 
-const BottomMenu = ({ onChangeLanguage, onShowModal }) => {
+const BottomMenu = ({ pageTexts, onChangeLanguage, onShowModal }) => {
   return (
     <View style={styles.bottomMenu}>
       <Button
@@ -25,7 +25,7 @@ const BottomMenu = ({ onChangeLanguage, onShowModal }) => {
       <Button
         color="#0f5389"
         onPress={() => onShowModal()}
-        title="Menu"
+        title={pageTexts.menu}
         accessibilityLabel="Options"
       />
     </View>

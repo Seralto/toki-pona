@@ -1,7 +1,9 @@
 {
   "language": "Português",
   "placeholder": "Digite aqui...",
-  "close": "Fechar",
+  "back": "Voltar",
+  "quit": "Sair",
+  "menu": "Menu",
   "pages": {
     "translator": "Tradutor",
     "dictionary": "Dicionário",
@@ -22,7 +24,7 @@
   },
   "tokiPona": {
     "title": "O que é Toki Pona?",
-    "content": "Toki Pona é uma língua criada pela linguista e tradutora canadense Sonja Lang, tendo sido publicada na internet pela primeira vez em 2001. \n\nTrata-se de uma linguagem minimalista, composta de apenas 14 fonemas e 120 palavras (atualmente existem algumas outras palavras não oficiais). \n\nA língua foca-se em conceitos simples e elementos que são relativamente universais. Inspirado pela filosofia taoista, toki pona não visa a ser uma língua auxiliar, mas um \"yoga para a mente\", pretendendo expressar o máximo de sentido com o mínimo de complexidade.",
+    "content": "Toki Pona é uma língua criada pela linguista e tradutora canadense Sonja Lang, tendo sido publicada na internet pela primeira vez em 2001. \n\nTrata-se de uma linguagem minimalista, composta de apenas 14 fonemas (letras) e 120 palavras (atualmente existem algumas outras palavras não oficiais). \n\nA língua foca-se em conceitos simples e elementos que são relativamente universais. Inspirado pela filosofia taoista, toki pona não visa a ser uma língua auxiliar, mas um \"yoga para a mente\", pretendendo expressar o máximo de sentido com o mínimo de complexidade.",
     "official": "Website oficial: ",
     "site": "https://tokipona.org"
   }
