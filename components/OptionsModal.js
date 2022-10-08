@@ -28,6 +28,14 @@ const OptionsModal = ({
           </TouchableOpacity>
         )}
 
+        {page !== "grammar" && (
+          <TouchableOpacity onPress={() => onChangePage("grammar")}>
+            <Text style={styles.menuButton}>
+              {pageTexts.pages.grammar.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        )}
+
         {page !== "about" && (
           <TouchableOpacity onPress={() => onChangePage("about")}>
             <Text style={styles.menuButton}>

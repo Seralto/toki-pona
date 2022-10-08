@@ -7,8 +7,74 @@
   "pages": {
     "translator": "Tradutor",
     "dictionary": "Dicionário",
+    "grammar": "Gramática",
     "aboutMe": "Sobre Mim",
     "tokiPona": "Toki Pona"
+  },
+  "grammar": {
+    "title": "Gramática",
+    "content": {
+      "alphabet": {
+        "title": "Alfabeto",
+        "content": "Toki Pona usa nove consoantes (j k l m n p s t w) e cinco vogais (a e i o u)."
+      },
+      "basicSentences": {
+        "title": "Frases básicas",
+        "content": "A partícula \"li\" separa o sujeito do verbo: \n\nsoweli li moku = O gato está comendo \njan li lape = A pessoa está dormindo \n\nNão existe o verbo \"ser/estar\", a parte depois de \"li\" pode ser um substantivo ou um adjetivo: \n\nkili li moku = Frutas são comida \ntelo li pona = Água é boa \ntelo li moku = Água é uma bebida \n\nSe o sujeito é \"mi\" ou \"sina\", o \"li\" é sempre omitido: \n\nmi moku = eu como \nsina pona = Você é bom"
+      },
+      "ambiguity": {
+        "title": "Ambiguidade",
+        "content": "Toki Pona tem muitas ambiguidades. Muitas vezes, você precisará saber o contexto para decidir o que as coisas significam. Por exemplo, não há tempos verbais: \n\nmi moku =  Eu como / Eu comi / Eu comerei \n\nMuitas palavras têm múltiplos ou significados gerais: \n\nsoweli = gato / cachorro / (qualquer mamífero terrestre) \nkili = (qualquer fruta ou vegetal) \n\nMuitas palavras podem desempenhar o papel de um substantivo , adjetivo ou verbo: \n\ntelo = água / molhado / lavar \npona = bom, simples / consertar, reparar \n\nOs substantivos não têm forma singular/plural, nem artigo definido/indefinido: \n\nkili = uma fruta / a fruta / algumas frutas / as frutas"
+      },
+      "directObjects": {
+        "title": "Objetos diretos",
+        "content": "A partícula \"e\" separa um objeto direto do resto da frase: \n\nsoweli li moku e telo = O gato bebe água \nmi telo e soweli = Estou dando banho no gato"
+      },
+      "modifyingWords": {
+        "title": "Palavras modificadoras",
+        "content": "As palavras podem ser modificadas acrescentando outras palavras: \n\njan lili = pequeno humano / criança \ntomo mi = minha casa \npilin pona = sentir-se bem / estar feliz"
+      },
+      "negation": {
+        "title": "Negação",
+        "content": "Para negar uma palavra, acrescenta-se \"ala\": \n\nmi lape ala = Eu não estou dormindo \njan ala li toki = Ninguém está falando"
+      },
+      "questions": {
+        "title": "Perguntas",
+        "content": "Para fazer perguntas de sim-ou-não, substitua o verbo por \"(verbo) ala (verbo)\": \n\nsina ken ala ken lape? = Você consegue dormir? \nsoweli li wile ala wile moku? = O gato está com fome? \n\nAlternativamente, acrescente \"anu seme\" (ou o quê) à frase: \n\nsina wile uta e mi anu seme? = Você quer me beijar? \n\nPara responder a essas perguntas, responda com \"(verbo)\" ou \"(verbo) ala\". \n\nPara fazer perguntas que não podem ser respondidas com sim ou não, escreva a frase normalmente e substitua a palavra que pergunta com \"seme\": \n\nsina moku e seme? = O que você está comendo? \n\nseme li moku e kili mi? = Quem/o que comeu minha fruta?"
+      },
+      "usingPi": {
+        "title": "Modificando palavras usando \"pi\"",
+        "content": "Para modificar uma expressão com um grupo de palavras, separe-as com a partícula \"pi\". Isso muitas vezes pode ser considerado como um \"de\". Observe a diferença: \n\ntomo telo nasa = casa de água louca / banheiro estranho \ntomo pi telo nasa = casa da água maluca / bar \n\njan wawa ala = sem gente forte \njan pi wawa ala = gente de sem força / gente fraca"
+      },
+      "usingLa": {
+        "title": "Fornecendo contexto usando \"la\"",
+        "content": "Para adicionar um contexto a uma frase, anexe outra frase ou expressão, seguida de \"la\". Isso geralmente resulta em uma estrutura como \"Se (parte 1), então (parte 2)\" ou \"No contexto de (parte 1), (parte 2).\" \n\n\nmi lape la ale li pona = Quando estou dormindo, está tudo bem"
+      },
+      "time": {
+        "title": "Tempo",
+        "content": "Você pode usar uma partícula \"la\" para adicionar um contexto temporal a uma frase: \n\ntenpo ni la mi lape = Eu estou dormindo agora \n\ntenpo kama la mi lape = Eu estarei dormindo no futuro \n\ntenpo pini la mi lape = Eu dormi no passado"
+      },
+      "compoundSentences": {
+        "title": "Frases compostas",
+        "content": "Separe múltiplos sujeitos em uma frase usando \"en\": \n\nlape en moku li suli = Sono e comida são importantes \n\nPara dizer que o sujeito faz mais de uma coisa, você pode usar várias partículas \"li\": \n\npipi li moku li pakala = O inseto come e destrói \n\nSe há vários objetos diretos do mesmo verbo, você pode usar várias partículas \"e\": \n \nmi moku e kili e telo = eu consumo frutas e água"
+      },
+      "unofficialWords": {
+        "title": "Palavras não-oficiais",
+        "content": "Nas palavras não-oficiais (como nomes de países, idiomas ou pessoas) são usadas maiúsculas e tratadas como adjetivos. Elas são anexadas a um substantivo e geralmente simplificadas para o alfabeto limitado do Toki Pona: \n\nmi jan Kapile = Eu sou Gabriele \n\nma Kanata li pona lukin = O Canadá é bonito \n\nmi toki ala e toki Inli = Eu não falo inglês \n\nma tomo Nujoka li suli = Nova York é grande"
+      },
+      "prepositions": {
+        "title": "Preposições",
+        "content": "\"lon\", \"kepeken\", \"tawa\", e \"tan\" podem ser usados ​​como preposições no final de uma frase: \n\nmi moku lon tomo = Eu como em casa \n\nmi moku kepeken ilo moku = Eu como com garfo \n\nsina pona tawa mi = Você é bom para mim / Eu gosto de você \n\nsina tawa weka tan seme? = Por que você está indo embora? "
+      },
+      "commands": {
+        "title": "Comandos",
+        "content": "Para declarar um comando, use \"o\" e depois o que você quer que a pessoa faça: \n\no lukin e ni! = Veja isso! \n\nPara se dirigir a alguém, comece a frase com \"(person) o,\": \n\njan Malin o, sina pona lukin = Malin, você é bonita \n\nVocê também pode usar isso junto com um comando, misturando os dois \"o's\": \n \njan San o tawa tomo sina = Sam, vá para casa"
+      },
+      "numbers": {
+        "title": "Números",
+        "content": "Combine palavras numéricas para somar: \n\nwan = 1 \ntu = 2 \nluka = ​​5 \nluka luka tu wan = 13"
+      }
+    }
   },
   "aboutMe": {
     "linkedin": "LinkedIn",

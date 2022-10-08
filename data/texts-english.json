@@ -7,8 +7,74 @@
   "pages": {
     "translator": "Translator",
     "dictionary": "Dictionary",
+    "grammar": "Grammar",
     "aboutMe": "About Me",
     "tokiPona": "Toki Pona"
+  },
+  "grammar": {
+    "title": "Grammar",
+    "content": {
+      "alphabet": {
+        "title": "Alphabet",
+        "content": "Toki Pona uses nine consonants (j k l m n p s t w) and five vowels (a e i o u)."
+      },
+      "basicSentences": {
+        "title": "Basic Sentences",
+        "content": "The particle \"li\" separates the subject from the verb: \n\nsoweli li moku = The cat is eating \njan li lape = The person is sleeping \n\nThere is no verb \"to be\", the part after \"li\" can also be a noun or an adjective: \n\nkili li moku = Fruits are food \ntelo li pona = Water is good \ntelo li moku = Water is a drink \n\nIf the subject is \"mi\" or \"sina\", the \"li\" is always omitted: \n\nmi moku = I eat \nsina pona = You are good"
+      },
+      "ambiguity": {
+        "title": "Ambiguity",
+        "content": "Toki Pona has a lot of ambiguity. You'll often need to know the context to decide what things mean. For example, verbs have no tense: \n\nmi moku = I am eating / I was eating / I will be eating \n\nMany words have multiple or general meanings: \n\nsoweli = cat / dog / (any land mammal) \nkili = (any fruit or vegetable) \n\nMany words can play the role of a noun, adjective, or verb: \n\ntelo = water / wet / to wash \npona = good, simple / to fix, to repair \n\nNouns have no singular/plural, and no definite/indefinite article: \n\nkili = a fruit / the fruit / some fruits / the fruits"
+      },
+      "directObjects": {
+        "title": "Direct objects",
+        "content": "The particle \"e\" separates a direct object from the rest of the sentence: \n\nsoweli li moku e telo = The cat drinks the water \nmi telo e soweli = I'm washing the cat"
+      },
+      "modifyingWords": {
+        "title": "Modifying words",
+        "content": "Words can be modified by appending other words: \n\njan lili = small human / child \ntomo mi = my house \npilin pona = to feel good / to be happy"
+      },
+      "negation": {
+        "title": "Negation",
+        "content": "To negate a word, append \"ala\": \n\nmi lape ala = I'm not sleeping \njan ala li toki = Nobody is talking"
+      },
+      "questions": {
+        "title": "Questions",
+        "content": "To ask yes-or-no questions, replace the verb with \"(verb) ala (verb)\": \n\nsina ken ala ken lape? = Are you able to sleep? \nsoweli li wile ala wile moku? = Is the cat hungry? \n\nAlternatively, append \"anu seme\" (or what) to the sentence: \n\nsina wile uta e mi anu seme? = Do you want to kiss me? \n\nTo answer these questions, reply with either \"(verb)\" or \"(verb) ala\". \n\nTo ask questions that can't be answered with yes or no, write a normal sentence and replace the word in question with \"seme\": \n\nsina moku e seme? = What are you eating? \n\nseme li moku e kili mi? = Who/what ate my fruit?"
+      },
+      "usingPi": {
+        "title": "Modifying words using \"pi\"",
+        "content": "To modify an expression with a group of words, separate them with the particle \"pi\". It can often be thought of as \"of\". Note the difference: \n\ntomo telo nasa = crazy water house / strange bathroom \ntomo pi telo nasa = house of the crazy water / pub \n\njan wawa ala = no strong people \njan pi wawa ala = people of notstrong / weak people"
+      },
+      "usingLa": {
+        "title": "Providing context using \"la\"",
+        "content": "To add a context to a sentence, prepend another sentence or expression, followed by \"la\". This often results in a structure like \"If (part 1), then (part 2)\" or \"In the context of (part 1), (part2).\" \n\nmi lape la ale li pona = When I'm asleep, everything is okay"
+      },
+      "time": {
+        "title": "Time",
+        "content": "You can use a \"la-clause\" to add a temporal context to a sentence: \n\ntenpo ni la mi lape = I am sleeping right now \n\ntenpo kama la mi lape = I will be sleeping in the future \n\ntenpo pini la mi lape = I slept in the past"
+      },
+      "compoundSentences": {
+        "title": "Compound sentences",
+        "content": "Separate multiple subjects in a sentence using \"en\": \n\nlape en moku li suli = Sleep and food are important \n\nTo say that the subject does more than one thing, you can use multiple \"li-clauses\": \n\npipi li moku li pakala = The bug eats and destroys \n\nIf there are several direct objects of the same verb, you can use multiple \"e-clauses\": \n\nmi moku e kili e telo = I consume fruit and water"
+      },
+      "unofficialWords": {
+        "title": "Unofficial words",
+        "content": "Unofficial words (like names of countries, languages, or people) are capitalized and treated like adjectives. They are attached to a noun, and often simplified to Toki Pona's limited alphabet: \n\nmi jan Kapile = I'm Gabriele \n\nma Kanata li pona lukin = Canada is pretty \n\nmi toki ala e toki Inli = I don't speak English \n\nma tomo Nujoka li suli = New York is big"
+      },
+      "prepositions": {
+        "title": "Prepositions",
+        "content": "\"lon\", \"kepeken\", \"tawa\", and \"tan\" can be used as prepositions at the end of a sentence: \n\nmi moku lon tomo = I eat in the house \n\nmi moku kepeken ilo moku = I eat using a fork \n\nsina pona tawa mi = You are good for me / I like you \n\nsina tawa weka tan seme? = Why are you leaving?"
+      },
+      "commands": {
+        "title": "Commands",
+        "content": "To state a command, use \"o\" and then what you want the person to do: \n\no lukin e ni! = Look at this! \n\nTo address someone, start a sentence with \"(person) o,\": \n\njan Malin o, sina pona lukin = Malin, you are pretty \n\nYou can also use this together with a command, merging the two \"o's\": \n\njan San o tawa tomo sina = Sam, go home"
+      },
+      "numbers": {
+        "title": "Numbers",
+        "content": "Combine number words to add them up: \n\nwan = 1 \ntu = 2 \nluka = 5 \nluka luka tu wan = 13"
+      }
+    }
   },
   "aboutMe": {
     "linkedin": "LinkedIn",
