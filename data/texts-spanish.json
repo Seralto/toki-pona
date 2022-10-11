@@ -24,7 +24,7 @@
       },
       "ambiguity": {
         "title": "Ambigüedad",
-        "content": "Toki Pona tiene muchas ambigüedades. A menudo, necesitará conocer el contexto para decidir qué significan las cosas. Por ejemplo, no hay tiempos verbales: \n\nmi moku = Yo como / Yo comí / Yo comeré \n\nMuchas palabras tienen significados múltiples o generales: \n\nsoweli = gato / perro / (cualquier mamífero terrestre) \nkili = (cualquier fruta o verdura) \n\nMuchas palabras pueden desempeñar el papel de un sustantivo, adjetivo o verbo: \n\ntelo = agua / mojar / lavar \npona = bueno, simple / arreglar, reparar \n\nLos sustantivos no tienen forma singular/plural, ni artículo definido/indefinido: \n\nkili = una fruta / la fruta / algunas frutas / las frutas"
+        "content": "Toki Pona tiene muchas ambigüedades. A menudo, necesitará conocer el contexto para decidir qué significan las cosas. Por ejemplo, no hay tiempos verbales: \n\nmi moku = Yo como / Yo comí / Yo comeré \n\nMuchas palabras tienen significados múltiples o generales: \n\nsoweli = gato / perro / (cualquier mamífero terrestre) \nkili = (cualquier fruta o verdura) \n\nMuchas palabras pueden desempeñar el papel de un sustantivo, adjetivo o verbo: \n\ntelo = agua / mojado / lavar \npona = bueno, simple / arreglar, reparar \n\nLos sustantivos no tienen forma singular/plural, ni artículo definido/indefinido: \n\nkili = una fruta / la fruta / algunas frutas / las frutas"
       },
       "directObjects": {
         "title": "Objetos Directos",
@@ -40,11 +40,11 @@
       },
       "preguntas": {
         "title": "Preguntas",
-        "content": "Para hacer preguntas de sí o no, reemplaza el verbo con \"(verbo) ala (verbo)\": \n\nsina ken ala ken lape? = ¿Puedes dormir? \nsoweli li wile ala wile moku? = ¿Tiene hambre el gato? \n\nAlternativamente, agregue \"anu seme\" (o qué) a la oración: \n\nsina wile uta e mi anu seme? = ¿Quieres besarme? \n\nPara responder estas preguntas, responda con \"(verbo)\" o \"(verbo) ala\".\n\nPara hacer preguntas que no se pueden responder con sí o no, escriba la oración normalmente y reemplace la palabra esa pregunta con \"seme\": \n\nsina moku e seme? = ¿Qué estás comiendo? \n\nseme li moku e kili mi? = ¿Quién/qué se comió mi fruta?"
+        "content": "Para hacer preguntas de sí o no, reemplaza el verbo con \"(verbo) ala (verbo)\": \n\nsina ken ala ken lape? = ¿Puedes dormir? \nsoweli li wile ala wile moku? = ¿Tiene hambre el gato? \n\nAlternativamente, agregue \"anu seme\" (o qué) a la oración: \n\nsina wile uta e mi anu seme? = ¿Quieres besarme? \n\nPara responder estas preguntas, responda con \"(verbo)\" o \"(verbo) ala\".\n\nPara hacer preguntas que no se pueden responder con sí o no, escriba la oración normalmente y reemplaza la palabra que pregunta con \"seme\": \n\nsina moku e seme? = ¿Qué estás comiendo? \n\nseme li moku e kili mi? = ¿Quién/qué se comió mi fruta?"
       },
       "usandoPi": {
         "title": "Modificar palabras usando \"pi\"",
-        "content": "Para modificar una expresión con un grupo de palabras, sepárelas con la partícula \"pi\". Esto a menudo se puede considerar como \"from\". Tenga en cuenta la diferencia: \n\ntomo telo nasa = casa de agua loca / baño extraño \ntomo pi telo nasa = casa de agua loca / bar \n\njan wawa ala = sin gente fuerte \njan pi wawa ala = gente débil / gente débil"
+        "content": "Para modificar una expresión con un grupo de palabras, sepárelas con la partícula \"pi\". Esto a menudo se puede considerar como \"de\". Tenga en cuenta la diferencia: \n\ntomo telo nasa = casa de agua loca / baño extraño \ntomo pi telo nasa = casa del agua loca / bar \n\njan wawa ala = sin gente fuerte \njan pi wawa ala = gente débil / gente débil"
       },
       "usandoLa": {
         "title": "Proporcionando contexto usando \"la\"",
@@ -60,11 +60,11 @@
       },
       "Palabras no oficiales": {
         "title": "Palabras no oficiales",
-        "content": "Las palabras no oficiales (como nombres de países, idiomas o personas) se escriben con mayúscula y se tratan como adjetivos. Se adjuntan a un sustantivo y generalmente se simplifican al alfabeto limitado de Toki Pona: \n\nmi jan Kapile = I Soy Gabriele \n\nma Kanata li pona lukin = Canadá es hermoso \n\nmi toki ala e toki Inli = No hablo inglés \n\nma tomo Nujoka li suli = Nueva York es grande"
+        "content": "Las palabras no oficiales (como nombres de países, idiomas o personas) se escriben con mayúscula y se tratan como adjetivos. Se adjuntan a un sustantivo y generalmente se simplifican al alfabeto limitado de Toki Pona: \n\nmi jan Kapile = I Soy Gabriele \n\nma Kanata li pona lukin = Canadá es bonito \n\nmi toki ala e toki Inli = No hablo inglés \n\nma tomo Nujoka li suli = Nova York es grande"
       },
       "preposiciones": {
         "title": "Preposiciones",
-        "content": "\"lon\", \"kepeken\", \"tawa\" y \"tan\" se pueden usar como preposiciones al final de una oración: \n\nmi moku lon tomo = I comer en casa \n\nmi moku kepeken ilo moku = Yo como con tenedor \n\nsina pona tawa mi = Eres bueno conmigo / Me gustas \n\nsina tawa weka tan seme? = ¿Por qué vas aunque ? "
+        "content": "\"lon\", \"kepeken\", \"tawa\" y \"tan\" se pueden usar como preposiciones al final de una oración: \n\nmi moku lon tomo = Yo como en la casa \n\nmi moku kepeken ilo moku = Yo como con tenedor \n\nsina pona tawa mi = Eres bueno conmigo / Me gustas \n\nsina tawa weka tan seme? = ¿Por qué te vas?"
       },
       "comandos": {
         "title": "Comandos",
