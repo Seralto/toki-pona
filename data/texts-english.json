@@ -20,7 +20,7 @@
       },
       "basicSentences": {
         "title": "Basic Sentences",
-        "content": "The particle \"li\" separates the subject from the verb: \n\nsoweli li moku = The cat is eating \njan li lape = The person is sleeping \n\nThere is no verb \"to be\", the part after \"li\" can also be a noun or an adjective: \n\nkili li moku = Fruits are food \ntelo li pona = Water is good \ntelo li moku = Water is a drink \n\nIf the subject is \"mi\" or \"sina\", the \"li\" is always omitted: \n\nmi moku = I eat \nsina pona = You are good"
+        "content": "The particle \"li\" separates the subject from the verb: \n\nsoweli li moku = The cat is eating \njan li lape = The person is sleeping \n\nThere is no verb \"to be\". \nThe part after \"li\" can also be a noun or an adjective: \n\nkili li moku = Fruits are food \ntelo li pona = Water is good \ntelo li moku = Water is a drink \n\nIf the subject is \"mi\" or \"sina\", the \"li\" is always omitted: \n\nmi moku = I eat \nsina pona = You are good"
       },
       "ambiguity": {
         "title": "Ambiguity",

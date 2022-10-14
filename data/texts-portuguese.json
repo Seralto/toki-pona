@@ -20,7 +20,7 @@
       },
       "basicSentences": {
         "title": "Frases básicas",
-        "content": "A partícula \"li\" separa o sujeito do verbo: \n\nsoweli li moku = O gato está comendo \njan li lape = A pessoa está dormindo \n\nNão existe o verbo \"ser/estar\", a parte depois de \"li\" pode ser um substantivo ou um adjetivo: \n\nkili li moku = Frutas são comida \ntelo li pona = Água é boa \ntelo li moku = Água é uma bebida \n\nSe o sujeito é \"mi\" ou \"sina\", o \"li\" é sempre omitido: \n\nmi moku = eu como \nsina pona = Você é bom"
+        "content": "A partícula \"li\" separa o sujeito do verbo: \n\nsoweli li moku = O gato está comendo \njan li lape = A pessoa está dormindo \n\nNão existem verbos \"ser\" ou \"estar\". \nA parte depois de \"li\" pode ser um substantivo ou um adjetivo: \n\nkili li moku = Frutas são comida \ntelo li pona = Água é boa \ntelo li moku = Água é uma bebida \n\nSe o sujeito é \"mi\" ou \"sina\", o \"li\" é sempre omitido: \n\nmi moku = eu como \nsina pona = Você é bom"
       },
       "ambiguity": {
         "title": "Ambiguidade",

@@ -20,7 +20,7 @@
       },
       "basicSentences": {
         "title": "Frases básicas",
-        "content": "La partícula \"li\" separa el sujeto del verbo: \n\nsoweli li moku = El gato está comiendo \njan li lape = La persona está durmiendo \n\nNo hay verbo \"ser/estar\", la parte posterior a \"li\" puede ser un sustantivo o un adjetivo: \n\nkili li moku = Las frutas son comida \ntelo li pona = El agua es buena \ntelo li moku = El agua es una bebida \n\nSi el sujeto es \"mi\" o \"sina\", siempre se omite \"li\": \n\nmi moku = Yo como \nsina pona = Tú eres bueno"
+        "content": "La partícula \"li\" separa el sujeto del verbo: \n\nsoweli li moku = El gato está comiendo \njan li lape = La persona está durmiendo \n\nNo hay verbos \"ser\" o \"estar\". \nLa parte posterior a \"li\" puede ser un sustantivo o un adjetivo: \n\nkili li moku = Las frutas son comida \ntelo li pona = El agua es buena \ntelo li moku = El agua es una bebida \n\nSi el sujeto es \"mi\" o \"sina\", siempre se omite \"li\": \n\nmi moku = Yo como \nsina pona = Tú eres bueno"
       },
       "ambiguity": {
         "title": "Ambigüedad",
@@ -44,7 +44,7 @@
       },
       "usandoPi": {
         "title": "Modificar palabras usando \"pi\"",
-        "content": "Para modificar una expresión con un grupo de palabras, sepárelas con la partícula \"pi\". Esto a menudo se puede considerar como \"de\". Tenga en cuenta la diferencia: \n\ntomo telo nasa = casa de agua loca / baño extraño \ntomo pi telo nasa = casa del agua loca / bar \n\njan wawa ala = sin gente fuerte \njan pi wawa ala = gente débil / gente débil"
+        "content": "Para modificar una expresión con un grupo de palabras, sepárelas con la partícula \"pi\". Esto a menudo se puede considerar como \"de\". Tenga en cuenta la diferencia: \n\ntomo telo nasa = casa de agua loca / baño extraño \ntomo pi telo nasa = casa del agua loca / bar \n\njan wawa ala = sin gente fuerte \njan pi wawa ala = gente de no fuerte / gente débil"
       },
       "usandoLa": {
         "title": "Proporcionando contexto usando \"la\"",
@@ -56,11 +56,11 @@
       },
       "oraciones compuestas": {
         "title": "Oraciones compuestas",
-        "content": "Separe múltiples sujetos en una oración usando \"en\": \n\nlape en moku li suli = Dormir y comer son importantes \n\nPara decir que el sujeto hace más de una cosa, puede usar varias Partículas \"li\": \n\npipi li moku li pakala = El insecto come y destruye \n\nSi hay múltiples objetos directos del mismo verbo, puedes usar múltiples partículas \"e\": \n \nmi moku e kili y telo = consumo fruta y agua"
+        "content": "Separe múltiples sujetos en una oración usando \"en\": \n\nlape en moku li suli = Dormir y comer son importantes \n\nPara decir que el sujeto hace más de una cosa, puede usar varias Partículas \"li\": \n\npipi li moku li pakala = El insecto come y destruye \n\nSi hay múltiples objetos directos del mismo verbo, puedes usar múltiples partículas \"e\": \n \nmi moku e kili e telo = consumo fruta y agua"
       },
       "Palabras no oficiales": {
         "title": "Palabras no oficiales",
-        "content": "Las palabras no oficiales (como nombres de países, idiomas o personas) se escriben con mayúscula y se tratan como adjetivos. Se adjuntan a un sustantivo y generalmente se simplifican al alfabeto limitado de Toki Pona: \n\nmi jan Kapile = I Soy Gabriele \n\nma Kanata li pona lukin = Canadá es bonito \n\nmi toki ala e toki Inli = No hablo inglés \n\nma tomo Nujoka li suli = Nova York es grande"
+        "content": "Las palabras no oficiales (como nombres de países, idiomas o personas) se escriben con mayúscula y se tratan como adjetivos. Se adjuntan a un sustantivo y generalmente se simplifican al alfabeto limitado de Toki Pona: \n\nmi jan Kapile = Soy Gabriele \n\nma Kanata li pona lukin = Canadá es bonito \n\nmi toki ala e toki Inli = No hablo inglés \n\nma tomo Nujoka li suli = Nova York es grande"
       },
       "preposiciones": {
         "title": "Preposiciones",
@@ -68,7 +68,7 @@
       },
       "comandos": {
         "title": "Comandos",
-        "content": "Para declarar un comando, usa \"o\" y luego lo que quieres que haga la persona: \n\no lukin y ni! = ¡Mira esto! \n\nPara dirigirte a alguien, comienza la oración con \"(persona) o,\": \n\njan Malin o, sina pona lukin = Malin, eres hermosa \n\nTambién puedes usar esto junto con un comando, mezclando las dos \"o's\": \n\njan San o tawa tomo sina = Sam, vete a casa"
+        "content": "Para declarar un comando, usa \"o\" y luego lo que quieres que haga la persona: \n\no lukin y ni! = ¡Mira esto! \n\nPara dirigirte a alguien, comienza la oración con \"(persona) o,\": \n\njan Malin o, sina pona lukin = Malin, eres hermosa \n\nTambién puedes usar esto junto con un comando, mezclando los dos \"o's\": \n\njan San o tawa tomo sina = Sam, vete a casa"
       },
       "números": {
         "title": "Números",
