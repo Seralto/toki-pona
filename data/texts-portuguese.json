@@ -1,6 +1,6 @@
 {
   "language": "Português",
-  "placeholder": "Digite aqui...",
+  "placeholder": "Digite aqui em Toki Pona...",
   "back": "Voltar",
   "quit": "Sair",
   "menu": "Menu",
@@ -8,6 +8,7 @@
     "translator": "Tradutor",
     "dictionary": "Dicionário",
     "grammar": "Gramática",
+    "sentences": "Frases",
     "quiz": "Quiz",
     "tokiPona": "Toki Pona",
     "aboutMe": "Sobre Mim"
@@ -81,6 +82,152 @@
       }
     }
   },
+  "sentences": {
+    "title": "Frases",
+    "content": {
+      "simple_sentences": {
+        "title": "Frases Simples",
+        "phrases": [
+          "Você é bom.\nsina pona.\n\n",
+          "É verdade.\nni li lon.\n\n",
+          "Eles estão falando.\nona li toki.\n\n",
+          "Ela está comendo pão.\nona li moku e pan.\n\n",
+          "Eu sei/entendo.\nmi sona.\n\n",
+          "Fruta é comida.\nkili li moku.\n\n",
+          "Está tudo bem.\nale li pona.\n\n",
+          "Talvez ele venha.\nken la ona li kama.\n\n",
+          "Olá!\ntoki!\n\n",
+          "Estou indo.\nmi tawa."
+        ]
+      },
+      "adjectives_and_adverbs": {
+        "title": "Adjetivos e Advérbios",
+        "phrases": [
+          "Esta é minha casa.\nni li tomo mi.\n\n",
+          "Meus amigos estão aqui.\njan pona mi li lon.\n\n",
+          "Ele fala bem.\nona li toki pona.\n\n",
+          "Pequenos animais são fofos.\nsoweli lili li suwi.\n\n",
+          "A nova página é boa.\nlipu sin li pona.\n\n",
+          "Esse grupo é importante.\nkulupu ni li suli."
+        ]
+      },
+      "basic_particles": {
+        "title": "Partículas Básicas",
+        "phrases": [
+          "Eu sei Toki Pona.\nmi sona e toki pona.\n\n",
+          "Você está assistindo a um vídeo.\nsina lukin e sitelen tawa.\n\n",
+          "O animal pequeno e o animal grande dormiram bem.\nsoweli lili en soweli suli li lape pona.\n\n",
+          "A pessoa ouve e fala.\njan li kute li toki.\n\n",
+          "Todo animal precisa de comida, água e um abrigo.\nsoweli ale li wile e moku e telo e tomo.\n\n",
+          "Eu ouço música e danço.\nmi kute e kalama musi li tawa musi.\n\n",
+          "O inseto comeu a planta verde.\npipi li moku e kasi laso.\n\n",
+          "Vermelho, amarelo e verde/azul são cores.\nloje en jelo en laso li kule.\n\n",
+          "Sinto a água fria e o ar quente.\nmi pilin e telo lete e kon seli.\n\n",
+          "Seu país e meu país são quentes e têm muitas plantas.\nma sina en ma mi li seli li jo e kasi mute.\n\n",
+          "Você e eu sabemos muito bem.\nsina en mi li sona pona e ona."
+        ]
+      },
+      "prepositions": {
+        "title": "Preposições",
+        "phrases": [
+          "Ele está usando a ferramenta.\nona li kepeken ilo.\n\n",
+          "Estou na minha casa.\nmi lon tomo mi.\n\n",
+          "Eu falo de um jeito diferente.\nmi toki kepeken nasin ante.\n\n",
+          "A criança está comendo na loja.\njan lili li moku lon esun.\n\n",
+          "Você é como seu pai.\nsina sama mama sina."
+        ]
+      },
+      "modifiers_with_pi": {
+        "title": "Modificadores com \"pi\"",
+        "phrases": [
+          "Eu gosto da comunidade Toki Pona.\nkulupu pi toki pona li pona tawa mi.\n\n",
+          "Ela está lendo um livro didático.\nona li lukin e lipu pi kama sona.\n\n",
+          "A casa da Ana é vermelha.\ntomo pi jan Ana li loje.\n\n",
+          "Ele é um bom músico.\nona li jan pona pi kalama musi.\n\n",
+          "Você é uma pessoa muito boa.\nsina jan pi pona mute."
+        ]
+      },
+      "preverbs": {
+        "title": "Verbos",
+        "phrases": [
+          "Ele está aprendendo Toki Pona.\nona li kama sona e toki pona.\n\n",
+          "Eu ainda estou ouvindo eles.\nmi awen kute e ona.\n\n",
+          "Essa pessoa pode falar bem.\njan ni li ken toki pona.\n\n",
+          "Estou tentando falar com ela.\nmi lukin toki tawa ona.\n\n",
+          "Ele quer ver seu desenho.\nona li wile lukin e sitelen sina.\n\n",
+          "Quero me tornar forte.\nmi wile kama wawa.\n\n",
+          "Eu posso continuar assistindo.\nmi ken awen lukin e ona.\n\n",
+          "O pássaro está tentando pegar o inseto.\nwaso li lukin kama jo e pipi."
+        ]
+      },
+      "questions_with_seme": {
+        "title": "Perguntas com \"seme\"",
+        "phrases": [
+          "O que é bom para você? (O que você gosta?)\nseme li pona tawa sina?\n\n",
+          "O que você está comendo?\nsina moku e seme?\n\n",
+          "De que país você é?\nsina tan ma seme?\n\n",
+          "O que há de novo?\nseme li sin?\n\n",
+          "Onde fica?\nona li lon seme?\n\n",
+          "Por que você se sente mal?\nsina pilin ike tan seme?\n\n",
+          "Como você aprendeu Toki Pona?\nsina kama sona e toki pona kepeken nasin seme?\n\n",
+          "Quem está falando?\njan seme li toki?"
+        ]
+      },
+      "negation_and_yes_no_questions": {
+        "title": "Negação e perguntas sim/não",
+        "phrases": [
+          "Eu não entendo isso.\nmi sona ala e ni.\n\n",
+          "Ninguém está falando.\njan ala li toki.\n\n",
+          "Você está bem? Sim (eu estou bem).\nsina pona ala pona? pona.\n\n",
+          "Ele leu o livro? Não.\nona li lukin ala lukin e lipu? ala.\n\n",
+          "Isso é novo?\nni li sin anu seme?\n\n",
+          "O animal está aqui?\nsoweli li lon anu seme?"
+        ]
+      },
+      "vocative_and_imperative_with_o": {
+        "title": "Vocativo e Imperativo com \"o\"",
+        "phrases": [
+          "Ei amigo, tudo bem?\njan pona o, sina pona ala pona?\n\n",
+          "Sonja, você é boa.\njan Sonja o, sina pona.\n\n",
+          "Leia este livro.\no lukin e lipu ni.\n\n",
+          "Por favor, me dê a ferramenta.\no pana e ilo tawa mi.\n\n",
+          "Meu amigo, fale comigo!\njan pona mi o toki tawa mi!\n\n",
+          "As crianças devem ouvir seus pais.\njan lili o kute e mama ona.\n\n",
+          "Vamos!\nmi o tawa!"
+        ]
+      },
+      "time": {
+        "title": "Tempo",
+        "phrases": [
+          "Eu entendo agora.\ntenpo ni la mi sona.\n\n",
+          "Nós fomos à loja.\ntenpo pini la mi tawa esun.\n\n",
+          "Ela estará ausente.\ntenpo kama la ona li weka.\n\n",
+          "Eu durmo à noite.\nmi lape lon tenpo pimeja.\n\n",
+          "Nós comemos durante o dia.\nmi moku lon tenpo suno.\n\n",
+          "Ele quer falar com você amanhã.\ntenpo suno kama la ona li wile toki tawa sina.\n\n",
+          "Vi o filme ontem.\ntenpo suno pini la mi lukin e sitelen tawa.\n\n",
+          "Estou aqui hoje.\ntenpo suno ni la mi lon.\n\n",
+          "O animal comeu.\nsoweli li moku lon tenpo pini.\n\n",
+          "Vou ouvir a música mais tarde.\nmi kute e kalama musi lon tenpo kama.\n\n",
+          "Estou lendo um livro agora.\nmi lukin e lipu lon tenpo ni."
+        ]
+      },
+      "context_phrases_with_la": {
+        "title": "Frases de contexto com \"la\"",
+        "phrases": [
+          "No meu quarto, eu durmo.\ntomo mi la mi lape.\n\n",
+          "Para mim, está tudo bem.\nmi la ale li pona.\n\n",
+          "As imagens do livro são coloridas.\nlipu ni la sitelen li kule.\n\n",
+          "Se meu animal de estimação come, ele se sente bem.\nsoweli mi li moku la ona li pilin pona.\n\n",
+          "Se ela estiver falando, ouça.\nona li toki la o kute.\n\n",
+          "De acordo com os sentimentos deles, isso é loucura.\npilin ona la ni li nasa.\n\n",
+          "Você me ajudou. Por isso, eu vou ajudar você.\nsina pana e pona tawa mi. ni la mi pana e pona tawa sina.\n\n",
+          "Se você não gostar disso, eu paro.\nni li ike tawa sina la mi pini.\n\n",
+          "Se você não sabe Toki Pona, aprenda!\nsina sona ala sona e toki pona la o kama sona!"
+        ]
+      }
+    }
+  },
   "aboutMe": {
     "linkedin": "LinkedIn",
     "github": "GitHub",
@@ -95,7 +242,7 @@
   },
   "tokiPona": {
     "title": "O que é Toki Pona?",
-    "content": "Toki Pona é uma língua criada pela linguista e tradutora canadense Sonja Lang, tendo sido publicada na internet pela primeira vez em 2001. \n\nTrata-se de uma linguagem minimalista, composta de apenas 14 fonemas (letras) e 120 palavras (atualmente existem algumas outras palavras não oficiais). \n\nA língua foca-se em conceitos simples e elementos que são relativamente universais. Inspirado pela filosofia taoista, toki pona não visa a ser uma língua auxiliar, mas um \"yoga para a mente\", pretendendo expressar o máximo de sentido com o mínimo de complexidade.",
+    "content": "Toki Pona é uma língua criada pela linguista e tradutora canadense Sonja Lang, tendo sido publicada na internet pela primeira vez em 2001. \n\nTrata-se de uma linguagem minimalista, composta de apenas 14 fonemas (letras) e 120 palavras (atualmente existem algumas outras palavras não oficiais). \n\nA língua foca-se em conceitos simples e elementos que são relativamente universais. Inspirado pela filosofia taoista, Toki Pona não visa a ser uma língua auxiliar, mas um \"yoga para a mente\", pretendendo expressar o máximo de sentido com o mínimo de complexidade.",
     "official": "Website oficial: ",
     "site": "https://tokipona.org"
   }

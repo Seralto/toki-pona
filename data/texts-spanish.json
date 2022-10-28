@@ -1,6 +1,6 @@
 {
   "language": "Español",
-  "placeholder": "Escriba aquí...",
+  "placeholder": "Escriba aquí en Toki Pona...",
   "back": "Volver",
   "quit": "Salir",
   "menu": "Menú",
@@ -8,6 +8,7 @@
     "translator": "Traductor",
     "dictionary": "Diccionario",
     "grammar": "Gramática",
+    "sentences": "Frases",
     "quiz": "Quiz",
     "tokiPona": "Toki Pona",
     "aboutMe": "Sobre Mí"
@@ -78,6 +79,152 @@
       "números": {
         "title": "Números",
         "content": "Combina palabras numéricas para sumar: \n\nwan = 1 \ntu = 2 \nluka = ​​​​5 \nluka luka tu wan = 13"
+      }
+    }
+  },
+  "sentences": {
+    "title": "Frases",
+    "content": {
+      "simple_sentences": {
+        "title": "Oraciones simples",
+        "phrases": [
+          "Eres bueno.\nsina pona.\n\n",
+          "Eso es cierto.\nni li lon.\n\n",
+          "Están hablando.\nona li toki.\n\n",
+          "Ella esta comiendo pan.\nona li moku e pan.\n\n",
+          "Lo sé/entiendo.\nmi sona.\n\n",
+          "La fruta es comida.\nkili li moku.\n\n",
+          "Todo está bien.\nale li pona.\n\n",
+          "Talvez él venga.\nken la ona li kama.\n\n",
+          "¡Hola!\ntoki!\n\n",
+          "Me voy.\nmi tawa"
+        ]
+      },
+      "adjectives_and_adverbs": {
+        "title": "Adjetivos y Adverbios",
+        "phrases": [
+          "Esta es mi casa.\nni li tomo mi.\n\n",
+          "Mis amigos están aquí.\njan pona mi li lon.\n\n",
+          "Habla bien.\nona li toki pona.\n\n",
+          "Los animales pequeños son lindos.\nsoweli lili li suwi.\n\n",
+          "La nueva página es buena.\nlipu sin li pona.\n\n",
+          "Ese grupo es importante.\nkulupu ni li suli"
+        ]
+      },
+      "basic_particles": {
+        "title": "Partículas básicas",
+        "phrases": [
+          "Yo lo sé Toki Pona.\nmi sona e toki pona.\n\n",
+          "Tu estás viendo un video.\nsina lukin e sitelen tawa.\n\n",
+          "El animal pequeño y el animal grande durmieron bien.\nsoweli lili en soweli suli li lape pona.\n\n",
+          "La persona escucha y habla.\njan li kute li toki.\n\n",
+          "Todo animal necesita comida, agua y un refugio.\nsoweli ale li wile e moku e telo e tomo.\n\n",
+          "Escucho música y bailo.\nmi kute e kalama musi li tawa musi.\n\n",
+          "El bicho se comió la planta verde.\npipi li moku e kasi laso.\n\n",
+          "Rojo, amarillo y verde/azul son colores.\nloje en jelo en laso li kule.\n\n",
+          "Siento el agua fría y el aire cálido.\nmi pilin e telo lete e kon seli.\n\n",
+          "Tu país y mi país son cálidos y tienen muchas plantas.\nma sina en ma mi li seli li jo e kasi mute.\n\n",
+          "Tú y yo lo sabemos bien.\nsina en mi li sona pona e ona."
+        ]
+      },
+      "prepositions": {
+        "title": "Preposiciones",
+        "phrases": [
+          "Él está usando la herramienta.\nona li kepeken ilo.\n\n",
+          "Estoy en mi casa.\nmi lon tomo mi.\n\n",
+          "Hablo de otra manera.\nmi toki kepeken nasin ante.\n\n",
+          "El niño está comiendo en la tienda.\njan lili li moku lon esun.\n\n",
+          "Eres como tu padre.\nsina sama mama sina"
+        ]
+      },
+      "modifiers_with_pi": {
+        "title": "Modificadores con \"pi\"",
+        "phrases": [
+          "Me gusta la comunidad Toki Pona.\nkulupu pi toki pona li pona tawa mi.\n\n",
+          "Ella está leyendo un libro de texto.\nona li lukin e lipu pi kama sona.\n\n",
+          "La casa de Ana es roja.\ntomo pi jan Ana li loje.\n\n",
+          "Él es un buen músico.\nona li jan pona pi kalama musi.\n\n",
+          "Tú eres muy buena persona.\nsina jan pi pona mute."
+        ]
+      },
+      "preverbs": {
+        "title": "Verbos",
+        "phrases": [
+          "Él está aprendiendo Toki Pona.\nona li kama sona e toki pona.\n\n",
+          "Aún estoy escuchándolos.\nmi awen kute e ona.\n\n",
+          "Esa persona puede hablar bien.\njan ni li ken toki pona.\n\n",
+          "Estoy tratando de hablar con ella.\nmi lukin toki tawa ona.\n\n",
+          "Él quiere ver tu dibujo.\nona li wile lukin e sitelen sina.\n\n",
+          "Quiero volverme fuerte.\nmi wile kama wawa.\n\n",
+          "Puedo seguir viéndolo.\nmi ken awen lukin e ona.\n\n",
+          "El pájaro está tratando de atrapar el insecto.\nwaso li lukin kama jo e pipi"
+        ]
+      },
+      "questions_with_seme": {
+        "title": "Preguntas con \"seme\"",
+        "phrases": [
+          "¿Qué es bueno para ti? (¿Qué te gusta?)\nseme li pona tawa sina?\n\n",
+          "¿Qué estás comiendo?\nsina moku e seme?\n\n",
+          "¿De qué país eres?\nsina tan ma seme?\n\n",
+          "¿Qué hay de nuevo?\nseme li sin?\n\n",
+          "¿Dónde está?\nona li lon seme?\n\n",
+          "¿Por qué te sientes mal?\nsina pilin ike tan seme?\n\n",
+          "¿Cómo aprendiste Toki Pona?\nsina kama sona e toki pona kepeken nasin seme?\n\n",
+          "¿Quién habla?\njan seme li toki?"
+        ]
+      },
+      "negation_and_yes_no_questions": {
+        "title": "Negación y preguntas sí/no",
+        "phrases": [
+          "No entiendo esto.\nmi sona ala e ni.\n\n",
+          "Nadie habla.\njan ala li toki.\n\n",
+          "¿Estás bien? Sí (estoy bien).\nsina pona ala pona? pona.\n\n",
+          "¿Él leyó el libro? No.\nona li lukin ala lukin e lipu? ala.\n\n",
+          "¿Esto es nuevo?\nni li sin anu seme?\n\n",
+          "¿Está el animal aquí?\nsoweli li lon anu seme?"
+        ]
+      },
+      "vocative_and_imperative_with_o": {
+        "title": "Vocativo e Imperativo con \"o\"",
+        "phrases": [
+          "Oye amigo, ¿estás bien?\njan pona o, sina pona ala pona?\n\n",
+          "Sonja, eres buena.\njan Sonja o, sina pona.\n\n",
+          "Lee este libro.\no lukin e lipu ni.\n\n",
+          "Por favor, dame la herramienta.\no pana e ilo tawa mi.\n\n",
+          "¡Amigo mío, háblame!\njan pona mi o toki tawa mi!\n\n",
+          "Los niños deben escuchar a sus padres.\njan lili o kute e mama ona.\n\n",
+          "¡Vamos!\nmi o tawa!"
+        ]
+      },
+      "time": {
+        "title": "Tiempo",
+        "phrases": [
+          "Yo entiendo ahora.\ntenpo ni la mi sona.\n\n",
+          "Nosotros fuimos a la tienda.\ntenpo pini la mi tawa esun.\n\n",
+          "Ella estará fuera.\ntenpo kama la ona li weka.\n\n",
+          "Duermo por la noche.\nmi lape lon tenpo pimeja.\n\n",
+          "Nosotros comemos durante el día.\nmi moku lon tenpo suno.\n\n",
+          "Él quiere hablar contigo mañana.\ntenpo suno kama la ona li wile toki tawa sina.\n\n",
+          "Vi la película ayer.\ntenpo suno pini la mi lukin e sitelen tawa.\n\n",
+          "Hoy estoy aquí.\ntenpo suno ni la mi lon.\n\n",
+          "El animal comió.\nsoweli li moku lon tenpo pini.\n\n",
+          "Escucharé la canción más tarde.\nmi kute e kalama musi lon tenpo kama.\n\n",
+          "Estoy leyendo un libro ahora mismo.\nmi lukin e lipu lon tenpo ni"
+        ]
+      },
+      "context_phrases_with_la": {
+        "title": "Frases de contexto con \"la\"",
+        "phrases": [
+          "En mi cuarto, yo duermo.\ntomo mi la mi lape.\n\n",
+          "Para mí, todo está bien.\nmi la ale li pona.\n\n",
+          "Las imágenes del libro son coloridas.\nlipu ni la sitelen li kule.\n\n",
+          "Si mi mascota come, él se siente bien.\nsoweli mi li moku la ona li pilin pona.\n\n",
+          "Si ella está hablando, escucha.\nona li toki la o kute.\n\n",
+          "Según sus sentimientos, esto es una locura.\npilin ona la ni li nasa.\n\n",
+          "Me ayudaste. Por eso, te ayudaré.\nsina pana e pona tawa mi. ni la mi pana e pona tawa sina.\n\n",
+          "Si no te gusta, me detendré.\nni li ike tawa sina la mi pini.\n\n",
+          "Si no sabes Toki Pona, ¡apréndelo!\nsina sona ala sona e toki pona la o kama sona!"
+        ]
       }
     }
   },
