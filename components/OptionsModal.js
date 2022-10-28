@@ -36,6 +36,14 @@ const OptionsModal = ({
           </TouchableOpacity>
         )}
 
+        {page !== "sentences" && (
+          <TouchableOpacity onPress={() => onChangePage("sentences")}>
+            <Text style={styles.menuButton}>
+              {pageTexts.pages.sentences.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        )}
+
         {page !== "about" && (
           <TouchableOpacity onPress={() => onChangePage("about")}>
             <Text style={styles.menuButton}>
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 10,
     paddingHorizontal: 40,
-    marginVertical: 15,
+    marginVertical: 12,
     marginHorizontal: 50,
     borderRadius: 5,
   },
@@ -92,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 10,
     paddingHorizontal: 40,
-    marginVertical: 15,
+    marginVertical: 12,
     marginHorizontal: 50,
     borderRadius: 5,
   },

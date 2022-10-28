@@ -4,6 +4,7 @@ import { View, ScrollView, StyleSheet, BackHandler } from "react-native";
 import Translator from "./components/Translator";
 import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
+import Sentences from "./components/Sentences";
 import About from "./components/About";
 import TokiPona from "./components/TokiPona";
 import OptionsModal from "./components/OptionsModal";
@@ -123,6 +124,10 @@ export default class App extends Component {
 
           {this.isPage("grammar") && (
             <Grammar pageTexts={this.state.appTexts.grammar} />
+          )}
+
+          {this.isPage("sentences") && (
+            <Sentences pageTexts={this.state.appTexts.sentences} />
           )}
 
           {this.isPage("about") && (
