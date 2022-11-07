@@ -35,8 +35,7 @@ export default class App extends Component {
     this.state = {
       validEnteredWords: [],
       translations: [],
-      page: "quiz",
-      // page: "translator",
+      page: "translator",
       enteredText: "",
       language: defaultLanguage,
       isModalVisible: false,
