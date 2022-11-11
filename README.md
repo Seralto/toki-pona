@@ -13,6 +13,7 @@ The app is available on [Google Play Store](https://play.google.com/store/apps/d
   <img src="https://sergiotoledo.com.br/toki-pona/dictionary-en.png" alt="dictionary" width="200" align="left"/>
   <img src="https://sergiotoledo.com.br/toki-pona/grammar-en.png" alt="grammar" width="200" align="left"/>
   <img src="https://sergiotoledo.com.br/toki-pona/sentences-en.png" alt="sentences" width="200" align="left"/>
+  <img src="https://sergiotoledo.com.br/toki-pona/quiz-en.png" alt="quiz" width="200" align="left"/>
   <img src="https://sergiotoledo.com.br/toki-pona/menu-en.png" alt="menu" width="200" />
 </div>
 
@@ -30,6 +31,5 @@ $ expo start
 
 ## TODO
 
-- Quiz game
 - Store user preferences
 - some improvements...
