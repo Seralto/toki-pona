@@ -4,6 +4,7 @@ import { View, ScrollView, StyleSheet, BackHandler } from "react-native";
 import Translator from "./components/Translator";
 import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
+import Quiz from "./components/Quiz";
 import About from "./components/About";
 import TokiPona from "./components/TokiPona";
 import OptionsModal from "./components/OptionsModal";
@@ -33,7 +34,8 @@ export default class App extends Component {
     this.state = {
       validEnteredWords: [],
       translations: [],
-      page: "translator",
+      page: "quiz",
+      // page: "translator",
       enteredText: "",
       language: defaultLanguage,
       isModalVisible: false,
@@ -123,6 +125,13 @@ export default class App extends Component {
 
           {this.isPage("grammar") && (
             <Grammar pageTexts={this.state.appTexts.grammar} />
+          )}
+
+          {this.isPage("quiz") && (
+            <Quiz
+              pageTexts={this.state.appTexts.quiz}
+              dictionary={this.state.dictionary}
+            />
           )}
 
           {this.isPage("about") && (

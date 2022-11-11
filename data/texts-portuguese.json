@@ -8,8 +8,13 @@
     "translator": "Tradutor",
     "dictionary": "Dicionário",
     "grammar": "Gramática",
-    "aboutMe": "Sobre Mim",
-    "tokiPona": "Toki Pona"
+    "quiz": "Quiz",
+    "tokiPona": "Toki Pona",
+    "aboutMe": "Sobre Mim"
+  },
+  "quiz": {
+    "title": "Quiz",
+    "next": "Próximo"
   },
   "grammar": {
     "title": "Gramática",

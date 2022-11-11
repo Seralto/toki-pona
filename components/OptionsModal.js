@@ -36,10 +36,10 @@ const OptionsModal = ({
           </TouchableOpacity>
         )}
 
-        {page !== "about" && (
-          <TouchableOpacity onPress={() => onChangePage("about")}>
+        {page !== "quiz" && (
+          <TouchableOpacity onPress={() => onChangePage("quiz")}>
             <Text style={styles.menuButton}>
-              {pageTexts.pages.aboutMe.toUpperCase()}
+              {pageTexts.pages.quiz.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
@@ -48,6 +48,14 @@ const OptionsModal = ({
           <TouchableOpacity onPress={() => onChangePage("tokipona")}>
             <Text style={styles.menuButton}>
               {pageTexts.pages.tokiPona.toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        )}
+
+        {page !== "about" && (
+          <TouchableOpacity onPress={() => onChangePage("about")}>
+            <Text style={styles.menuButton}>
+              {pageTexts.pages.aboutMe.toUpperCase()}
             </Text>
           </TouchableOpacity>
         )}
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 10,
     paddingHorizontal: 40,
-    marginVertical: 15,
+    marginVertical: 12,
     marginHorizontal: 50,
     borderRadius: 5,
   },
@@ -92,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 10,
     paddingHorizontal: 40,
-    marginVertical: 15,
+    marginVertical: 12,
     marginHorizontal: 50,
     borderRadius: 5,
   },

@@ -8,8 +8,13 @@
     "translator": "Translator",
     "dictionary": "Dictionary",
     "grammar": "Grammar",
-    "aboutMe": "About Me",
-    "tokiPona": "Toki Pona"
+    "quiz": "Quiz",
+    "tokiPona": "Toki Pona",
+    "aboutMe": "About Me"
+  },
+  "quiz": {
+    "title": "Quiz",
+    "next": "Next"
   },
   "grammar": {
     "title": "Grammar",

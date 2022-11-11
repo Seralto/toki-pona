@@ -9,9 +9,9 @@ const Dictionary = ({ pageTexts, dictionary }) => {
       <Text style={styles.title}>{pageTexts.pages.dictionary}</Text>
 
       <ScrollView>
-        {Object.keys(dictionary).map((key) => {
-          return <Translation word={key} text={dictionary[key]} key={key} />;
-        })}
+        {Object.keys(dictionary).map((key) => (
+          <Translation word={key} text={dictionary[key]} key={key} />
+        ))}
       </ScrollView>
     </View>
   );
