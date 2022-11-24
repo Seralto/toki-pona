@@ -10,12 +10,25 @@
     "grammar": "Gramática",
     "sentences": "Frases",
     "quiz": "Quiz",
+    "settings": "Configurações",
     "tokiPona": "Toki Pona",
     "aboutMe": "Sobre Mim"
   },
   "quiz": {
     "title": "Quiz",
     "next": "Próximo"
+  },
+  "settings": {
+    "title": "Configurações",
+    "defaultLanguage": "Selecione o idioma padrão",
+    "defaultPage": "Selecione a página padrão",
+    "pagesOptions": {
+      "translator": "Tradutor",
+      "dictionary": "Dicionário",
+      "grammar": "Gramática",
+      "sentences": "Frases",
+      "quiz": "Quiz"
+    }
   },
   "grammar": {
     "title": "Gramática",

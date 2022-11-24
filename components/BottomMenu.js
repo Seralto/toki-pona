@@ -5,15 +5,15 @@ const BottomMenu = ({ pageTexts, onChangeLanguage, onShowModal }) => {
   return (
     <View style={styles.bottomMenu}>
       <Button
-        onPress={() => onChangeLanguage("portuguese")}
-        title="Português"
-        accessibilityLabel="Mude o idioma para português"
-      />
-
-      <Button
         onPress={() => onChangeLanguage("english")}
         title="English"
         accessibilityLabel="Change language to english"
+      />
+
+      <Button
+        onPress={() => onChangeLanguage("portuguese")}
+        title="Português"
+        accessibilityLabel="Mude o idioma para português"
       />
 
       <Button

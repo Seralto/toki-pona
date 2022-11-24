@@ -10,12 +10,25 @@
     "grammar": "Grammar",
     "sentences": "Sentences",
     "quiz": "Quiz",
+    "settings": "Settings",
     "tokiPona": "Toki Pona",
     "aboutMe": "About Me"
   },
   "quiz": {
     "title": "Quiz",
     "next": "Next"
+  },
+  "settings": {
+    "title": "Settings",
+    "defaultLanguage": "Select default language",
+    "defaultPage": "Select default page",
+    "pagesOptions": {
+      "translator": "Translator",
+      "dictionary": "Dictionary",
+      "grammar": "Grammar",
+      "sentences": "Sentences",
+      "quiz": "Quiz"
+    }
   },
   "grammar": {
     "title": "Grammar",
