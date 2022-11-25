@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { View, ScrollView, StyleSheet, BackHandler } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Translator from "./components/Translator";
 import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
 import Sentences from "./components/Sentences";
 import Quiz from "./components/Quiz";
+import Settings from "./components/Settings";
 import About from "./components/About";
 import TokiPona from "./components/TokiPona";
 import OptionsModal from "./components/OptionsModal";
@@ -23,26 +25,64 @@ const texts = {
   spanish: require("./data/texts-spanish.json"),
 };
 
+const DEFAULT_LANGUAGE = "english";
+const DEFAULT_PAGE = "translator";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.textInput = React.createRef();
 
-    const defaultLanguage = "portuguese";
-    const dictionary = this.loadDictionary(defaultLanguage);
-
     this.state = {
       validEnteredWords: [],
+      tokiPonaWords: [],
       translations: [],
-      page: "translator",
+      dictionary: {},
+      appTexts: "",
       enteredText: "",
-      language: defaultLanguage,
+      language: "",
+      page: "",
       isModalVisible: false,
-      dictionary: dictionary,
-      tokiPonaWords: Object.keys(dictionary),
-      appTexts: this.loadText(defaultLanguage),
     };
+  }
+
+  componentDidMount() {
+    this.getLanguage();
+    this.getStartPage();
+    this.getDictionary();
+  }
+
+  getLanguage() {
+    AsyncStorage.getItem("language").then((language) => {
+      const currentLanguage = language ? language : DEFAULT_LANGUAGE;
+      this.changeLanguage(currentLanguage);
+      const texts = this.loadText(currentLanguage);
+      this.setState({ appTexts: texts });
+    });
+  }
+
+  getStartPage() {
+    AsyncStorage.getItem("page").then((page) => {
+      const currentPage = page ? page : DEFAULT_PAGE;
+      this.changePage(currentPage);
+      this.setState({ page: currentPage });
+    });
+  }
+
+  getDictionary() {
+    const dictionary = this.loadDictionary(DEFAULT_LANGUAGE);
+    this.setState({ dictionary: dictionary });
+    this.setState({ tokiPonaWords: Object.keys(dictionary) });
+  }
+
+  setDefaultLanguage(language) {
+    AsyncStorage.setItem("language", language);
+    this.changeLanguage(language);
+  }
+
+  setDefaultPage(page) {
+    AsyncStorage.setItem("page", page);
   }
 
   translate(enteredText) {
@@ -78,6 +118,7 @@ export default class App extends Component {
   changePage(page) {
     this.setState({ page: page });
     this.showModal(false);
+    this.mainContent.scrollTo({ y: 0, animated: false });
   }
 
   clearTranslation() {
@@ -115,7 +156,10 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.app}>
-        <ScrollView>
+        <ScrollView
+          nestedScrollEnabled={true}
+          ref={(ref) => (this.mainContent = ref)}
+        >
           {this.isPage("dictionary") && (
             <Dictionary
               pageTexts={this.state.appTexts}
@@ -131,6 +175,17 @@ export default class App extends Component {
             <Quiz
               pageTexts={this.state.appTexts.quiz}
               dictionary={this.state.dictionary}
+            />
+          )}
+
+          {this.isPage("settings") && (
+            <Settings
+              pageTexts={this.state.appTexts.settings}
+              onSelectLanguage={(language) => this.setDefaultLanguage(language)}
+              onSelectPage={(page) => this.setDefaultPage(page)}
+              pagesOptions={this.state.appTexts.settings.pagesOptions}
+              language={this.state.language}
+              page={this.state.page}
             />
           )}
 
@@ -159,20 +214,24 @@ export default class App extends Component {
           )}
         </ScrollView>
 
-        <OptionsModal
-          pageTexts={this.state.appTexts}
-          page={this.state.page}
-          modalVisibility={this.state.isModalVisible}
-          onChangePage={(page) => this.changePage(page)}
-          onShowModal={(state) => this.showModal(state)}
-          onQuit={() => this.quitApp()}
-        />
+        {this.state.appTexts && (
+          <OptionsModal
+            pageTexts={this.state.appTexts}
+            page={this.state.page}
+            modalVisibility={this.state.isModalVisible}
+            onChangePage={(page) => this.changePage(page)}
+            onShowModal={(state) => this.showModal(state)}
+            onQuit={() => this.quitApp()}
+          />
+        )}
 
-        <BottomMenu
-          pageTexts={this.state.appTexts}
-          onChangeLanguage={(language) => this.changeLanguage(language)}
-          onShowModal={() => this.showModal(true)}
-        />
+        {this.state.appTexts && (
+          <BottomMenu
+            pageTexts={this.state.appTexts}
+            onChangeLanguage={(language) => this.changeLanguage(language)}
+            onShowModal={() => this.showModal(true)}
+          />
+        )}
       </View>
     );
   }
