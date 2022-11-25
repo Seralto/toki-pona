@@ -28,8 +28,3 @@ The app is available on [Google Play Store](https://play.google.com/store/apps/d
 ```shell
 $ expo start
 ```
-
-## TODO
-
-- Store user preferences
-- some improvements...
