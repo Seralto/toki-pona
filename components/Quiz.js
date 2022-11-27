@@ -117,14 +117,14 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
     marginBottom: 40,
     textAlign: "center",
   },
   randomWord: {
-    fontSize: 22,
+    fontSize: 18,
     color: "#323545",
     backgroundColor: "#c3c3c3",
     borderRadius: 10,

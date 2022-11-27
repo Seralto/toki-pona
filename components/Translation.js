@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   word: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#42455a",
     fontWeight: "bold",
   },
   translation: {
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 

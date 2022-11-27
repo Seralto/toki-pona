@@ -3,7 +3,6 @@ import { View, ScrollView, Text, StyleSheet } from "react-native";
 
 const Sentences = ({ pageTexts }) => {
   const content = pageTexts.content;
-  console.log(pageTexts.content);
 
   return (
     <View style={styles.sentences}>
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
     marginBottom: 20,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 22,
     color: "#c3c3c3",
     marginBottom: 20,
   },

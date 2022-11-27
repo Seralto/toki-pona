@@ -53,22 +53,22 @@ const About = ({ pageTexts }) => {
 const styles = StyleSheet.create({
   about: {
     alignItems: "center",
-    padding: 30,
+    padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     color: "#c3c3c3",
     marginTop: 40,
     textAlign: "center",
   },
   content: {
-    fontSize: 22,
+    fontSize: 18,
     color: "#c3c3c3",
     marginTop: 20,
     marginBottom: 60,
   },
   link: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#2196f3",
     marginBottom: 10,
   },
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   info: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 18,
     color: "#c3c3c3",
     marginBottom: 10,
   },

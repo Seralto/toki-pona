@@ -43,18 +43,19 @@ export default class App extends Component {
       enteredText: "",
       language: "",
       page: "",
+      defaultPage: "",
       isModalVisible: false,
     };
   }
 
   componentDidMount() {
-    this.getLanguage();
-    this.getStartPage();
+    this.getDefaultLanguage();
+    this.getDefaultPage();
     this.getDictionary();
   }
 
-  getLanguage() {
-    AsyncStorage.getItem("language").then((language) => {
+  getDefaultLanguage() {
+    AsyncStorage.getItem("defaultLanguage").then((language) => {
       const currentLanguage = language ? language : DEFAULT_LANGUAGE;
       this.changeLanguage(currentLanguage);
       const texts = this.loadText(currentLanguage);
@@ -62,11 +63,11 @@ export default class App extends Component {
     });
   }
 
-  getStartPage() {
-    AsyncStorage.getItem("page").then((page) => {
-      const currentPage = page ? page : DEFAULT_PAGE;
-      this.changePage(currentPage);
-      this.setState({ page: currentPage });
+  getDefaultPage() {
+    AsyncStorage.getItem("defaultPage").then((page) => {
+      const defaultPage = page ? page : DEFAULT_PAGE;
+      this.setState({ defaultPage: defaultPage });
+      this.changePage(defaultPage);
     });
   }
 
@@ -77,12 +78,13 @@ export default class App extends Component {
   }
 
   setDefaultLanguage(language) {
-    AsyncStorage.setItem("language", language);
+    AsyncStorage.setItem("defaultLanguage", language);
     this.changeLanguage(language);
   }
 
   setDefaultPage(page) {
-    AsyncStorage.setItem("page", page);
+    AsyncStorage.setItem("defaultPage", page);
+    this.setState({ defaultPage: page });
   }
 
   translate(enteredText) {
@@ -166,11 +168,9 @@ export default class App extends Component {
               dictionary={this.state.dictionary}
             />
           )}
-
           {this.isPage("grammar") && (
             <Grammar pageTexts={this.state.appTexts.grammar} />
           )}
-
           {this.isPage("quiz") && (
             <Quiz
               pageTexts={this.state.appTexts.quiz}
@@ -184,8 +184,8 @@ export default class App extends Component {
               onSelectLanguage={(language) => this.setDefaultLanguage(language)}
               onSelectPage={(page) => this.setDefaultPage(page)}
               pagesOptions={this.state.appTexts.settings.pagesOptions}
-              language={this.state.language}
-              page={this.state.page}
+              defaultLanguage={this.state.language}
+              defaultPage={this.state.defaultPage}
             />
           )}
 

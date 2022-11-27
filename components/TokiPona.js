@@ -23,22 +23,22 @@ const TokiPona = ({ pageTexts }) => {
 const styles = StyleSheet.create({
   TokiPona: {
     alignItems: "center",
-    padding: 30,
+    padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
     textAlign: "center",
   },
   content: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#c3c3c3",
     marginTop: 20,
     marginBottom: 80,
   },
   info: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "center",
     color: "#c3c3c3",
   },

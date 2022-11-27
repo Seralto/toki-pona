@@ -7,14 +7,13 @@ const Settings = ({
   onSelectPage,
   pagesOptions,
   pageTexts,
-  language,
-  page,
+  defaultLanguage,
+  defaultPage,
 }) => {
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [languageValue, setLanguageValue] = useState(language);
+  const [languageValue, setLanguageValue] = useState(defaultLanguage);
   const [pageOpen, setPageOpen] = useState(false);
-  const [pageValue, setPageValue] = useState(page);
-
+  const [pageValue, setPageValue] = useState(defaultPage);
   const [languages, setLanguages] = useState([
     { label: "Português", value: "portuguese" },
     { label: "English", value: "english" },
@@ -85,16 +84,16 @@ const Settings = ({
 
 const styles = StyleSheet.create({
   settings: {
-    padding: 30,
+    padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 20,
     color: "#c3c3c3",
     marginBottom: 10,
   },

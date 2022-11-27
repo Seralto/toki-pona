@@ -20,10 +20,10 @@ const Dictionary = ({ pageTexts, dictionary }) => {
 const styles = StyleSheet.create({
   dictionary: {
     alignItems: "center",
-    padding: 30,
+    padding: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
     marginBottom: 20,

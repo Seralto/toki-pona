@@ -34,6 +34,7 @@ const Translator = ({
           autoCapitalize="none"
           value={enteredText}
         />
+
         <TouchableOpacity onPress={onClearTranslation}>
           <Image
             style={styles.clearImage}
@@ -60,10 +61,10 @@ const Translator = ({
 const styles = StyleSheet.create({
   translator: {
     alignItems: "center",
-    padding: 30,
+    padding: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 28,
     color: "#c3c3c3",
     marginTop: 40,
     marginBottom: 20,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   inputText: {
     flex: 1,
     backgroundColor: "#d6e2ec",
-    fontSize: 20,
+    fontSize: 18,
     borderRadius: 10,
     padding: 10,
     marginRight: 8,
