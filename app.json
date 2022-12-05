@@ -2,7 +2,7 @@
   "expo": {
     "name": "Toki Pona",
     "slug": "TokiPona",
-    "version": "1.7.5",
+    "version": "1.7.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 17,
+      "versionCode": 18,
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
