@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const NUM_OPTIONS = 4;
 
-const Quiz = ({ pageTexts, dictionary }) => {
+const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
   const [randomWord, setRandomWord] = useState("");
   const [options, setOptions] = useState([]);
   const [checkAnswer, setCheckAnswer] = useState(false);
@@ -43,6 +43,8 @@ const Quiz = ({ pageTexts, dictionary }) => {
     setCheckAnswer(true);
 
     if (answer === randomWord) {
+      onChangeScore();
+
       setTimeout(() => {
         setCheckAnswer(false);
         setStartNewGame(true);
@@ -89,6 +91,8 @@ const Quiz = ({ pageTexts, dictionary }) => {
     <View style={styles.quiz}>
       <Text style={styles.title}>{pageTexts.title}</Text>
 
+      <Text style={styles.score}>{score}</Text>
+
       <Text style={styles.randomWord}>
         {reversed ? randomWord : dictionary[randomWord]}
       </Text>
@@ -120,31 +124,29 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: "#c3c3c3",
     marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 10,
     textAlign: "center",
+  },
+  score: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#4a9373",
+    backgroundColor: "#323545",
+    borderRadius: 20,
+    marginBottom: 25,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    marginRight: "auto",
+    textAlign: "center",
+    minWidth: 60,
   },
   randomWord: {
     fontSize: 18,
     color: "#323545",
     backgroundColor: "#c3c3c3",
     borderRadius: 10,
-    marginBottom: 35,
+    marginBottom: 30,
     padding: 20,
-  },
-  info: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-  score: {
-    fontSize: 18,
-    color: "#549591",
-    backgroundColor: "#323545",
-    borderRadius: 15,
-    paddingHorizontal: 30,
-    paddingVertical: 5,
   },
   option: {
     fontSize: 18,

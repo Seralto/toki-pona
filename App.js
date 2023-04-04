@@ -8,8 +8,8 @@ import Grammar from "./components/Grammar";
 import Sentences from "./components/Sentences";
 import Quiz from "./components/Quiz";
 import Settings from "./components/Settings";
-import About from "./components/About";
 import TokiPona from "./components/TokiPona";
+import About from "./components/About";
 import OptionsModal from "./components/OptionsModal";
 import BottomMenu from "./components/BottomMenu";
 
@@ -44,6 +44,7 @@ export default class App extends Component {
       language: "",
       page: "",
       defaultPage: "",
+      score: 0,
       isModalVisible: false,
     };
   }
@@ -52,6 +53,7 @@ export default class App extends Component {
     this.getDefaultLanguage();
     this.getDefaultPage();
     this.getDictionary();
+    this.getScore();
   }
 
   getDefaultLanguage() {
@@ -68,6 +70,13 @@ export default class App extends Component {
       const defaultPage = page ? page : DEFAULT_PAGE;
       this.setState({ defaultPage: defaultPage });
       this.changePage(defaultPage);
+    });
+  }
+
+  getScore() {
+    AsyncStorage.getItem("score").then((totalScore) => {
+      const score = totalScore ? totalScore : 0;
+      this.setState({ score: score.toString() });
     });
   }
 
@@ -151,6 +160,12 @@ export default class App extends Component {
     BackHandler.exitApp();
   }
 
+  changeScore() {
+    const newScore = parseInt(this.state.score) + 10;
+    this.setState({ score: newScore });
+    AsyncStorage.setItem("score", newScore.toString());
+  }
+
   isPage(page) {
     return this.state.page === page;
   }
@@ -162,19 +177,39 @@ export default class App extends Component {
           nestedScrollEnabled={true}
           ref={(ref) => (this.mainContent = ref)}
         >
+          {this.isPage("translator") && (
+            <Translator
+              pageTexts={this.state.appTexts}
+              translations={this.state.translations}
+              validEnteredWords={this.state.validEnteredWords}
+              enteredText={this.state.enteredText}
+              inputRef={this.textInput}
+              onEnterText={(enteredText) => this.translate(enteredText)}
+              onClearTranslation={() => this.clearTranslation()}
+            />
+          )}
+
           {this.isPage("dictionary") && (
             <Dictionary
               pageTexts={this.state.appTexts}
               dictionary={this.state.dictionary}
             />
           )}
+
           {this.isPage("grammar") && (
             <Grammar pageTexts={this.state.appTexts.grammar} />
           )}
+
+          {this.isPage("sentences") && (
+            <Sentences pageTexts={this.state.appTexts.sentences} />
+          )}
+
           {this.isPage("quiz") && (
             <Quiz
               pageTexts={this.state.appTexts.quiz}
               dictionary={this.state.dictionary}
+              score={this.state.score}
+              onChangeScore={() => this.changeScore()}
             />
           )}
 
@@ -189,28 +224,12 @@ export default class App extends Component {
             />
           )}
 
-          {this.isPage("sentences") && (
-            <Sentences pageTexts={this.state.appTexts.sentences} />
-          )}
-
-          {this.isPage("about") && (
-            <About pageTexts={this.state.appTexts.aboutMe} />
-          )}
-
           {this.isPage("tokipona") && (
             <TokiPona pageTexts={this.state.appTexts.tokiPona} />
           )}
 
-          {this.isPage("translator") && (
-            <Translator
-              pageTexts={this.state.appTexts}
-              translations={this.state.translations}
-              validEnteredWords={this.state.validEnteredWords}
-              enteredText={this.state.enteredText}
-              inputRef={this.textInput}
-              onEnterText={(enteredText) => this.translate(enteredText)}
-              onClearTranslation={() => this.clearTranslation()}
-            />
+          {this.isPage("about") && (
+            <About pageTexts={this.state.appTexts.aboutMe} />
           )}
         </ScrollView>
 
