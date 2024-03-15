@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+
+import { Audio } from "expo-av";
 
 const NUM_OPTIONS = 4;
 
-const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
+const Quiz = ({
+  pageTexts,
+  dictionary,
+  score,
+  language,
+  onChangeScore,
+  screenWidth,
+}) => {
   const [randomWord, setRandomWord] = useState("");
   const [options, setOptions] = useState([]);
   const [checkAnswer, setCheckAnswer] = useState(false);
@@ -12,6 +21,34 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
   const [userAnswer, setUserAnswer] = useState("");
   const [showNextButton, setshowNextButton] = useState(false);
   const [reversed, setReversed] = useState(false);
+  const [muted, setMuted] = useState(false);
+
+  const titleFontSize = screenWidth < 400 ? 20 : 24;
+  const fontSize = screenWidth < 400 ? 16 : 18;
+  const padding = screenWidth < 400 ? 14 : 20;
+  const buttonPadding = screenWidth < 400 ? 10 : 14;
+
+  const soundObject = new Audio.Sound();
+
+  const playSound = async (result) => {
+    if (muted) {
+      return;
+    }
+
+    try {
+      soundObject.setOnPlaybackStatusUpdate((status) => {
+        if (!status.didJustFinish) return;
+        soundObject.unloadAsync();
+      });
+
+      if (result == "right") {
+        await soundObject.loadAsync(require("../assets/right-answer.wav"));
+      } else {
+        await soundObject.loadAsync(require("../assets/wrong-answer.wav"));
+      }
+      await soundObject.playAsync();
+    } catch (_error) {}
+  };
 
   const getRandomWord = () => {
     return Object.keys(dictionary)[
@@ -43,6 +80,7 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
     setCheckAnswer(true);
 
     if (answer === randomWord) {
+      playSound("right");
       onChangeScore();
 
       setTimeout(() => {
@@ -51,6 +89,7 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
         setOptionsDisabled(false);
       }, 1500);
     } else {
+      playSound("wrong");
       setshowNextButton(true);
     }
   };
@@ -81,6 +120,18 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
     setReversed(setDirections());
   };
 
+  const formatScore = (score) => {
+    if (language === "en") {
+      return score.toLocaleString("en-US");
+    } else {
+      return score.toLocaleString("pt-BR");
+    }
+  };
+
+  const handleSound = () => {
+    setMuted(!muted);
+  };
+
   if (startNewGame) {
     setshowNextButton(false);
     setStartNewGame(false);
@@ -89,18 +140,41 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
 
   return (
     <View style={styles.quiz}>
-      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+        {pageTexts.title}
+      </Text>
 
-      <Text style={styles.score}>{score}</Text>
+      <View style={styles.headerBox}>
+        <Text style={[styles.score, { fontSize: fontSize }]}>
+          Score: {formatScore(score)}
+        </Text>
 
-      <Text style={styles.randomWord}>
+        {/* Sound  */}
+        <TouchableOpacity onPress={handleSound}>
+          <Image
+            style={[muted ? styles.soundOff : styles.soundOn]}
+            source={require("../assets/volume.png")}
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* Word */}
+      <Text
+        style={[styles.randomWord, { fontSize: fontSize, padding: padding }]}
+      >
         {reversed ? randomWord : dictionary[randomWord]}
       </Text>
 
+      {/* Options */}
       <View>
         {options.map((key) => (
           <TouchableOpacity onPress={() => matchUserAnswer(key)} key={key}>
-            <Text style={getOptionStyle(key)}>
+            <Text
+              style={[
+                getOptionStyle(key),
+                { fontSize: fontSize, padding: padding },
+              ]}
+            >
               {reversed ? dictionary[key] : key}
             </Text>
           </TouchableOpacity>
@@ -108,7 +182,14 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
 
         {showNextButton && (
           <TouchableOpacity onPress={nextQuestion}>
-            <Text style={styles.nextButton}>{pageTexts.next}</Text>
+            <Text
+              style={[
+                styles.nextButton,
+                { fontSize: fontSize, paddingVertical: buttonPadding },
+              ]}
+            >
+              {pageTexts.next}
+            </Text>
           </TouchableOpacity>
         )}
       </View>
@@ -118,17 +199,18 @@ const Quiz = ({ pageTexts, dictionary, score, onChangeScore }) => {
 
 const styles = StyleSheet.create({
   quiz: {
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 26,
     color: "#c3c3c3",
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
   },
+  headerBox: {
+    flexDirection: "row",
+  },
   score: {
-    fontSize: 18,
     fontWeight: "bold",
     color: "#4a9373",
     backgroundColor: "#323545",
@@ -140,55 +222,57 @@ const styles = StyleSheet.create({
     textAlign: "center",
     minWidth: 60,
   },
+  soundOn: {
+    width: 26,
+    height: 26,
+  },
+  soundOff: {
+    width: 26,
+    height: 26,
+    opacity: 0.2,
+  },
   randomWord: {
-    fontSize: 18,
     color: "#323545",
     backgroundColor: "#c3c3c3",
     borderRadius: 10,
     marginBottom: 30,
-    padding: 20,
   },
   option: {
-    fontSize: 18,
     backgroundColor: "#323545",
     color: "#c3c3c3",
     borderColor: "#292b38",
     borderStyle: "solid",
     borderWidth: 3,
-    padding: 20,
+    paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
   },
   rightOption: {
     backgroundColor: "#023220",
     color: "#c3c3c3",
-    fontSize: 18,
     borderColor: "#006c00",
     borderStyle: "solid",
     borderWidth: 3,
-    padding: 20,
+    paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
   },
   wrongOption: {
     backgroundColor: "#560707",
     color: "#c3c3c3",
-    fontSize: 18,
     borderColor: "#8d0a0a",
     borderStyle: "solid",
     borderWidth: 3,
-    padding: 20,
+    paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
   },
   nextButton: {
     backgroundColor: "#2196f3",
     color: "#fff",
-    fontSize: 20,
     textAlign: "center",
-    paddingVertical: 10,
     borderRadius: 5,
-    marginTop: 20,
+    marginTop: 15,
   },
 });
 

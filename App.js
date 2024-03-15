@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, ScrollView, StyleSheet, BackHandler } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Translator from "./components/Translator";
@@ -46,18 +46,22 @@ export default class App extends Component {
       defaultPage: "",
       score: 0,
       isModalVisible: false,
+      isLoading: true,
+      screenWidth: Dimensions.get("window").width,
     };
   }
 
   componentDidMount() {
-    this.getDefaultLanguage();
-    this.getDefaultPage();
-    this.getDictionary();
-    this.getScore();
+    setTimeout(() => {
+      this.getDefaultLanguage();
+      this.getDefaultPage();
+      this.getDictionary();
+      this.getScore();
+    }, 500);
   }
 
   getDefaultLanguage() {
-    AsyncStorage.getItem("defaultLanguage").then((language) => {
+    AsyncStorage.getItem("@TokiPona:defaultLanguage").then((language) => {
       const currentLanguage = language ? language : DEFAULT_LANGUAGE;
       this.changeLanguage(currentLanguage);
       const texts = this.loadText(currentLanguage);
@@ -66,7 +70,7 @@ export default class App extends Component {
   }
 
   getDefaultPage() {
-    AsyncStorage.getItem("defaultPage").then((page) => {
+    AsyncStorage.getItem("@TokiPona:defaultPage").then((page) => {
       const defaultPage = page ? page : DEFAULT_PAGE;
       this.setState({ defaultPage: defaultPage });
       this.changePage(defaultPage);
@@ -74,9 +78,10 @@ export default class App extends Component {
   }
 
   getScore() {
-    AsyncStorage.getItem("score").then((totalScore) => {
+    AsyncStorage.getItem("@TokiPona:score").then((totalScore) => {
       const score = totalScore ? totalScore : 0;
       this.setState({ score: score.toString() });
+      this.setState({ isLoading: false });
     });
   }
 
@@ -87,12 +92,12 @@ export default class App extends Component {
   }
 
   setDefaultLanguage(language) {
-    AsyncStorage.setItem("defaultLanguage", language);
+    AsyncStorage.setItem("@TokiPona:defaultLanguage", language);
     this.changeLanguage(language);
   }
 
   setDefaultPage(page) {
-    AsyncStorage.setItem("defaultPage", page);
+    AsyncStorage.setItem("@TokiPona:defaultPage", page);
     this.setState({ defaultPage: page });
   }
 
@@ -129,7 +134,6 @@ export default class App extends Component {
   changePage(page) {
     this.setState({ page: page });
     this.showModal(false);
-    this.mainContent.scrollTo({ y: 0, animated: false });
   }
 
   clearTranslation() {
@@ -156,27 +160,31 @@ export default class App extends Component {
     this.setState({ isModalVisible: state });
   }
 
-  quitApp() {
-    BackHandler.exitApp();
-  }
-
   changeScore() {
     const newScore = parseInt(this.state.score) + 10;
     this.setState({ score: newScore });
-    AsyncStorage.setItem("score", newScore.toString());
+    AsyncStorage.setItem("@TokiPona:score", newScore.toString());
   }
 
   isPage(page) {
     return this.state.page === page;
   }
 
+  isPageLoading() {
+    return this.state.isLoading;
+  }
+
   render() {
-    return (
+    return this.isPageLoading() ? (
+      <View style={styles.splash}>
+        <Image
+          source={require("./assets/splash.png")}
+          style={styles.splashImage}
+        />
+      </View>
+    ) : (
       <View style={styles.app}>
-        <ScrollView
-          nestedScrollEnabled={true}
-          ref={(ref) => (this.mainContent = ref)}
-        >
+        <View style={styles.pages}>
           {this.isPage("translator") && (
             <Translator
               pageTexts={this.state.appTexts}
@@ -184,6 +192,7 @@ export default class App extends Component {
               validEnteredWords={this.state.validEnteredWords}
               enteredText={this.state.enteredText}
               inputRef={this.textInput}
+              screenWidth={this.state.screenWidth}
               onEnterText={(enteredText) => this.translate(enteredText)}
               onClearTranslation={() => this.clearTranslation()}
             />
@@ -193,15 +202,22 @@ export default class App extends Component {
             <Dictionary
               pageTexts={this.state.appTexts}
               dictionary={this.state.dictionary}
+              screenWidth={this.state.screenWidth}
             />
           )}
 
           {this.isPage("grammar") && (
-            <Grammar pageTexts={this.state.appTexts.grammar} />
+            <Grammar
+              pageTexts={this.state.appTexts.grammar}
+              screenWidth={this.state.screenWidth}
+            />
           )}
 
           {this.isPage("sentences") && (
-            <Sentences pageTexts={this.state.appTexts.sentences} />
+            <Sentences
+              pageTexts={this.state.appTexts.sentences}
+              screenWidth={this.state.screenWidth}
+            />
           )}
 
           {this.isPage("quiz") && (
@@ -209,38 +225,47 @@ export default class App extends Component {
               pageTexts={this.state.appTexts.quiz}
               dictionary={this.state.dictionary}
               score={this.state.score}
+              screenWidth={this.state.screenWidth}
               onChangeScore={() => this.changeScore()}
+              language={this.state.language}
             />
           )}
 
           {this.isPage("settings") && (
             <Settings
               pageTexts={this.state.appTexts.settings}
-              onSelectLanguage={(language) => this.setDefaultLanguage(language)}
-              onSelectPage={(page) => this.setDefaultPage(page)}
               pagesOptions={this.state.appTexts.settings.pagesOptions}
               defaultLanguage={this.state.language}
               defaultPage={this.state.defaultPage}
+              screenWidth={this.state.screenWidth}
+              onSelectLanguage={(language) => this.setDefaultLanguage(language)}
+              onSelectPage={(page) => this.setDefaultPage(page)}
             />
           )}
 
           {this.isPage("tokipona") && (
-            <TokiPona pageTexts={this.state.appTexts.tokiPona} />
+            <TokiPona
+              pageTexts={this.state.appTexts.tokiPona}
+              screenWidth={this.state.screenWidth}
+            />
           )}
 
           {this.isPage("about") && (
-            <About pageTexts={this.state.appTexts.aboutMe} />
+            <About
+              pageTexts={this.state.appTexts.aboutMe}
+              screenWidth={this.state.screenWidth}
+            />
           )}
-        </ScrollView>
+        </View>
 
         {this.state.appTexts && (
           <OptionsModal
             pageTexts={this.state.appTexts}
             page={this.state.page}
             modalVisibility={this.state.isModalVisible}
+            screenWidth={this.state.screenWidth}
             onChangePage={(page) => this.changePage(page)}
             onShowModal={(state) => this.showModal(state)}
-            onQuit={() => this.quitApp()}
           />
         )}
 
@@ -260,5 +285,20 @@ const styles = StyleSheet.create({
   app: {
     flex: 1,
     backgroundColor: "#42455a",
+  },
+  pages: {
+    flex: 1,
+    marginBottom: 40,
+  },
+  splash: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#545771",
+  },
+  splashImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
   },
 });

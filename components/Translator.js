@@ -19,15 +19,21 @@ const Translator = ({
   inputRef,
   onEnterText,
   onClearTranslation,
+  screenWidth,
 }) => {
+  const titleFontSize = screenWidth < 400 ? 20 : 26;
+  const fontSize = screenWidth < 400 ? 15 : 18;
+
   return (
     <View style={styles.translator}>
-      <Text style={styles.title}>Toki Pona - {pageTexts.language}</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+        Toki Pona - {pageTexts.language}
+      </Text>
 
       <View style={styles.inputBox}>
         <TextInput
           onChangeText={onEnterText}
-          style={styles.inputText}
+          style={[styles.inputText, { fontSize: fontSize }]}
           placeholder={pageTexts.placeholder}
           ref={inputRef}
           autoFocus={true}
@@ -50,6 +56,7 @@ const Translator = ({
               word={validEnteredWords[index]}
               text={translation}
               key={index}
+              screenWidth={screenWidth}
             />
           );
         })}
@@ -61,12 +68,11 @@ const Translator = ({
 const styles = StyleSheet.create({
   translator: {
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 28,
     color: "#c3c3c3",
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 20,
   },
   inputBox: {
@@ -78,7 +84,6 @@ const styles = StyleSheet.create({
   inputText: {
     flex: 1,
     backgroundColor: "#d6e2ec",
-    fontSize: 18,
     borderRadius: 10,
     padding: 10,
     marginRight: 8,

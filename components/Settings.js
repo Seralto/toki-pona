@@ -9,6 +9,7 @@ const Settings = ({
   pageTexts,
   defaultLanguage,
   defaultPage,
+  screenWidth,
 }) => {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [languageValue, setLanguageValue] = useState(defaultLanguage);
@@ -19,6 +20,10 @@ const Settings = ({
     { label: "English", value: "english" },
     { label: "Español", value: "spanish" },
   ]);
+
+  const titleFontSize = screenWidth < 400 ? 20 : 24;
+  const subtitleFontSize = screenWidth < 400 ? 18 : 22;
+  const fontSize = screenWidth < 400 ? 15 : 18;
 
   const [pages, setPages] = useState(
     Object.keys(pagesOptions).map((key) => ({
@@ -37,10 +42,14 @@ const Settings = ({
 
   return (
     <View style={styles.settings}>
-      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+        {pageTexts.title}
+      </Text>
 
       <View style={styles.languageBox}>
-        <Text style={styles.subtitle}>{pageTexts.defaultLanguage}</Text>
+        <Text style={[styles.subtitle, { fontSize: subtitleFontSize }]}>
+          {pageTexts.defaultLanguage}
+        </Text>
         <DropDownPicker
           zIndex={2000}
           zIndexInverse={1000}
@@ -53,14 +62,16 @@ const Settings = ({
           setItems={setLanguages}
           onSelectItem={setLanguage}
           placeholder={pageTexts.defaultLanguage}
-          textStyle={{ fontSize: 18 }}
+          textStyle={{ fontSize: fontSize }}
           listMode="SCROLLVIEW"
           theme="DARK"
         />
       </View>
 
       <View style={styles.pageBox}>
-        <Text style={styles.subtitle}>{pageTexts.defaultPage}</Text>
+        <Text style={[styles.subtitle, { fontSize: subtitleFontSize }]}>
+          {pageTexts.defaultPage}
+        </Text>
         <DropDownPicker
           zIndex={1000}
           zIndexInverse={2000}
@@ -73,7 +84,7 @@ const Settings = ({
           setItems={setPages}
           onSelectItem={setPage}
           placeholder={pageTexts.defaultPage}
-          textStyle={{ fontSize: 18 }}
+          textStyle={{ fontSize: fontSize }}
           listMode="SCROLLVIEW"
           theme="DARK"
         />
@@ -84,27 +95,23 @@ const Settings = ({
 
 const styles = StyleSheet.create({
   settings: {
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 26,
     color: "#c3c3c3",
-    marginTop: 40,
+    marginTop: 10,
     textAlign: "center",
   },
   subtitle: {
-    fontSize: 20,
     color: "#c3c3c3",
     marginBottom: 10,
   },
   languageBox: {
     marginTop: 30,
-    flex: 1,
   },
   pageBox: {
     height: 300,
     marginTop: 30,
-    flex: 1,
   },
 });
 

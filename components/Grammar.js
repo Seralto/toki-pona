@@ -1,19 +1,29 @@
 import React from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 
-const Grammar = ({ pageTexts }) => {
+const Grammar = ({ pageTexts, screenWidth }) => {
   const content = pageTexts.content;
+
+  const titleFontSize = screenWidth < 400 ? 20 : 24;
+  const subtitleFontSize = screenWidth < 400 ? 18 : 22;
+  const fontSize = screenWidth < 400 ? 15 : 18;
 
   return (
     <View style={styles.grammar}>
-      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+        {pageTexts.title}
+      </Text>
 
       <ScrollView>
         {Object.keys(content).map((key) => {
           return (
             <View style={styles.grammarBox} key={key}>
-              <Text style={styles.subtitle}>{content[key].title}</Text>
-              <Text style={styles.content}>{content[key].content}</Text>
+              <Text style={[styles.subtitle, { fontSize: subtitleFontSize }]}>
+                {content[key].title}
+              </Text>
+              <Text style={[styles.content, { fontSize: fontSize }]}>
+                {content[key].content}
+              </Text>
             </View>
           );
         })}
@@ -25,13 +35,11 @@ const Grammar = ({ pageTexts }) => {
 const styles = StyleSheet.create({
   grammar: {
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 26,
     color: "#c3c3c3",
-    marginTop: 40,
-    marginBottom: 20,
+    marginVertical: 10,
     textAlign: "center",
   },
   grammarBox: {
@@ -41,12 +49,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   subtitle: {
-    fontSize: 22,
     color: "#c3c3c3",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   content: {
-    fontSize: 18,
     color: "#c3c3c3",
   },
 });

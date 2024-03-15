@@ -1,19 +1,29 @@
 import React from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 
-const Sentences = ({ pageTexts }) => {
+const Sentences = ({ pageTexts, screenWidth }) => {
   const content = pageTexts.content;
+
+  const titleFontSize = screenWidth < 400 ? 20 : 24;
+  const subtitleFontSize = screenWidth < 400 ? 18 : 22;
+  const fontSize = screenWidth < 400 ? 15 : 18;
 
   return (
     <View style={styles.sentences}>
-      <Text style={styles.title}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+        {pageTexts.title}
+      </Text>
 
       <ScrollView>
         {Object.keys(content).map((key) => {
           return (
             <View style={styles.sentencesBox} key={key}>
-              <Text style={styles.subtitle}>{content[key].title}</Text>
-              <Text style={styles.content}>{content[key].phrases}</Text>
+              <Text style={[styles.subtitle, { fontSize: subtitleFontSize }]}>
+                {content[key].title}
+              </Text>
+              <Text style={[styles.content, { fontSize: fontSize }]}>
+                {content[key].phrases}
+              </Text>
             </View>
           );
         })}
@@ -25,13 +35,12 @@ const Sentences = ({ pageTexts }) => {
 const styles = StyleSheet.create({
   sentences: {
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 26,
     color: "#c3c3c3",
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
   sentencesBox: {
     backgroundColor: "#323545",
@@ -41,12 +50,10 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     textAlign: "center",
-    fontSize: 22,
     color: "#c3c3c3",
     marginBottom: 20,
   },
   content: {
-    fontSize: 18,
     color: "#c3c3c3",
   },
 });

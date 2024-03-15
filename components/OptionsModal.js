@@ -5,86 +5,148 @@ const OptionsModal = ({
   page,
   pageTexts,
   modalVisibility,
+  screenWidth,
   onChangePage,
   onShowModal,
-  onQuit,
 }) => {
+  const fontSize = screenWidth < 400 ? 15 : 18;
+  const vertical = screenWidth < 400 ? 8 : 10;
+
   return (
     <Modal visible={modalVisibility} animationType="slide">
       <View style={styles.optionsModal}>
-        {page !== "translator" && (
-          <TouchableOpacity onPress={() => onChangePage("translator")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.translator.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "dictionary" && (
-          <TouchableOpacity onPress={() => onChangePage("dictionary")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.dictionary.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "grammar" && (
-          <TouchableOpacity onPress={() => onChangePage("grammar")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.grammar.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "sentences" && (
-          <TouchableOpacity onPress={() => onChangePage("sentences")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.sentences.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "quiz" && (
-          <TouchableOpacity onPress={() => onChangePage("quiz")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.quiz.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "settings" && (
-          <TouchableOpacity onPress={() => onChangePage("settings")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.settings.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "tokipona" && (
-          <TouchableOpacity onPress={() => onChangePage("tokipona")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.tokiPona.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        {page !== "about" && (
-          <TouchableOpacity onPress={() => onChangePage("about")}>
-            <Text style={styles.menuButton}>
-              {pageTexts.pages.aboutMe.toUpperCase()}
-            </Text>
-          </TouchableOpacity>
-        )}
-
-        <TouchableOpacity onPress={() => onShowModal(false)}>
-          <Text style={styles.controllButton}>
-            {pageTexts.back.toUpperCase()}
+        <TouchableOpacity onPress={() => onChangePage("translator")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.translator.toUpperCase()}
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onQuit}>
-          <Text style={styles.controllButton}>
-            {pageTexts.quit.toUpperCase()}
+        <TouchableOpacity onPress={() => onChangePage("dictionary")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.dictionary.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("grammar")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.grammar.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("sentences")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.sentences.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("quiz")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.quiz.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("settings")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.settings.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("tokipona")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.tokiPona.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onChangePage("about")}>
+          <Text
+            style={[
+              styles.menuButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.pages.aboutMe.toUpperCase()}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => onShowModal(false)}>
+          <Text
+            style={[
+              styles.controllButton,
+              {
+                fontSize: fontSize,
+                paddingVertical: vertical,
+                marginVertical: vertical,
+              },
+            ]}
+          >
+            {pageTexts.back.toUpperCase()}
           </Text>
         </TouchableOpacity>
       </View>
@@ -102,10 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196f3",
     textAlign: "center",
     color: "#fff",
-    fontSize: 18,
-    paddingVertical: 10,
     paddingHorizontal: 40,
-    marginVertical: 10,
     marginHorizontal: 50,
     borderRadius: 5,
   },
@@ -113,7 +172,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0f5389",
     textAlign: "center",
     color: "#fff",
-    fontSize: 18,
     paddingVertical: 10,
     paddingHorizontal: 40,
     marginVertical: 10,

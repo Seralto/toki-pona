@@ -248,15 +248,19 @@
     "linkedinUrl": "https://www.linkedin.com/in/seralto",
     "githubUrl": "https://github.com/seralto",
     "youtubeUrl": "https://www.youtube.com/user/stoledo13",
-    "site": "http://sergiotoledo.com.br",
+    "site": "sergiotoledo.com.br",
+    "siteUrl": "http://sergiotoledo.com.br",
     "email": "contato@sergiotoledo.com.br",
     "title": "¡Gracias por usar la \naplicación Toki Pona!",
-    "content": "¡Hola! Soy Sérgio Toledo de Brasil, soy Ingeniero de Software y apasionado por la programación. \n\nEsta aplicación gratuita fue desarrollada para ayudarte a aprender el idioma Toki Pona."
+    "content": "¡Hola! Soy Sérgio Toledo de Brasil, soy Ingeniero de Software y apasionado por la programación. \n\nEsta aplicación gratuita fue desarrollada para ayudarte a aprender el idioma Toki Pona.",
+    "playStoreUrl": "https://play.google.com/store/apps/developer?id=S%C3%A9rgio+Toledo",
+    "myApps": "Descubre mis apps:"
   },
   "tokiPona": {
     "title": "¿Qué es Toki Pona?",
     "content": "Toki Pona es un idioma creado por la lingüista y traductora canadiense Sonja Lang y se publicó por primera vez en Internet en 2001. \n\nEs un idioma minimalista, compuesto por solo 14 fonemas (letras) y 120 palabras (actualmente existen algunas otras palabras no oficiales). \n\nEl idioma se enfoca en conceptos y elementos simples que son relativamente universales. Inspirado en la filosofía taoísta, Toki Pona no pretende ser un idioma auxiliar, sino un \"yoga para la mente\", con el objetivo de expresar el máximo significado con la mínima complejidad.",
     "official": "Página web oficial: ",
-    "site": "https://tokipona.org"
+    "siteUrl": "https://tokipona.org",
+    "site": "tokipona.org"
   }
 }

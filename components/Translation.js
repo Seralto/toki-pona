@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Translation = ({ word, text }) => {
+const Translation = ({ word, text, screenWidth }) => {
+  const fontSize = screenWidth < 400 ? 15 : 18;
+
   return (
     <View style={styles.translationBox}>
-      <Text style={styles.word}>{word}</Text>
-      <Text style={styles.translation}>{text}</Text>
+      <Text style={[styles.word, { fontSize: fontSize }]}>{word}</Text>
+      <Text style={[styles.translation, { fontSize: fontSize }]}>{text}</Text>
     </View>
   );
 };
@@ -19,12 +21,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   word: {
-    fontSize: 18,
     color: "#42455a",
     fontWeight: "bold",
-  },
-  translation: {
-    fontSize: 18,
   },
 });
 
