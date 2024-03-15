@@ -30,26 +30,26 @@ const Translator = ({
         Toki Pona - {pageTexts.language}
       </Text>
 
-      <View style={styles.inputBox}>
-        <TextInput
-          onChangeText={onEnterText}
-          style={[styles.inputText, { fontSize: fontSize }]}
-          placeholder={pageTexts.placeholder}
-          ref={inputRef}
-          autoFocus={true}
-          autoCapitalize="none"
-          value={enteredText}
-        />
-
-        <TouchableOpacity onPress={onClearTranslation}>
-          <Image
-            style={styles.clearImage}
-            source={require("../assets/clear.png")}
-          />
-        </TouchableOpacity>
-      </View>
-
       <ScrollView style={styles.translations}>
+        <View style={styles.inputBox}>
+          <TextInput
+            onChangeText={onEnterText}
+            style={[styles.inputText, { fontSize: fontSize }]}
+            placeholder={pageTexts.placeholder}
+            ref={inputRef}
+            autoFocus={true}
+            autoCapitalize="none"
+            value={enteredText}
+          />
+
+          <TouchableOpacity onPress={onClearTranslation}>
+            <Image
+              style={styles.clearImage}
+              source={require("../assets/clear.png")}
+            />
+          </TouchableOpacity>
+        </View>
+
         {translations.map((translation, index) => {
           return (
             <Translation
@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#c3c3c3",
-    marginTop: 10,
-    marginBottom: 20,
+    marginVertical: 10,
   },
   inputBox: {
     flexDirection: "row",

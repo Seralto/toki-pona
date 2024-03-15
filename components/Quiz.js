@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 import { Audio } from "expo-av";
 
@@ -158,41 +165,43 @@ const Quiz = ({
         </TouchableOpacity>
       </View>
 
-      {/* Word */}
-      <Text
-        style={[styles.randomWord, { fontSize: fontSize, padding: padding }]}
-      >
-        {reversed ? randomWord : dictionary[randomWord]}
-      </Text>
+      <ScrollView>
+        {/* Word */}
+        <Text
+          style={[styles.randomWord, { fontSize: fontSize, padding: padding }]}
+        >
+          {reversed ? randomWord : dictionary[randomWord]}
+        </Text>
 
-      {/* Options */}
-      <View>
-        {options.map((key) => (
-          <TouchableOpacity onPress={() => matchUserAnswer(key)} key={key}>
-            <Text
-              style={[
-                getOptionStyle(key),
-                { fontSize: fontSize, padding: padding },
-              ]}
-            >
-              {reversed ? dictionary[key] : key}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        {/* Options */}
+        <View>
+          {options.map((key) => (
+            <TouchableOpacity onPress={() => matchUserAnswer(key)} key={key}>
+              <Text
+                style={[
+                  getOptionStyle(key),
+                  { fontSize: fontSize, padding: padding },
+                ]}
+              >
+                {reversed ? dictionary[key] : key}
+              </Text>
+            </TouchableOpacity>
+          ))}
 
-        {showNextButton && (
-          <TouchableOpacity onPress={nextQuestion}>
-            <Text
-              style={[
-                styles.nextButton,
-                { fontSize: fontSize, paddingVertical: buttonPadding },
-              ]}
-            >
-              {pageTexts.next}
-            </Text>
-          </TouchableOpacity>
-        )}
-      </View>
+          {showNextButton && (
+            <TouchableOpacity onPress={nextQuestion}>
+              <Text
+                style={[
+                  styles.nextButton,
+                  { fontSize: fontSize, paddingVertical: buttonPadding },
+                ]}
+              >
+                {pageTexts.next}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -200,27 +209,27 @@ const Quiz = ({
 const styles = StyleSheet.create({
   quiz: {
     paddingHorizontal: 20,
+    marginBottom: 50,
   },
   title: {
     color: "#c3c3c3",
-    marginTop: 10,
-    marginBottom: 10,
+    marginVertical: 10,
     textAlign: "center",
   },
   headerBox: {
     flexDirection: "row",
+    marginBottom: 20,
   },
   score: {
     fontWeight: "bold",
     color: "#4a9373",
     backgroundColor: "#323545",
     borderRadius: 20,
-    marginBottom: 25,
     paddingVertical: 5,
     paddingHorizontal: 15,
     marginRight: "auto",
     textAlign: "center",
-    minWidth: 60,
+    minWidth: 80,
   },
   soundOn: {
     width: 26,
@@ -235,14 +244,14 @@ const styles = StyleSheet.create({
     color: "#323545",
     backgroundColor: "#c3c3c3",
     borderRadius: 10,
-    marginBottom: 30,
+    marginBottom: 25,
   },
   option: {
     backgroundColor: "#323545",
     color: "#c3c3c3",
     borderColor: "#292b38",
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 2,
     paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
@@ -252,7 +261,7 @@ const styles = StyleSheet.create({
     color: "#c3c3c3",
     borderColor: "#006c00",
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 2,
     paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
@@ -262,7 +271,7 @@ const styles = StyleSheet.create({
     color: "#c3c3c3",
     borderColor: "#8d0a0a",
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 2,
     paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: 15,
@@ -272,7 +281,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     borderRadius: 5,
-    marginTop: 15,
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 

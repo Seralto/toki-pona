@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#c3c3c3",
-    marginTop: 10,
-    marginBottom: 10,
+    marginVertical: 10,
   },
 });
 

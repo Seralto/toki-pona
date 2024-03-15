@@ -19,7 +19,6 @@ const About = ({ pageTexts, screenWidth }) => {
       <View style={styles.about}>
         <Text style={[styles.title, { fontSize: titleFontSize }]}>
           {pageTexts.title}
-          {screenWidth}
         </Text>
         <Text style={[styles.content, { fontSize: fontSize }]}>
           {pageTexts.content}
@@ -104,15 +103,14 @@ const styles = StyleSheet.create({
   },
   content: {
     color: "#fdfdfd",
-    marginTop: 20,
-    marginBottom: 40,
+    marginVertical: 20,
   },
   link: {
     color: "#2196f3",
     marginBottom: 10,
   },
   infoBox: {
-    marginVertical: 20,
+    marginVertical: 10,
   },
   info: {
     textAlign: "center",
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
   },
   myApps: {
     color: "#fdfdfd",
-    marginBottom: 20,
+    marginVertical: 15,
     textAlign: "center",
   },
   playStoreImage: {
