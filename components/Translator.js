@@ -23,6 +23,7 @@ const Translator = ({
 }) => {
   const titleFontSize = screenWidth < 400 ? 20 : 26;
   const fontSize = screenWidth < 400 ? 15 : 18;
+  const iconSize = screenWidth < 400 ? 35 : 40;
 
   return (
     <View style={styles.translator}>
@@ -42,12 +43,14 @@ const Translator = ({
             value={enteredText}
           />
 
-          <TouchableOpacity onPress={onClearTranslation}>
-            <Image
-              style={styles.clearImage}
-              source={require("../assets/clear.png")}
-            />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity onPress={onClearTranslation}>
+              <Image
+                style={{ width: iconSize, height: iconSize }}
+                source={require("../assets/clear.png")}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {translations.map((translation, index) => {
@@ -75,10 +78,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inputBox: {
+    display: "flex",
+    alignItems: "center",
     flexDirection: "row",
     marginTop: 10,
     marginBottom: 30,
-    width: "100%",
   },
   inputText: {
     flex: 1,
@@ -86,11 +90,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginRight: 8,
-  },
-  clearImage: {
-    width: 38,
-    height: 48,
-    alignSelf: "center",
   },
   translations: {
     width: "100%",
