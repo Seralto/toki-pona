@@ -2,7 +2,7 @@
   "expo": {
     "name": "Toki Pona",
     "slug": "TokiPona",
-    "version": "1.8.6",
+    "version": "1.9.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +18,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 21,
+      "versionCode": 22,
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -33,6 +33,8 @@
       "eas": {
         "projectId": "3a6ab407-71bb-4c49-a8b5-571735259005"
       }
-    }
+    },
+    "assets": ["./assets/fonts/"],
+    "plugins": ["expo-font"]
   }
 }
