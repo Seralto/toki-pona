@@ -104,13 +104,22 @@ export default class App extends Component {
   translate(enteredText) {
     const validTokiPonaWords = this.sanitizeInput(enteredText)
       .split(" ")
-      .filter((word) => this.state.tokiPonaWords.includes(word));
+      .filter(
+        (word) =>
+          this.state.tokiPonaWords.includes(word) ||
+          word === "ale" ||
+          word === "ali"
+      );
 
-    const translations = validTokiPonaWords.map(
+    let replacedValidTokiPonaWords = validTokiPonaWords.map((word) => {
+      return word === "ale" || word === "ali" ? "ale/ali" : word;
+    });
+
+    const translations = replacedValidTokiPonaWords.map(
       (word) => this.state.dictionary[word]
     );
 
-    this.setState({ enteredText: enteredText });
+    this.setState({ enteredText: enteredText.toLowerCase() });
     this.setState({ validEnteredWords: validTokiPonaWords });
     this.setState({ translations: translations });
   }
@@ -145,7 +154,7 @@ export default class App extends Component {
   }
 
   sanitizeInput(input) {
-    return input.toLowerCase().replace(/[^a-z\s]/g, "");
+    return input.replace(/[^a-z\s]/g, "");
   }
 
   loadText(language) {
