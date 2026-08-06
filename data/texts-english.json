@@ -83,7 +83,7 @@
       },
       "prepositions": {
         "title": "Prepositions",
-        "content": "\"lon\", \"kepeken\", \"tawa\", and \"tan\" can be used as prepositions at the end of a sentence: \n\nmi moku lon tomo = I eat in the house \n\nmi moku kepeken ilo moku = I eat using a fork \n\nsina pona tawa mi = You are good for me / I like you \n\nsina tawa weka tan seme? = Why are you leaving?"
+        "content": "\"lon\", \"kepeken\", \"tawa\", \"tan\", and \"sama\" can be used as prepositions at the end of a sentence: \n\nmi moku lon tomo = I eat in the house \n\nmi moku kepeken ilo moku = I eat using a fork \n\nsina pona tawa mi = You are good for me / I like you \n\nsina tawa weka tan seme? = Why are you leaving? \n\nona li toki sama mi = They speak like me"
       },
       "commands": {
         "title": "Commands",
@@ -91,7 +91,7 @@
       },
       "numbers": {
         "title": "Numbers",
-        "content": "Combine number words to add them up: \n\nwan = 1 \ntu = 2 \nluka = 5 \nluka luka tu wan = 13"
+        "content": "Combine number words to add them up: \n\nwan = 1 \ntu = 2 \nluka = 5 \nmute = 20 \nale = 100 \n\nluka luka tu wan = 13 \nmute luka luka tu wan = 33 \nale mute = 120"
       }
     }
   },
@@ -259,8 +259,8 @@
   "tokiPona": {
     "title": "What is Toki Pona?",
     "content": "Toki Pona is a language created by the Canadian linguist and translator Sonja Lang and it was first published on the internet in 2001. \n\nIt is a minimalist language, composed of only 14 phonemes (letters) and 120 words (currently, there are some other unofficial words). \n\nThe language focuses on simple concepts and elements that are relatively universal. Inspired by Taoist philosophy, Toki Pona is not intended to be an auxiliary language, but a \"yoga for the mind\", aiming to express maximum meaning with minimum complexity.",
-    "official": "Official website: ",
-    "siteUrl": "https://tokipona.org",
-    "site": "tokipona.org"
+    "official": "Community website: ",
+    "siteUrl": "https://tokipona.net",
+    "site": "tokipona.net"
   }
 }

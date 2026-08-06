@@ -83,7 +83,7 @@
       },
       "prepositions": {
         "title": "Preposições",
-        "content": "\"lon\", \"kepeken\", \"tawa\", e \"tan\" podem ser usados ​​como preposições no final de uma frase: \n\nmi moku lon tomo = Eu como em casa \n\nmi moku kepeken ilo moku = Eu como com garfo \n\nsina pona tawa mi = Você é bom para mim / Eu gosto de você \n\nsina tawa weka tan seme? = Por que você está indo embora? "
+        "content": "\"lon\", \"kepeken\", \"tawa\", \"tan\" e \"sama\" podem ser usados como preposições no final de uma frase: \n\nmi moku lon tomo = Eu como em casa \n\nmi moku kepeken ilo moku = Eu como com garfo \n\nsina pona tawa mi = Você é bom para mim / Eu gosto de você \n\nsina tawa weka tan seme? = Por que você está indo embora? \n\nona li toki sama mi = Ela fala igual a mim"
       },
       "commands": {
         "title": "Comandos",
@@ -91,7 +91,7 @@
       },
       "numbers": {
         "title": "Números",
-        "content": "Combine palavras numéricas para somar: \n\nwan = 1 \ntu = 2 \nluka = ​​5 \nluka luka tu wan = 13"
+        "content": "Combine palavras numéricas para somar: \n\nwan = 1 \ntu = 2 \nluka = 5 \nmute = 20 \nale = 100 \n\nluka luka tu wan = 13 \nmute luka luka tu wan = 33 \nale mute = 120"
       }
     }
   },
@@ -259,8 +259,8 @@
   "tokiPona": {
     "title": "O que é Toki Pona?",
     "content": "Toki Pona é uma língua criada pela linguista e tradutora canadense Sonja Lang, tendo sido publicada na internet pela primeira vez em 2001. \n\nTrata-se de uma linguagem minimalista, composta de apenas 14 fonemas (letras) e 120 palavras (atualmente existem algumas outras palavras não oficiais). \n\nA língua foca-se em conceitos simples e elementos que são relativamente universais. Inspirado pela filosofia taoista, Toki Pona não visa a ser uma língua auxiliar, mas um \"yoga para a mente\", pretendendo expressar o máximo de sentido com o mínimo de complexidade.",
-    "official": "Website oficial: ",
-    "siteUrl": "https://tokipona.org",
-    "site": "tokipona.org"
+    "official": "Website da comunidade: ",
+    "siteUrl": "https://tokipona.net",
+    "site": "tokipona.net"
   }
 }

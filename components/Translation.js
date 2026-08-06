@@ -8,7 +8,7 @@ const Translation = ({ word, text, screenWidth }) => {
   const sitelenPonaFontSize = screenWidth < 400 ? 22 : 26;
 
   const [loaded] = useFonts({
-    "sitelen-pona": require("../assets/fonts/sitelen-pona.otf"),
+    "sitelen-pona": require("../assets/fonts/linja-pona.otf"),
   });
 
   return (

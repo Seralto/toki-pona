@@ -83,7 +83,7 @@
       },
       "preposiciones": {
         "title": "Preposiciones",
-        "content": "\"lon\", \"kepeken\", \"tawa\" y \"tan\" se pueden usar como preposiciones al final de una oración: \n\nmi moku lon tomo = Yo como en la casa \n\nmi moku kepeken ilo moku = Yo como con tenedor \n\nsina pona tawa mi = Eres bueno conmigo / Me gustas \n\nsina tawa weka tan seme? = ¿Por qué te vas?"
+        "content": "\"lon\", \"kepeken\", \"tawa\", \"tan\" y \"sama\" se pueden usar como preposiciones al final de una oración: \n\nmi moku lon tomo = Yo como en la casa \n\nmi moku kepeken ilo moku = Yo como con tenedor \n\nsina pona tawa mi = Eres bueno conmigo / Me gustas \n\nsina tawa weka tan seme? = ¿Por qué te vas? \n\nona li toki sama mi = Ella habla igual que yo"
       },
       "comandos": {
         "title": "Comandos",
@@ -91,7 +91,7 @@
       },
       "números": {
         "title": "Números",
-        "content": "Combina palabras numéricas para sumar: \n\nwan = 1 \ntu = 2 \nluka = ​​​​5 \nluka luka tu wan = 13"
+        "content": "Combina palabras numéricas para sumar: \n\nwan = 1 \ntu = 2 \nluka = 5 \nmute = 20 \nale = 100 \n\nluka luka tu wan = 13 \nmute luka luka tu wan = 33 \nale mute = 120"
       }
     }
   },
@@ -259,8 +259,8 @@
   "tokiPona": {
     "title": "¿Qué es Toki Pona?",
     "content": "Toki Pona es un idioma creado por la lingüista y traductora canadiense Sonja Lang y se publicó por primera vez en Internet en 2001. \n\nEs un idioma minimalista, compuesto por solo 14 fonemas (letras) y 120 palabras (actualmente existen algunas otras palabras no oficiales). \n\nEl idioma se enfoca en conceptos y elementos simples que son relativamente universales. Inspirado en la filosofía taoísta, Toki Pona no pretende ser un idioma auxiliar, sino un \"yoga para la mente\", con el objetivo de expresar el máximo significado con la mínima complejidad.",
-    "official": "Página web oficial: ",
-    "siteUrl": "https://tokipona.org",
-    "site": "tokipona.org"
+    "official": "Sitio web de la comunidad: ",
+    "siteUrl": "https://tokipona.net",
+    "site": "tokipona.net"
   }
 }
