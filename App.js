@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import themes from "./themes";
 
 import Home from "./components/Home";
 import Translator from "./components/Translator";
@@ -28,6 +29,7 @@ const texts = {
 
 const DEFAULT_LANGUAGE = "english";
 const DEFAULT_PAGE = "home";
+const DEFAULT_THEME = "dark";
 
 export default class App extends Component {
   constructor(props) {
@@ -48,6 +50,7 @@ export default class App extends Component {
       isModalVisible: false,
       isLoading: true,
       screenWidth: Dimensions.get("window").width,
+      themeId: DEFAULT_THEME,
     };
   }
 
@@ -56,6 +59,7 @@ export default class App extends Component {
       this.getDefaultLanguage();
       this.getDictionary();
       this.getScore();
+      this.getTheme();
     }, 500);
   }
 
@@ -152,6 +156,20 @@ export default class App extends Component {
     return dictionaries[language];
   }
 
+  getTheme() {
+    AsyncStorage.getItem("@TokiPona:theme").then((themeId) => {
+      if (themeId && themes[themeId]) {
+        this.setState({ themeId });
+      }
+    });
+  }
+
+  changeTheme(themeId) {
+    if (!themes[themeId]) return;
+    this.setState({ themeId });
+    AsyncStorage.setItem("@TokiPona:theme", themeId);
+  }
+
   showModal(state) {
     this.setState({ isModalVisible: state });
   }
@@ -171,6 +189,7 @@ export default class App extends Component {
   }
 
   render() {
+    const theme = themes[this.state.themeId] ?? themes.dark;
     return this.isPageLoading() ? (
       <View style={styles.splash}>
         <Image
@@ -179,10 +198,10 @@ export default class App extends Component {
         />
       </View>
     ) : (
-      <SafeAreaView style={styles.app}>
+      <SafeAreaView style={[styles.app, { backgroundColor: theme.background }]}>
         {/* Top header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Toki Pona</Text>
+        <View style={[styles.header, { backgroundColor: theme.header, borderBottomColor: theme.headerBorder }]}>
+          <Text style={[styles.headerTitle, { color: theme.text }]}>Toki Pona</Text>
           <View style={styles.headerRight}>
             <TouchableOpacity
               onPress={() => this.changePage("home")}
@@ -192,7 +211,7 @@ export default class App extends Component {
               <Ionicons
                 name={this.state.page === "home" ? "home" : "home-outline"}
                 size={22}
-                color={this.state.page === "home" ? "#7eb8d4" : "#9b9db8"}
+                color={this.state.page === "home" ? theme.accent : theme.inactive}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -200,7 +219,7 @@ export default class App extends Component {
               accessibilityLabel="Settings"
               style={styles.headerButton}
             >
-              <Ionicons name="settings-outline" size={22} color="#9b9db8" />
+              <Ionicons name="settings-outline" size={22} color={theme.inactive} />
             </TouchableOpacity>
           </View>
         </View>
@@ -212,6 +231,7 @@ export default class App extends Component {
               language={this.state.language}
               pageTexts={this.state.appTexts}
               screenWidth={this.state.screenWidth}
+              theme={theme}
               onGoToQuiz={() => this.changePage("quiz")}
             />
           )}
@@ -224,6 +244,7 @@ export default class App extends Component {
               enteredText={this.state.enteredText}
               inputRef={this.textInput}
               screenWidth={this.state.screenWidth}
+              theme={theme}
               onEnterText={(enteredText) => this.translate(enteredText)}
               onClearTranslation={() => this.clearTranslation()}
             />
@@ -234,6 +255,7 @@ export default class App extends Component {
               pageTexts={this.state.appTexts}
               dictionary={this.state.dictionary}
               screenWidth={this.state.screenWidth}
+              theme={theme}
             />
           )}
 
@@ -241,6 +263,7 @@ export default class App extends Component {
             <Grammar
               pageTexts={this.state.appTexts.grammar}
               screenWidth={this.state.screenWidth}
+              theme={theme}
             />
           )}
 
@@ -248,6 +271,7 @@ export default class App extends Component {
             <Sentences
               pageTexts={this.state.appTexts.sentences}
               screenWidth={this.state.screenWidth}
+              theme={theme}
             />
           )}
 
@@ -257,16 +281,17 @@ export default class App extends Component {
               dictionary={this.state.dictionary}
               score={this.state.score}
               screenWidth={this.state.screenWidth}
+              theme={theme}
               onChangeScore={() => this.changeScore()}
               language={this.state.language}
             />
           )}
 
-
           {this.isPage("tokipona") && (
             <TokiPona
               pageTexts={this.state.appTexts.tokiPona}
               screenWidth={this.state.screenWidth}
+              theme={theme}
             />
           )}
 
@@ -274,6 +299,7 @@ export default class App extends Component {
             <About
               pageTexts={this.state.appTexts.aboutMe}
               screenWidth={this.state.screenWidth}
+              theme={theme}
             />
           )}
         </View>
@@ -283,8 +309,11 @@ export default class App extends Component {
             pageTexts={this.state.appTexts}
             modalVisibility={this.state.isModalVisible}
             currentLanguage={this.state.language}
+            currentTheme={this.state.themeId}
+            theme={theme}
             onChangePage={(page) => this.changePage(page)}
             onChangeLanguage={(language) => this.changeLanguage(language)}
+            onChangeTheme={(themeId) => this.changeTheme(themeId)}
             onShowModal={(state) => this.showModal(state)}
           />
         )}
@@ -293,6 +322,7 @@ export default class App extends Component {
           <BottomMenu
             pageTexts={this.state.appTexts}
             currentPage={this.state.page}
+            theme={theme}
             onChangePage={(page) => this.changePage(page)}
           />
         )}
@@ -304,7 +334,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: "#0d0f1e",
   },
   header: {
     flexDirection: "row",
@@ -312,12 +341,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#0d0f1e",
     borderBottomWidth: 1,
-    borderBottomColor: "#1e1f30",
   },
   headerTitle: {
-    color: "#e0e0f0",
     fontSize: 17,
     fontWeight: "700",
     letterSpacing: 0.3,

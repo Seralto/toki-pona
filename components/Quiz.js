@@ -19,6 +19,7 @@ const Quiz = ({
   language,
   onChangeScore,
   screenWidth,
+  theme,
 }) => {
   const [randomWord, setRandomWord] = useState("");
   const [options, setOptions] = useState([]);
@@ -34,6 +35,7 @@ const Quiz = ({
   const fontSize = screenWidth < 400 ? 16 : 18;
   const padding = screenWidth < 400 ? 14 : 20;
   const buttonPadding = screenWidth < 400 ? 10 : 14;
+  const th = theme ?? {};
 
   const soundObject = new Audio.Sound();
 
@@ -69,12 +71,23 @@ const Quiz = ({
 
   const getOptionStyle = (key) => {
     if (key === randomWord && checkAnswer) {
-      return styles.rightOption;
+      return {
+        backgroundColor: th.quizRightBg, color: th.quizOptionText,
+        borderColor: th.quizRightBorder, borderStyle: "solid", borderWidth: 2,
+        paddingHorizontal: 20, borderRadius: 15, marginBottom: 15,
+      };
     } else if (key !== randomWord && key === userAnswer && checkAnswer) {
-      return styles.wrongOption;
+      return {
+        backgroundColor: th.quizWrongBg, color: th.quizOptionText,
+        borderColor: th.quizWrongBorder, borderStyle: "solid", borderWidth: 2,
+        paddingHorizontal: 20, borderRadius: 15, marginBottom: 15,
+      };
     }
-
-    return styles.option;
+    return {
+      backgroundColor: th.quizOptionBg, color: th.quizOptionText,
+      borderColor: th.quizOptionBorder, borderStyle: "solid", borderWidth: 2,
+      paddingHorizontal: 20, borderRadius: 15, marginBottom: 15,
+    };
   };
 
   const matchUserAnswer = (answer) => {
@@ -147,16 +160,15 @@ const Quiz = ({
 
   return (
     <View style={styles.quiz}>
-      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+      <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
         {pageTexts.title}
       </Text>
 
       <View style={styles.headerBox}>
-        <Text style={[styles.score, { fontSize: fontSize }]}>
+        <Text style={[styles.score, { fontSize, color: th.quizScoreText, backgroundColor: th.quizScoreBg }]}>
           Score: {formatScore(score)}
         </Text>
 
-        {/* Sound  */}
         <TouchableOpacity onPress={handleSound}>
           <Image
             style={[muted ? styles.soundOff : styles.soundOn]}
@@ -166,23 +178,14 @@ const Quiz = ({
       </View>
 
       <ScrollView>
-        {/* Word */}
-        <Text
-          style={[styles.randomWord, { fontSize: fontSize, padding: padding }]}
-        >
+        <Text style={[styles.randomWord, { fontSize, padding, color: th.quizWordText, backgroundColor: th.quizWordBg }]}>
           {reversed ? randomWord : dictionary[randomWord]}
         </Text>
 
-        {/* Options */}
         <View>
           {options.map((key) => (
             <TouchableOpacity onPress={() => matchUserAnswer(key)} key={key}>
-              <Text
-                style={[
-                  getOptionStyle(key),
-                  { fontSize: fontSize, padding: padding },
-                ]}
-              >
+              <Text style={[getOptionStyle(key), { fontSize, padding }]}>
                 {reversed ? dictionary[key] : key}
               </Text>
             </TouchableOpacity>
@@ -190,12 +193,7 @@ const Quiz = ({
 
           {showNextButton && (
             <TouchableOpacity onPress={nextQuestion}>
-              <Text
-                style={[
-                  styles.nextButton,
-                  { fontSize: fontSize, paddingVertical: buttonPadding },
-                ]}
-              >
+              <Text style={[styles.nextButton, { fontSize, paddingVertical: buttonPadding, backgroundColor: th.accent }]}>
                 {pageTexts.next}
               </Text>
             </TouchableOpacity>
@@ -207,82 +205,20 @@ const Quiz = ({
 };
 
 const styles = StyleSheet.create({
-  quiz: {
-    paddingHorizontal: 20,
-    marginBottom: 50,
-  },
-  title: {
-    color: "#c3c3c3",
-    marginVertical: 10,
-    textAlign: "center",
-  },
-  headerBox: {
-    flexDirection: "row",
-    marginBottom: 20,
-  },
+  quiz: { paddingHorizontal: 20, marginBottom: 50 },
+  title: { marginVertical: 10, textAlign: "center" },
+  headerBox: { flexDirection: "row", marginBottom: 20 },
   score: {
     fontWeight: "bold",
-    color: "#4a9373",
-    backgroundColor: "#323545",
-    borderRadius: 20,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    marginRight: "auto",
-    textAlign: "center",
-    minWidth: 80,
+    borderRadius: 20, paddingVertical: 5, paddingHorizontal: 15,
+    marginRight: "auto", textAlign: "center", minWidth: 80,
   },
-  soundOn: {
-    width: 26,
-    height: 26,
-  },
-  soundOff: {
-    width: 26,
-    height: 26,
-    opacity: 0.2,
-  },
-  randomWord: {
-    color: "#323545",
-    backgroundColor: "#c3c3c3",
-    borderRadius: 10,
-    marginBottom: 25,
-  },
-  option: {
-    backgroundColor: "#323545",
-    color: "#c3c3c3",
-    borderColor: "#292b38",
-    borderStyle: "solid",
-    borderWidth: 2,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-  rightOption: {
-    backgroundColor: "#023220",
-    color: "#c3c3c3",
-    borderColor: "#006c00",
-    borderStyle: "solid",
-    borderWidth: 2,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-  wrongOption: {
-    backgroundColor: "#560707",
-    color: "#c3c3c3",
-    borderColor: "#8d0a0a",
-    borderStyle: "solid",
-    borderWidth: 2,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
+  soundOn: { width: 26, height: 26 },
+  soundOff: { width: 26, height: 26, opacity: 0.2 },
+  randomWord: { borderRadius: 10, marginBottom: 25 },
   nextButton: {
-    backgroundColor: "#2196f3",
-    color: "#fff",
-    textAlign: "center",
-    borderRadius: 5,
-    marginTop: 10,
-    marginBottom: 20,
+    color: "#fff", textAlign: "center",
+    borderRadius: 5, marginTop: 10, marginBottom: 20,
   },
 });
 

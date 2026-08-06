@@ -3,12 +3,13 @@ import { View, ScrollView, Text, StyleSheet } from "react-native";
 
 import Translation from "./Translation";
 
-const Dictionary = ({ pageTexts, dictionary, screenWidth }) => {
+const Dictionary = ({ pageTexts, dictionary, screenWidth, theme }) => {
   const titleFontSize = screenWidth < 400 ? 20 : 24;
+  const th = theme ?? {};
 
   return (
     <View style={styles.dictionary}>
-      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+      <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
         {pageTexts.pages.dictionary}
       </Text>
 
@@ -19,6 +20,7 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth }) => {
             text={dictionary[key]}
             key={key}
             screenWidth={screenWidth}
+            theme={theme}
           />
         ))}
       </ScrollView>
@@ -27,14 +29,8 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth }) => {
 };
 
 const styles = StyleSheet.create({
-  dictionary: {
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    color: "#c3c3c3",
-    marginVertical: 10,
-  },
+  dictionary: { alignItems: "center", paddingHorizontal: 20 },
+  title: { marginVertical: 10 },
 });
 
 export default Dictionary;

@@ -34,7 +34,7 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
-export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth }) {
+export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth, theme }) {
   const [score, setScore]   = useState(null);
   const [streak, setStreak] = useState(0);
   const [fontsLoaded] = useFonts({
@@ -56,44 +56,46 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
   const intlLocale   = INTL_LOCALE[language] ?? "en-US";
   const formattedScore = score !== null ? score.toLocaleString(intlLocale) : "—";
 
+  const th = theme ?? {};
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
 
       {/* App title */}
       <View style={styles.titleSection}>
-        <Text style={styles.appTitle}>Toki Pona</Text>
-        <Text style={styles.appSubtitle}>{pageTexts?.description}</Text>
+        <Text style={[styles.appTitle, { color: th.text }]}>Toki Pona</Text>
+        <Text style={[styles.appSubtitle, { color: th.textDim }]}>{pageTexts?.description}</Text>
       </View>
 
       {/* Word of the Day */}
       {word && (
-        <View style={styles.card}>
-          <Text style={styles.sectionLabel}>{t.wordOfTheDay}</Text>
+        <View style={[styles.card, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}>
+          <Text style={[styles.sectionLabel, { color: th.textDim }]}>{t.wordOfTheDay}</Text>
           <View style={styles.wotdRow}>
             <View style={styles.wotdLeft}>
-              <Text style={styles.wotdWord}>{word}</Text>
-              <Text style={styles.wotdDef}>{definition}</Text>
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{wordClass}</Text>
+              <Text style={[styles.wotdWord, { color: th.text }]}>{word}</Text>
+              <Text style={[styles.wotdDef, { color: th.textMuted }]}>{definition}</Text>
+              <View style={[styles.badge, { backgroundColor: th.surfaceBorder }]}>
+                <Text style={[styles.badgeText, { color: th.textMuted }]}>{wordClass}</Text>
               </View>
             </View>
-            {fontsLoaded && <Text style={styles.glyph}>{word}</Text>}
+            {fontsLoaded && <Text style={[styles.glyph, { color: th.accentBg }]}>{word}</Text>}
           </View>
         </View>
       )}
 
       {/* Quiz Score */}
-      <TouchableOpacity style={[styles.card, styles.scoreCard]} onPress={onGoToQuiz} activeOpacity={0.75}>
+      <TouchableOpacity style={[styles.card, styles.scoreCard, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]} onPress={onGoToQuiz} activeOpacity={0.75}>
         <View style={styles.scoreRow}>
-          <View style={styles.scoreIcon}>
-            <Ionicons name="trophy-outline" size={26} color="#4a7fd4" />
+          <View style={[styles.scoreIcon, { backgroundColor: th.accentBg }]}>
+            <Ionicons name="trophy-outline" size={26} color={th.accent} />
           </View>
           <View style={styles.scoreInfo}>
-            <Text style={styles.scoreLabel}>{t.quizScore}</Text>
+            <Text style={[styles.scoreLabel, { color: th.textMuted }]}>{t.quizScore}</Text>
             {score === 0 ? (
-              <Text style={styles.scoreHint}>{t.playQuiz}</Text>
+              <Text style={[styles.scoreHint, { color: th.textDim }]}>{t.playQuiz}</Text>
             ) : (
-              <Text style={styles.scoreValue}>
+              <Text style={[styles.scoreValue, { color: th.accent }]}>
                 {formattedScore} {t.quizPoints}
               </Text>
             )}
@@ -102,7 +104,7 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
             <View style={styles.streakBox}>
               <Text style={styles.streakFire}>🔥</Text>
               <Text style={styles.streakCount}>{streak}</Text>
-              <Text style={styles.streakDays}>{t.days}</Text>
+              <Text style={[styles.streakDays, { color: th.textDim }]}>{t.days}</Text>
             </View>
           )}
         </View>
@@ -116,72 +118,40 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   content:   { padding: 20, paddingBottom: 48 },
 
-  titleSection: {
-    marginBottom: 28,
-    marginTop: 8,
-  },
-  appTitle: {
-    color: "#ffffff",
-    fontSize: 32,
-    fontWeight: "bold",
-    letterSpacing: -0.5,
-  },
-  appSubtitle: {
-    color: "#6b6e8a",
-    fontSize: 15,
-    marginTop: 4,
-  },
+  titleSection: { marginBottom: 28, marginTop: 8 },
+  appTitle: { fontSize: 32, fontWeight: "bold", letterSpacing: -0.5 },
+  appSubtitle: { fontSize: 15, marginTop: 4 },
 
   card: {
-    backgroundColor: "#13141f",
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: "#1e1f30",
+    borderRadius: 16, padding: 20, marginBottom: 16, borderWidth: 1,
   },
   sectionLabel: {
-    color: "#4a4d6a",
-    fontSize: 11,
-    fontWeight: "600",
-    letterSpacing: 1,
-    marginBottom: 16,
-    textTransform: "uppercase",
+    fontSize: 11, fontWeight: "600", letterSpacing: 1,
+    marginBottom: 16, textTransform: "uppercase",
   },
   wotdRow:  { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" },
   wotdLeft: { flex: 1, marginRight: 12 },
-  wotdWord: { color: "#ffffff", fontWeight: "bold", fontSize: 40, marginBottom: 8, lineHeight: 46 },
-  wotdDef:  { color: "#8b8d9e", fontSize: 16, lineHeight: 24 },
+  wotdWord: { fontWeight: "bold", fontSize: 40, marginBottom: 8, lineHeight: 46 },
+  wotdDef:  { fontSize: 16, lineHeight: 24 },
   badge: {
-    marginTop: 16,
-    alignSelf: "flex-start",
-    backgroundColor: "#1e1f30",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 5,
+    marginTop: 16, alignSelf: "flex-start",
+    borderRadius: 8, paddingHorizontal: 12, paddingVertical: 5,
   },
-  badgeText: { color: "#8b8d9e", fontSize: 12, fontWeight: "600" },
-  glyph: {
-    fontFamily: "sitelen-pona",
-    fontSize: 80,
-    color: "rgba(74,127,212,0.35)",
-    lineHeight: 90,
-  },
+  badgeText: { fontSize: 12, fontWeight: "600" },
+  glyph: { fontFamily: "sitelen-pona", fontSize: 80, lineHeight: 90 },
 
   scoreCard: { paddingVertical: 32 },
   scoreRow:  { flexDirection: "row", alignItems: "center" },
   scoreIcon: {
     width: 48, height: 48, borderRadius: 24,
-    backgroundColor: "rgba(74,127,212,0.15)",
-    alignItems: "center", justifyContent: "center",
-    marginRight: 14,
+    alignItems: "center", justifyContent: "center", marginRight: 14,
   },
   scoreInfo:  { flex: 1 },
-  scoreLabel: { color: "#8b8d9e", fontSize: 14, fontWeight: "500" },
-  scoreValue: { color: "#4a7fd4", fontWeight: "bold", fontSize: 28, lineHeight: 34, marginTop: 2 },
-  scoreHint:  { color: "#4a4d6a", fontSize: 13, marginTop: 4 },
+  scoreLabel: { fontSize: 14, fontWeight: "500" },
+  scoreValue: { fontWeight: "bold", fontSize: 28, lineHeight: 34, marginTop: 2 },
+  scoreHint:  { fontSize: 13, marginTop: 4 },
   streakBox:  { alignItems: "center" },
   streakFire: { fontSize: 22 },
   streakCount:{ color: "#f97316", fontWeight: "bold", fontSize: 18 },
-  streakDays: { color: "#4a4d6a", fontSize: 11 },
+  streakDays: { fontSize: 11 },
 });

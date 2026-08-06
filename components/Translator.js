@@ -2,12 +2,12 @@ import React from "react";
 import {
   View,
   Text,
-  Image,
   TextInput,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Translation from "./Translation";
 
@@ -20,14 +20,15 @@ const Translator = ({
   onEnterText,
   onClearTranslation,
   screenWidth,
+  theme,
 }) => {
   const titleFontSize = screenWidth < 400 ? 20 : 26;
   const fontSize = screenWidth < 400 ? 15 : 18;
-  const iconSize = screenWidth < 400 ? 35 : 40;
+  const th = theme ?? {};
 
   return (
     <View style={styles.translator}>
-      <Text style={[styles.title, { fontSize: titleFontSize }]}>
+      <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
         Toki Pona - {pageTexts.language}
       </Text>
 
@@ -35,65 +36,46 @@ const Translator = ({
         <View style={styles.inputBox}>
           <TextInput
             onChangeText={onEnterText}
-            style={[styles.inputText, { fontSize: fontSize }]}
+            style={[styles.inputText, { fontSize, backgroundColor: th.inputBg, color: th.inputText }]}
             placeholder={pageTexts.placeholder}
+            placeholderTextColor={th.textDim}
             ref={inputRef}
             autoFocus={true}
             autoCapitalize="none"
             value={enteredText}
           />
 
-          <View>
-            <TouchableOpacity onPress={onClearTranslation}>
-              <Image
-                style={{ width: iconSize, height: iconSize }}
-                source={require("../assets/clear.png")}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={onClearTranslation} style={styles.clearBtn}>
+            <Ionicons name="close-circle" size={36} color={th.textDim} />
+          </TouchableOpacity>
         </View>
 
-        {translations.map((translation, index) => {
-          return (
-            <Translation
-              word={validEnteredWords[index]}
-              text={translation}
-              key={index}
-              screenWidth={screenWidth}
-            />
-          );
-        })}
+        {translations.map((translation, index) => (
+          <Translation
+            word={validEnteredWords[index]}
+            text={translation}
+            key={index}
+            screenWidth={screenWidth}
+            theme={theme}
+          />
+        ))}
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  translator: {
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    color: "#c3c3c3",
-    marginVertical: 10,
-  },
+  translator: { alignItems: "center", paddingHorizontal: 20 },
+  title: { marginVertical: 10 },
   inputBox: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "row",
-    marginTop: 10,
-    marginBottom: 30,
+    alignItems: "center", flexDirection: "row",
+    marginTop: 10, marginBottom: 30,
   },
   inputText: {
-    flex: 1,
-    backgroundColor: "#d6e2ec",
-    borderRadius: 10,
-    padding: 10,
-    marginRight: 8,
+    flex: 1, borderRadius: 10, padding: 10, marginRight: 8,
   },
-  translations: {
-    width: "100%",
-  },
+  clearBtn: { padding: 4 },
+  translations: { width: "100%" },
 });
 
 export default Translator;

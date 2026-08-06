@@ -10,15 +10,13 @@ const NAV_ITEMS = [
   { key: "quiz",       icon: "game-controller-outline", iconActive: "game-controller" },
 ];
 
-const ACTIVE_COLOR   = "#7eb8d4";
-const INACTIVE_COLOR = "#6b6e8a";
-
-const BottomMenu = ({ pageTexts, currentPage, onChangePage }) => {
+const BottomMenu = ({ pageTexts, currentPage, theme, onChangePage }) => {
+  const t = theme ?? {};
   return (
-    <View style={styles.bottomMenu}>
+    <View style={[styles.bottomMenu, { backgroundColor: t.bottomMenu, borderTopColor: t.bottomMenuBorder }]}>
       {NAV_ITEMS.map(({ key, icon, iconActive }) => {
         const isActive = currentPage === key;
-        const color = isActive ? ACTIVE_COLOR : INACTIVE_COLOR;
+        const color = isActive ? t.accent : t.inactive;
         const label = pageTexts?.pages?.[key] ?? key;
 
         return (
@@ -46,9 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#2f3245",
     borderTopWidth: 1,
-    borderTopColor: "#3d4060",
     paddingVertical: 6,
     paddingBottom: 10,
   },
