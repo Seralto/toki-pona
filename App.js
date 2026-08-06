@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import Home from "./components/Home";
 import Translator from "./components/Translator";
 import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
@@ -26,7 +28,7 @@ const texts = {
 };
 
 const DEFAULT_LANGUAGE = "english";
-const DEFAULT_PAGE = "translator";
+const DEFAULT_PAGE = "home";
 
 export default class App extends Component {
   constructor(props) {
@@ -192,8 +194,43 @@ export default class App extends Component {
         />
       </View>
     ) : (
-      <View style={styles.app}>
+      <SafeAreaView style={styles.app}>
+        {/* Top header */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Toki Pona</Text>
+          <View style={styles.headerRight}>
+            <TouchableOpacity
+              onPress={() => this.changePage("home")}
+              accessibilityLabel="Home"
+              style={styles.headerButton}
+            >
+              <Ionicons
+                name={this.state.page === "home" ? "home" : "home-outline"}
+                size={22}
+                color={this.state.page === "home" ? "#7eb8d4" : "#9b9db8"}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.showModal(true)}
+              accessibilityLabel="Settings"
+              style={styles.headerButton}
+            >
+              <Ionicons name="settings-outline" size={22} color="#9b9db8" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
         <View style={styles.pages}>
+          {this.isPage("home") && (
+            <Home
+              dictionary={this.state.dictionary}
+              language={this.state.language}
+              pageTexts={this.state.appTexts}
+              screenWidth={this.state.screenWidth}
+              onGoToQuiz={() => this.changePage("quiz")}
+            />
+          )}
+
           {this.isPage("translator") && (
             <Translator
               pageTexts={this.state.appTexts}
@@ -270,10 +307,10 @@ export default class App extends Component {
         {this.state.appTexts && (
           <OptionsModal
             pageTexts={this.state.appTexts}
-            page={this.state.page}
             modalVisibility={this.state.isModalVisible}
-            screenWidth={this.state.screenWidth}
+            currentLanguage={this.state.language}
             onChangePage={(page) => this.changePage(page)}
+            onChangeLanguage={(language) => this.changeLanguage(language)}
             onShowModal={(state) => this.showModal(state)}
           />
         )}
@@ -281,11 +318,11 @@ export default class App extends Component {
         {this.state.appTexts && (
           <BottomMenu
             pageTexts={this.state.appTexts}
-            onChangeLanguage={(language) => this.changeLanguage(language)}
-            onShowModal={() => this.showModal(true)}
+            currentPage={this.state.page}
+            onChangePage={(page) => this.changePage(page)}
           />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -295,9 +332,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#42455a",
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: "#2f3245",
+    borderBottomWidth: 1,
+    borderBottomColor: "#3d4060",
+  },
+  headerTitle: {
+    color: "#e0e0f0",
+    fontSize: 17,
+    fontWeight: "700",
+    letterSpacing: 0.3,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  headerButton: {
+    padding: 6,
+    borderRadius: 8,
+  },
   pages: {
     flex: 1,
-    marginBottom: 40,
   },
   splash: {
     flex: 1,
