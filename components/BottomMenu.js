@@ -1,14 +1,13 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const NAV_ITEMS = [
-  { key: "translator", lib: "Ionicons",              icon: "swap-horizontal-outline", iconActive: "swap-horizontal" },
-  { key: "dictionary", lib: "Ionicons",              icon: "book-outline",            iconActive: "book" },
-  { key: "grammar",    lib: "Ionicons",              icon: "school-outline",          iconActive: "school" },
-  { key: "sentences",  lib: "Ionicons",              icon: "chatbubble-outline",      iconActive: "chatbubble" },
-  { key: "quiz",       lib: "MaterialCommunityIcons", icon: "brain",                  iconActive: "brain" },
+  { key: "translator", icon: "swap-horizontal-outline", iconActive: "swap-horizontal" },
+  { key: "dictionary", icon: "book-outline",            iconActive: "book" },
+  { key: "grammar",    icon: "school-outline",          iconActive: "school" },
+  { key: "sentences",  icon: "chatbubble-outline",      iconActive: "chatbubble" },
+  { key: "quiz",       icon: "game-controller-outline", iconActive: "game-controller" },
 ];
 
 const ACTIVE_COLOR   = "#7eb8d4";
@@ -17,11 +16,10 @@ const INACTIVE_COLOR = "#6b6e8a";
 const BottomMenu = ({ pageTexts, currentPage, onChangePage }) => {
   return (
     <View style={styles.bottomMenu}>
-      {NAV_ITEMS.map(({ key, lib, icon, iconActive }) => {
+      {NAV_ITEMS.map(({ key, icon, iconActive }) => {
         const isActive = currentPage === key;
         const color = isActive ? ACTIVE_COLOR : INACTIVE_COLOR;
         const label = pageTexts?.pages?.[key] ?? key;
-        const IconComp = lib === "MaterialCommunityIcons" ? MaterialCommunityIcons : Ionicons;
 
         return (
           <TouchableOpacity
@@ -30,7 +28,7 @@ const BottomMenu = ({ pageTexts, currentPage, onChangePage }) => {
             onPress={() => onChangePage(key)}
             accessibilityLabel={label}
           >
-            <IconComp
+            <Ionicons
               name={isActive ? iconActive : icon}
               size={22}
               color={color}

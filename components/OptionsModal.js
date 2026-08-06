@@ -16,7 +16,6 @@ const LANGUAGES = [
 ];
 
 const EXTRA_PAGES = [
-  { key: "settings", icon: "settings-outline" },
   { key: "tokipona", icon: "information-circle-outline" },
   { key: "about",    icon: "person-outline" },
 ];

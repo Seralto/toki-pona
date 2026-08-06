@@ -1,5 +1,6 @@
 {
   "language": "Português",
+  "description": "Aprenda e traduza Toki Pona",
   "placeholder": "Digite aqui em Toki Pona...",
   "back": "Voltar",
   "quit": "Sair",
@@ -13,6 +14,21 @@
     "settings": "Configurações",
     "tokiPona": "Toki Pona",
     "aboutMe": "Sobre Mim"
+  },
+  "home": {
+    "wordOfTheDay": "PALAVRA DO DIA",
+    "quizScore": "Pontuação do Quiz",
+    "quizPoints": "pontos",
+    "playQuiz": "Jogue o quiz para ganhar pontos",
+    "days": "dias",
+    "wordClasses": {
+      "noun": "substantivo",
+      "particle": "partícula",
+      "conjunction": "conjunção",
+      "preposition": "preposição",
+      "pronoun": "pronome",
+      "number": "número"
+    }
   },
   "quiz": {
     "title": "Quiz",

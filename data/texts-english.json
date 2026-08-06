@@ -1,5 +1,6 @@
 {
   "language": "English",
+  "description": "Learn and translate Toki Pona",
   "placeholder": "Type here in Toki Pona...",
   "back": "Back",
   "quit": "Quit",
@@ -13,6 +14,21 @@
     "settings": "Settings",
     "tokiPona": "Toki Pona",
     "aboutMe": "About Me"
+  },
+  "home": {
+    "wordOfTheDay": "WORD OF THE DAY",
+    "quizScore": "Quiz Score",
+    "quizPoints": "points",
+    "playQuiz": "Play the quiz to earn points",
+    "days": "days",
+    "wordClasses": {
+      "noun": "noun",
+      "particle": "particle",
+      "conjunction": "conjunction",
+      "preposition": "preposition",
+      "pronoun": "pronoun",
+      "number": "number"
+    }
   },
   "quiz": {
     "title": "Quiz",

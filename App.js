@@ -9,7 +9,6 @@ import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
 import Sentences from "./components/Sentences";
 import Quiz from "./components/Quiz";
-import Settings from "./components/Settings";
 import TokiPona from "./components/TokiPona";
 import About from "./components/About";
 import OptionsModal from "./components/OptionsModal";
@@ -45,7 +44,6 @@ export default class App extends Component {
       enteredText: "",
       language: "",
       page: "",
-      defaultPage: "",
       score: 0,
       isModalVisible: false,
       isLoading: true,
@@ -56,7 +54,6 @@ export default class App extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.getDefaultLanguage();
-      this.getDefaultPage();
       this.getDictionary();
       this.getScore();
     }, 500);
@@ -68,14 +65,7 @@ export default class App extends Component {
       this.changeLanguage(currentLanguage);
       const texts = this.loadText(currentLanguage);
       this.setState({ appTexts: texts });
-    });
-  }
-
-  getDefaultPage() {
-    AsyncStorage.getItem("@TokiPona:defaultPage").then((page) => {
-      const defaultPage = page ? page : DEFAULT_PAGE;
-      this.setState({ defaultPage: defaultPage });
-      this.changePage(defaultPage);
+      this.changePage(DEFAULT_PAGE);
     });
   }
 
@@ -96,11 +86,6 @@ export default class App extends Component {
   setDefaultLanguage(language) {
     AsyncStorage.setItem("@TokiPona:defaultLanguage", language);
     this.changeLanguage(language);
-  }
-
-  setDefaultPage(page) {
-    AsyncStorage.setItem("@TokiPona:defaultPage", page);
-    this.setState({ defaultPage: page });
   }
 
   translate(enteredText) {
@@ -277,17 +262,6 @@ export default class App extends Component {
             />
           )}
 
-          {this.isPage("settings") && (
-            <Settings
-              pageTexts={this.state.appTexts.settings}
-              pagesOptions={this.state.appTexts.settings.pagesOptions}
-              defaultLanguage={this.state.language}
-              defaultPage={this.state.defaultPage}
-              screenWidth={this.state.screenWidth}
-              onSelectLanguage={(language) => this.setDefaultLanguage(language)}
-              onSelectPage={(page) => this.setDefaultPage(page)}
-            />
-          )}
 
           {this.isPage("tokipona") && (
             <TokiPona
@@ -330,7 +304,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: "#42455a",
+    backgroundColor: "#0d0f1e",
   },
   header: {
     flexDirection: "row",
@@ -338,9 +312,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#2f3245",
+    backgroundColor: "#0d0f1e",
     borderBottomWidth: 1,
-    borderBottomColor: "#3d4060",
+    borderBottomColor: "#1e1f30",
   },
   headerTitle: {
     color: "#e0e0f0",
