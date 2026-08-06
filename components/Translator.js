@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 import Translation from "./Translation";
 
@@ -28,6 +29,7 @@ const Translator = ({
   const fontSize = (screenWidth < 400 ? 15 : 18) + fo;
   const th = theme ?? {};
   const [focused, setFocused] = useState(false);
+  const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
 
   return (
     <View style={styles.translator}>
@@ -59,11 +61,12 @@ const Translator = ({
       <ScrollView style={styles.translations}>
         {translations.map((translation, index) => (
           <Translation
+            key={index}
             word={validEnteredWords[index]}
             text={translation}
-            key={index}
             screenWidth={screenWidth}
             fontSizeId={fontSizeId}
+            fontsLoaded={fontsLoaded}
             theme={theme}
           />
         ))}

@@ -34,7 +34,7 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
-export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth, theme }) {
+export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth, fontSizeId, theme }) {
   const [score, setScore]   = useState(null);
   const [streak, setStreak] = useState(0);
   const [fontsLoaded] = useFonts({
@@ -46,6 +46,7 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
     AsyncStorage.getItem(STREAK_KEY).then((v) => setStreak(v ? parseInt(v, 10) : 0));
   }, []);
 
+  const fo = fontSizeId === "large" ? 4 : 0;
   const t = pageTexts?.home ?? {};
   const wordClasses = t.wordClasses ?? {};
 
@@ -63,20 +64,20 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
 
       {/* App title */}
       <View style={styles.titleSection}>
-        <Text style={[styles.appTitle, { color: th.text }]}>Toki Pona</Text>
-        <Text style={[styles.appSubtitle, { color: th.textDim }]}>{pageTexts?.description}</Text>
+        <Text style={[styles.appTitle, { fontSize: 32 + fo, color: th.text }]}>Toki Pona</Text>
+        <Text style={[styles.appSubtitle, { fontSize: 15 + fo, color: th.textDim }]}>{pageTexts?.description}</Text>
       </View>
 
       {/* Word of the Day */}
       {word && (
         <View style={[styles.card, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}>
-          <Text style={[styles.sectionLabel, { color: th.textDim }]}>{t.wordOfTheDay}</Text>
+          <Text style={[styles.sectionLabel, { fontSize: 11 + fo, color: th.textDim }]}>{t.wordOfTheDay}</Text>
           <View style={styles.wotdRow}>
             <View style={styles.wotdLeft}>
-              <Text style={[styles.wotdWord, { color: th.text }]}>{word}</Text>
-              <Text style={[styles.wotdDef, { color: th.textMuted }]}>{definition}</Text>
+              <Text style={[styles.wotdWord, { fontSize: 40 + fo, color: th.text }]}>{word}</Text>
+              <Text style={[styles.wotdDef, { fontSize: 16 + fo, color: th.textMuted }]}>{definition}</Text>
               <View style={[styles.badge, { backgroundColor: th.surfaceBorder }]}>
-                <Text style={[styles.badgeText, { color: th.textMuted }]}>{wordClass}</Text>
+                <Text style={[styles.badgeText, { fontSize: 12 + fo, color: th.textMuted }]}>{wordClass}</Text>
               </View>
             </View>
             {fontsLoaded && <Text style={[styles.glyph, { color: th.accentBg }]}>{word}</Text>}
@@ -88,23 +89,23 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
       <TouchableOpacity style={[styles.card, styles.scoreCard, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]} onPress={onGoToQuiz} activeOpacity={0.75}>
         <View style={styles.scoreRow}>
           <View style={[styles.scoreIcon, { backgroundColor: th.accentBg }]}>
-            <Ionicons name="trophy-outline" size={26} color={th.accent} />
+            <Ionicons name="trophy-outline" size={26 + fo} color={th.accent} />
           </View>
           <View style={styles.scoreInfo}>
-            <Text style={[styles.scoreLabel, { color: th.textMuted }]}>{t.quizScore}</Text>
+            <Text style={[styles.scoreLabel, { fontSize: 14 + fo, color: th.textMuted }]}>{t.quizScore}</Text>
             {score === 0 ? (
-              <Text style={[styles.scoreHint, { color: th.textDim }]}>{t.playQuiz}</Text>
+              <Text style={[styles.scoreHint, { fontSize: 13 + fo, color: th.textDim }]}>{t.playQuiz}</Text>
             ) : (
-              <Text style={[styles.scoreValue, { color: th.accent }]}>
+              <Text style={[styles.scoreValue, { fontSize: 28 + fo, color: th.accent }]}>
                 {formattedScore} {t.quizPoints}
               </Text>
             )}
           </View>
           {streak > 1 && (
             <View style={styles.streakBox}>
-              <Text style={styles.streakFire}>🔥</Text>
-              <Text style={styles.streakCount}>{streak}</Text>
-              <Text style={[styles.streakDays, { color: th.textDim }]}>{t.days}</Text>
+              <Text style={[styles.streakFire, { fontSize: 22 + fo }]}>🔥</Text>
+              <Text style={[styles.streakCount, { fontSize: 18 + fo }]}>{streak}</Text>
+              <Text style={[styles.streakDays, { fontSize: 11 + fo, color: th.textDim }]}>{t.days}</Text>
             </View>
           )}
         </View>

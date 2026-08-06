@@ -2,9 +2,6 @@
   "language": "English",
   "description": "Learn and translate Toki Pona",
   "placeholder": "Type here in Toki Pona...",
-  "back": "Back",
-  "quit": "Quit",
-  "menu": "Menu",
   "pages": {
     "translator": "Translator",
     "dictionary": "Dictionary",
@@ -53,15 +50,6 @@
   },
   "settings": {
     "title": "Settings",
-    "defaultLanguage": "Select default language",
-    "defaultPage": "Select default page",
-    "pagesOptions": {
-      "translator": "Translator",
-      "dictionary": "Dictionary",
-      "grammar": "Grammar",
-      "sentences": "Sentences",
-      "quiz": "Quiz"
-    },
     "sectionLanguage": "Language",
     "sectionAppearance": "Appearance",
     "sectionFontSize": "Font Size",
@@ -298,16 +286,12 @@
     }
   },
   "aboutMe": {
-    "linkedin": "LinkedIn",
-    "github": "GitHub",
-    "youtube": "YouTube",
     "linkedinUrl": "https://www.linkedin.com/in/seralto",
     "githubUrl": "https://github.com/seralto",
     "youtubeUrl": "https://www.youtube.com/user/stoledo13",
     "site": "sergiotoledo.com.br",
     "siteUrl": "https://sergiotoledo.com.br",
     "email": "contato@sergiotoledo.com.br",
-    "title": "Thank you for using the \nToki Pona app!",
     "content": "Hello! This is Sérgio Toledo from Brazil, I am a Software Engineer and passionate about programming. \n\nThis free app was developed to help you learn the Toki Pona language.",
     "playStoreUrl": "https://play.google.com/store/apps/developer?id=S%C3%A9rgio+Toledo",
     "myApps": "Discover my apps:"

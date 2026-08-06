@@ -37,7 +37,6 @@ export default class App extends Component {
 
     this.state = {
       validEnteredWords: [],
-      tokiPonaWords: [],
       translations: [],
       dictionary: {},
       appTexts: "",
@@ -74,16 +73,12 @@ export default class App extends Component {
 
   getScore() {
     AsyncStorage.getItem("@TokiPona:score").then((totalScore) => {
-      const score = totalScore ? totalScore : 0;
-      this.setState({ score: score.toString() });
-      this.setState({ isLoading: false });
+      this.setState({ score: totalScore ? totalScore.toString() : "0", isLoading: false });
     });
   }
 
   getDictionary() {
-    const dictionary = this.loadDictionary(DEFAULT_LANGUAGE);
-    this.setState({ dictionary: dictionary });
-    this.setState({ tokiPonaWords: Object.keys(dictionary) });
+    this.setState({ dictionary: this.loadDictionary(DEFAULT_LANGUAGE) });
   }
 
   setDefaultLanguage(language) {
@@ -92,26 +87,20 @@ export default class App extends Component {
   }
 
   translate(enteredText) {
+    const dictKeys = Object.keys(this.state.dictionary);
     const validTokiPonaWords = this.sanitizeInput(enteredText)
       .split(" ")
-      .filter(
-        (word) =>
-          this.state.tokiPonaWords.includes(word) ||
-          word === "ale" ||
-          word === "ali"
-      );
+      .filter((word) => dictKeys.includes(word) || word === "ale" || word === "ali");
 
-    let replacedValidTokiPonaWords = validTokiPonaWords.map((word) => {
-      return word === "ale" || word === "ali" ? "ale/ali" : word;
-    });
-
-    const translations = replacedValidTokiPonaWords.map(
-      (word) => this.state.dictionary[word]
+    const normalizedWords = validTokiPonaWords.map((word) =>
+      word === "ale" || word === "ali" ? "ale/ali" : word
     );
 
-    this.setState({ enteredText: enteredText.toLowerCase() });
-    this.setState({ validEnteredWords: validTokiPonaWords });
-    this.setState({ translations: translations });
+    this.setState({
+      enteredText: enteredText.toLowerCase(),
+      validEnteredWords: validTokiPonaWords,
+      translations: normalizedWords.map((word) => this.state.dictionary[word]),
+    });
   }
 
   changeLanguage(language) {
@@ -119,15 +108,12 @@ export default class App extends Component {
       this.textInput.current.focus();
     }
 
-    if (language === this.state.language) {
-      return;
-    }
+    if (language === this.state.language) return;
 
-    this.setState({ language: language });
-    this.setState({ appTexts: this.loadText(language) });
-    this.setState({ dictionary: this.loadDictionary(language) }, () => {
-      this.translate(this.state.enteredText);
-    });
+    this.setState(
+      { language, appTexts: this.loadText(language), dictionary: this.loadDictionary(language) },
+      () => this.translate(this.state.enteredText)
+    );
   }
 
   changePage(page) {
@@ -135,9 +121,7 @@ export default class App extends Component {
   }
 
   clearTranslation() {
-    this.setState({ validEnteredWords: [] });
-    this.setState({ translations: [] });
-    this.setState({ enteredText: "" });
+    this.setState({ validEnteredWords: [], translations: [], enteredText: "" });
     this.textInput.current.clear();
     this.textInput.current.focus();
   }
@@ -314,7 +298,7 @@ export default class App extends Component {
               currentTheme={this.state.themeId}
               currentFontSize={this.state.fontSizeId}
               theme={theme}
-              onChangeLanguage={(language) => this.changeLanguage(language)}
+              onChangeLanguage={(language) => this.setDefaultLanguage(language)}
               onChangeTheme={(themeId) => this.changeTheme(themeId)}
               onChangeFontSize={(id) => this.changeFontSize(id)}
               onResetScore={() => this.resetScore()}

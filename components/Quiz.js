@@ -9,6 +9,13 @@ const LABELS = ["A", "B", "C", "D"];
 const INTL_LOCALE = { english: "en-US", portuguese: "pt-BR", spanish: "es-ES" };
 const MODES = ["random", "word", "def", "glyph-word", "word-glyph"];
 
+const getModeLabel = (m, t) =>
+  m === "word"       ? t.modeWord
+: m === "def"        ? t.modeDef
+: m === "glyph-word" ? t.modeGlyphWord
+: m === "word-glyph" ? t.modeWordGlyph
+: t.modeRandom;
+
 const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWidth, theme }) => {
   const [randomWord, setRandomWord] = useState("");
   const [options, setOptions]       = useState([]);
@@ -144,11 +151,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
 
   const formattedScore = parseInt(score, 10).toLocaleString(intlLocale);
 
-  const modeLabel = mode === "word"       ? pageTexts.modeWord
-                  : mode === "def"        ? pageTexts.modeDef
-                  : mode === "glyph-word" ? pageTexts.modeGlyphWord
-                  : mode === "word-glyph" ? pageTexts.modeWordGlyph
-                  : pageTexts.modeRandom;
+  const modeLabel = getModeLabel(mode, pageTexts);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -171,11 +174,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
         <Pressable style={styles.modeOverlay} onPress={() => setShowModeMenu(false)}>
           <View style={[styles.modeMenu, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}>
             {MODES.map((m) => {
-              const label = m === "word"       ? pageTexts.modeWord
-                          : m === "def"        ? pageTexts.modeDef
-                          : m === "glyph-word" ? pageTexts.modeGlyphWord
-                          : m === "word-glyph" ? pageTexts.modeWordGlyph
-                          : pageTexts.modeRandom;
+              const label = getModeLabel(m, pageTexts);
               const isActive = m === mode;
               return (
                 <TouchableOpacity

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, ScrollView, Text, StyleSheet } from "react-native";
 import Accordion, { accordionShared } from "./Accordion";
+import SearchBar from "./SearchBar";
 
 function parsePhrase(raw) {
   const lines = raw.split("\n").filter((l) => l.trim().length > 0);
@@ -52,25 +52,14 @@ const Sentences = ({ pageTexts, screenWidth, fontSizeId, theme }) => {
       <Text style={[styles.title, { fontSize: 26 + fo, color: th.text }]}>{pageTexts.title}</Text>
 
       {/* Search */}
-      <View style={[styles.searchBox, { backgroundColor: th.inputBg, borderColor: q ? th.accentBorder : th.surfaceBorder }]}>
-        <Ionicons name="search-outline" size={18} color={th.textMuted} style={styles.searchIcon} />
-        <TextInput
-          style={[styles.searchInput, { fontSize, color: th.text }]}
-          value={query}
-          onChangeText={setQuery}
-          placeholder={pageTexts.search ?? "Search phrases..."}
-          placeholderTextColor={th.inactive}
-          autoCorrect={false}
-          autoCapitalize="none"
-          autoComplete="off"
-          returnKeyType="search"
-        />
-        {q.length > 0 && (
-          <TouchableOpacity onPress={() => setQuery("")}>
-            <Ionicons name="close-circle" size={18} color={th.textMuted} />
-          </TouchableOpacity>
-        )}
-      </View>
+      <SearchBar
+        value={query}
+        onChangeText={setQuery}
+        placeholder={pageTexts.search ?? "Search phrases..."}
+        fontSize={fontSize}
+        th={th}
+        style={styles.searchBarMargin}
+      />
 
       <ScrollView ref={scrollRef} style={styles.scroll} showsVerticalScrollIndicator={false}>
         {groups.length === 0 ? (
@@ -102,9 +91,7 @@ const styles = StyleSheet.create({
   title:          { fontSize: 26, fontWeight: "bold", marginBottom: 16, marginTop: 8 },
 
   /* Search */
-  searchBox:      { flexDirection: "row", alignItems: "center", borderRadius: 12, borderWidth: 1, paddingHorizontal: 12, marginBottom: 12 },
-  searchIcon:     { marginRight: 8 },
-  searchInput:    { flex: 1, paddingVertical: 12 },
+  searchBarMargin:{ marginBottom: 12 },
 
   scroll:         { flex: 1 },
   empty:          { textAlign: "center", marginTop: 40 },
