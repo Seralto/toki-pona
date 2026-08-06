@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -27,6 +27,7 @@ const Translator = ({
   const titleFontSize = (screenWidth < 400 ? 20 : 26) + fo;
   const fontSize = (screenWidth < 400 ? 15 : 18) + fo;
   const th = theme ?? {};
+  const [focused, setFocused] = useState(false);
 
   return (
     <View style={styles.translator}>
@@ -34,24 +35,28 @@ const Translator = ({
         Toki Pona - {pageTexts.language}
       </Text>
 
-      <ScrollView style={styles.translations}>
-        <View style={styles.inputBox}>
-          <TextInput
-            onChangeText={onEnterText}
-            style={[styles.inputText, { fontSize, backgroundColor: th.inputBg, color: th.inputText }]}
-            placeholder={pageTexts.placeholder}
-            placeholderTextColor={th.textDim}
-            ref={inputRef}
-            autoFocus={true}
-            autoCapitalize="none"
-            value={enteredText}
-          />
-
-          <TouchableOpacity onPress={onClearTranslation} style={styles.clearBtn}>
-            <Ionicons name="close-circle" size={36} color={th.textDim} />
+      <View style={[styles.inputBox, { backgroundColor: th.inputBg, borderColor: focused ? th.accentBorder : th.surfaceBorder }]}>
+        <Ionicons name="create-outline" size={18} color={th.textMuted} style={styles.inputIcon} />
+        <TextInput
+          onChangeText={onEnterText}
+          style={[styles.inputText, { fontSize, color: th.text }]}
+          placeholder={pageTexts.placeholder}
+          placeholderTextColor={th.textDim}
+          ref={inputRef}
+          autoFocus={true}
+          autoCapitalize="none"
+          value={enteredText}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+        />
+        {enteredText?.length > 0 && (
+          <TouchableOpacity onPress={onClearTranslation}>
+            <Ionicons name="close-circle" size={18} color={th.textMuted} />
           </TouchableOpacity>
-        </View>
+        )}
+      </View>
 
+      <ScrollView style={styles.translations}>
         {translations.map((translation, index) => (
           <Translation
             word={validEnteredWords[index]}
@@ -68,17 +73,12 @@ const Translator = ({
 };
 
 const styles = StyleSheet.create({
-  translator: { alignItems: "center", paddingHorizontal: 20 },
-  title: { marginVertical: 10 },
-  inputBox: {
-    alignItems: "center", flexDirection: "row",
-    marginTop: 10, marginBottom: 30,
-  },
-  inputText: {
-    flex: 1, borderRadius: 10, padding: 10, marginRight: 8,
-  },
-  clearBtn: { padding: 4 },
-  translations: { width: "100%" },
+  translator:  { flex: 1, paddingHorizontal: 20 },
+  title:       { marginVertical: 10 },
+  inputBox:    { flexDirection: "row", alignItems: "center", borderRadius: 12, borderWidth: 1, paddingHorizontal: 12, marginBottom: 16 },
+  inputIcon:   { marginRight: 8 },
+  inputText:   { flex: 1, paddingVertical: 12 },
+  translations:{ flex: 1 },
 });
 
 export default Translator;
