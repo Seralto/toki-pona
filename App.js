@@ -10,9 +10,7 @@ import Dictionary from "./components/Dictionary";
 import Grammar from "./components/Grammar";
 import Sentences from "./components/Sentences";
 import Quiz from "./components/Quiz";
-import TokiPona from "./components/TokiPona";
-import About from "./components/About";
-import OptionsModal from "./components/OptionsModal";
+import Settings from "./components/Settings";
 import BottomMenu from "./components/BottomMenu";
 
 const dictionaries = {
@@ -47,10 +45,10 @@ export default class App extends Component {
       language: "",
       page: "",
       score: 0,
-      isModalVisible: false,
       isLoading: true,
       screenWidth: Dimensions.get("window").width,
       themeId: DEFAULT_THEME,
+      fontSizeId: "normal",
     };
   }
 
@@ -60,6 +58,7 @@ export default class App extends Component {
       this.getDictionary();
       this.getScore();
       this.getTheme();
+      this.getFontSizeId();
     }, 500);
   }
 
@@ -133,7 +132,6 @@ export default class App extends Component {
 
   changePage(page) {
     this.setState({ page: page });
-    this.showModal(false);
   }
 
   clearTranslation() {
@@ -170,14 +168,26 @@ export default class App extends Component {
     AsyncStorage.setItem("@TokiPona:theme", themeId);
   }
 
-  showModal(state) {
-    this.setState({ isModalVisible: state });
+  getFontSizeId() {
+    AsyncStorage.getItem("@TokiPona:fontSizeId").then((id) => {
+      if (id === "normal" || id === "large") this.setState({ fontSizeId: id });
+    });
+  }
+
+  changeFontSize(id) {
+    this.setState({ fontSizeId: id });
+    AsyncStorage.setItem("@TokiPona:fontSizeId", id);
   }
 
   changeScore(points = 10) {
     const newScore = parseInt(this.state.score) + points;
     this.setState({ score: newScore });
     AsyncStorage.setItem("@TokiPona:score", newScore.toString());
+  }
+
+  resetScore() {
+    this.setState({ score: 0 });
+    AsyncStorage.setItem("@TokiPona:score", "0");
   }
 
   isPage(page) {
@@ -215,11 +225,15 @@ export default class App extends Component {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.showModal(true)}
+              onPress={() => this.changePage("settings")}
               accessibilityLabel="Settings"
               style={styles.headerButton}
             >
-              <Ionicons name="settings-outline" size={22} color={theme.inactive} />
+              <Ionicons
+                name={this.state.page === "settings" ? "settings" : "settings-outline"}
+                size={22}
+                color={this.state.page === "settings" ? theme.accent : theme.inactive}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -231,6 +245,7 @@ export default class App extends Component {
               language={this.state.language}
               pageTexts={this.state.appTexts}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
               onGoToQuiz={() => this.changePage("quiz")}
             />
@@ -244,6 +259,7 @@ export default class App extends Component {
               enteredText={this.state.enteredText}
               inputRef={this.textInput}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
               onEnterText={(enteredText) => this.translate(enteredText)}
               onClearTranslation={() => this.clearTranslation()}
@@ -255,6 +271,7 @@ export default class App extends Component {
               pageTexts={this.state.appTexts}
               dictionary={this.state.dictionary}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
             />
           )}
@@ -263,6 +280,7 @@ export default class App extends Component {
             <Grammar
               pageTexts={this.state.appTexts.grammar}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
             />
           )}
@@ -271,6 +289,7 @@ export default class App extends Component {
             <Sentences
               pageTexts={this.state.appTexts.sentences}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
             />
           )}
@@ -281,42 +300,27 @@ export default class App extends Component {
               dictionary={this.state.dictionary}
               score={this.state.score}
               screenWidth={this.state.screenWidth}
+              fontSizeId={this.state.fontSizeId}
               theme={theme}
               onChangeScore={(points) => this.changeScore(points)}
               language={this.state.language}
             />
           )}
 
-          {this.isPage("tokipona") && (
-            <TokiPona
-              pageTexts={this.state.appTexts.tokiPona}
-              screenWidth={this.state.screenWidth}
+          {this.isPage("settings") && (
+            <Settings
+              pageTexts={this.state.appTexts}
+              currentLanguage={this.state.language}
+              currentTheme={this.state.themeId}
+              currentFontSize={this.state.fontSizeId}
               theme={theme}
-            />
-          )}
-
-          {this.isPage("about") && (
-            <About
-              pageTexts={this.state.appTexts.aboutMe}
-              screenWidth={this.state.screenWidth}
-              theme={theme}
+              onChangeLanguage={(language) => this.changeLanguage(language)}
+              onChangeTheme={(themeId) => this.changeTheme(themeId)}
+              onChangeFontSize={(id) => this.changeFontSize(id)}
+              onResetScore={() => this.resetScore()}
             />
           )}
         </View>
-
-        {this.state.appTexts && (
-          <OptionsModal
-            pageTexts={this.state.appTexts}
-            modalVisibility={this.state.isModalVisible}
-            currentLanguage={this.state.language}
-            currentTheme={this.state.themeId}
-            theme={theme}
-            onChangePage={(page) => this.changePage(page)}
-            onChangeLanguage={(language) => this.changeLanguage(language)}
-            onChangeTheme={(themeId) => this.changeTheme(themeId)}
-            onShowModal={(state) => this.showModal(state)}
-          />
-        )}
 
         {this.state.appTexts && (
           <BottomMenu

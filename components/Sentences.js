@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Accordion, { accordionShared } from "./Accordion";
@@ -22,11 +22,13 @@ const PhraseList = ({ phrases, fontSize, th }) => (
   </>
 );
 
-const Sentences = ({ pageTexts, screenWidth, theme }) => {
+const Sentences = ({ pageTexts, screenWidth, fontSizeId, theme }) => {
   const content = pageTexts.content;
   const [query, setQuery] = useState("");
+  const scrollRef = useRef(null);
 
-  const fontSize = screenWidth < 400 ? 15 : 17;
+  const fo = fontSizeId === "large" ? 4 : 0;
+  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
   const th = theme ?? {};
   const q = query.trim().toLowerCase();
 
@@ -47,7 +49,7 @@ const Sentences = ({ pageTexts, screenWidth, theme }) => {
 
   return (
     <View style={styles.sentences}>
-      <Text style={[styles.title, { color: th.text }]}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: 26 + fo, color: th.text }]}>{pageTexts.title}</Text>
 
       {/* Search */}
       <View style={[styles.searchBox, { backgroundColor: th.inputBg, borderColor: q ? th.accentBorder : th.surfaceBorder }]}>
@@ -70,7 +72,7 @@ const Sentences = ({ pageTexts, screenWidth, theme }) => {
         )}
       </View>
 
-      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
+      <ScrollView ref={scrollRef} style={styles.scroll} showsVerticalScrollIndicator={false}>
         {groups.length === 0 ? (
           <Text style={[styles.empty, { fontSize, color: th.inactive }]}>{pageTexts.noResults ?? "No results found."}</Text>
         ) : q ? (
@@ -84,7 +86,7 @@ const Sentences = ({ pageTexts, screenWidth, theme }) => {
         ) : (
           /* Normal mode: accordion */
           groups.map(({ key, title, phrases }) => (
-            <Accordion key={key} title={title} badge={`(${phrases.length})`} th={th}>
+            <Accordion key={key} title={title} badge={`(${phrases.length})`} th={th} titleSize={15 + fo} scrollRef={scrollRef}>
               <PhraseList phrases={phrases} fontSize={fontSize} th={th} />
             </Accordion>
           ))

@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 
-const Translation = ({ word, text, screenWidth, theme }) => {
-  const fontSize = screenWidth < 400 ? 15 : 17;
+const Translation = ({ word, text, screenWidth, fontSizeId, theme }) => {
+  const fo = fontSizeId === "large" ? 4 : 0;
+  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
   const th = theme ?? {};
 
   const [fontsLoaded] = useFonts({

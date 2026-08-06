@@ -21,6 +21,11 @@ const THEME_OPTIONS = [
   { key: "classic", label: "Classic", icon: "book-outline" },
 ];
 
+const FONT_SIZE_OPTIONS = [
+  { key: "normal", label: "Normal" },
+  { key: "large",  label: "Grande" },
+];
+
 const EXTRA_PAGES = [
   { key: "tokipona", icon: "information-circle-outline" },
   { key: "about",    icon: "person-outline" },
@@ -31,10 +36,12 @@ const OptionsModal = ({
   modalVisibility,
   currentLanguage,
   currentTheme,
+  currentFontSize,
   theme,
   onChangePage,
   onChangeLanguage,
   onChangeTheme,
+  onChangeFontSize,
   onShowModal,
 }) => {
   const t = theme ?? {};
@@ -108,6 +115,39 @@ const OptionsModal = ({
           })}
         </View>
 
+        {/* Font size selector */}
+        <Text style={[styles.sectionLabel, { color: t.textDim }]}>Font Size</Text>
+        <View style={[styles.langRow, { marginBottom: 20 }]}>
+          {FONT_SIZE_OPTIONS.map(({ key, label }) => {
+            const isActive = (currentFontSize ?? "normal") === key;
+            return (
+              <TouchableOpacity
+                key={key}
+                style={[
+                  styles.fontBtn,
+                  { backgroundColor: t.langBtnBg, borderColor: "transparent" },
+                  isActive && { borderColor: t.accentBorder, backgroundColor: t.langBtnActiveBg },
+                ]}
+                onPress={() => { onChangeFontSize(key); onShowModal(false); }}
+                activeOpacity={0.7}
+              >
+                {isActive && (
+                  <Ionicons
+                    name="checkmark"
+                    size={13}
+                    color={t.accentBorder}
+                    style={styles.fontCheck}
+                  />
+                )}
+                <Text style={[styles.fontAa, { color: isActive ? t.accentSecondary : t.textMuted }]}>Aa</Text>
+                <Text style={[styles.langLabel, { color: isActive ? t.accentSecondary : t.textMuted }, isActive && { fontWeight: "600" }]}>
+                  {label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
         <View style={[styles.divider, { backgroundColor: t.sheetBorder }]} />
 
         {/* Extra pages */}
@@ -151,7 +191,10 @@ const styles = StyleSheet.create({
   },
   langFlag: { fontSize: 22, marginBottom: 4 },
   langLabel: { fontSize: 11 },
-  divider: { height: 1, marginBottom: 8 },
+  divider:   { height: 1, marginBottom: 8 },
+  fontBtn:   { flex: 1, alignItems: "center", paddingVertical: 14, borderRadius: 10, borderWidth: 1, position: "relative" },
+  fontAa:    { fontSize: 22, fontWeight: "700", marginBottom: 4 },
+  fontCheck: { position: "absolute", top: 6, right: 8 },
   pageRow: {
     flexDirection: "row", alignItems: "center",
     paddingVertical: 14, borderBottomWidth: 1,

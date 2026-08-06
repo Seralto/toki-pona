@@ -6,9 +6,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FAV_KEY = "tokipona:favorites";
 
-const Dictionary = ({ pageTexts, dictionary, screenWidth, theme }) => {
+const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) => {
   const th = theme ?? {};
-  const fontSize = screenWidth < 400 ? 15 : 17;
+  const fo = fontSizeId === "large" ? 4 : 0;
+  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
   const labels = pageTexts.dictionary ?? {};
 
   const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
@@ -48,7 +49,7 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth, theme }) => {
   return (
     <View style={styles.container}>
       {/* Title */}
-      <Text style={[styles.title, { color: th.text }]}>{pageTexts.pages.dictionary}</Text>
+      <Text style={[styles.title, { fontSize: 26 + fo, color: th.text }]}>{pageTexts.pages.dictionary}</Text>
 
       {/* Search bar */}
       <View style={[styles.searchBox, { backgroundColor: th.inputBg, borderColor: q ? th.accentBorder : th.surfaceBorder }]}>

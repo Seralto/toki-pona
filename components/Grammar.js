@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import Accordion, { accordionShared } from "./Accordion";
 
@@ -71,18 +71,20 @@ function SectionContent({ text, fontSize, th }) {
   );
 }
 
-const Grammar = ({ pageTexts, screenWidth, theme }) => {
+const Grammar = ({ pageTexts, screenWidth, fontSizeId, theme }) => {
   const content = pageTexts.content;
   const th = theme ?? {};
-  const fontSize = screenWidth < 400 ? 15 : 17;
+  const fo = fontSizeId === "large" ? 4 : 0;
+  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
+  const scrollRef = useRef(null);
 
   return (
     <View style={styles.grammar}>
-      <Text style={[styles.title, { color: th.text }]}>{pageTexts.title}</Text>
+      <Text style={[styles.title, { fontSize: 26 + fo, color: th.text }]}>{pageTexts.title}</Text>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
         {Object.keys(content).map((key) => (
-          <Accordion key={key} title={content[key].title} th={th}>
+          <Accordion key={key} title={content[key].title} th={th} titleSize={15 + fo} scrollRef={scrollRef}>
             <View style={[accordionShared.separator, { backgroundColor: th.surfaceBorder }]} />
             <SectionContent text={content[key].content} fontSize={fontSize} th={th} />
           </Accordion>

@@ -61,7 +61,28 @@
       "grammar": "Gramática",
       "sentences": "Frases",
       "quiz": "Quiz"
-    }
+    },
+    "sectionLanguage": "Idioma",
+    "sectionAppearance": "Aparência",
+    "sectionFontSize": "Tamanho da Fonte",
+    "sectionApp": "Aplicativo",
+    "sectionData": "Dados",
+    "themeDark": "Escuro",
+    "themeLight": "Claro",
+    "themeClassic": "Clássico",
+    "fontNormal": "Normal",
+    "fontLarge": "Grande",
+    "shareApp": "Compartilhar app Android",
+    "shareSubtitle": "Indique para um amigo",
+    "shareMessage": "Aprenda Toki Pona!",
+    "shareWeb": "Compartilhar versão web",
+    "shareWebSubtitle": "Para quem usa iPhone",
+    "shareWebMessage": "Aprenda Toki Pona no navegador!",
+    "resetScore": "Resetar Pontuação",
+    "resetSubtitle": "Apagar todos os pontos do quiz neste dispositivo",
+    "resetConfirm": "Apagar todos os pontos do quiz neste dispositivo?",
+    "cancel": "Cancelar",
+    "reset": "Resetar"
   },
   "grammar": {
     "title": "Gramática",
@@ -286,10 +307,10 @@
     "site": "sergiotoledo.com.br",
     "siteUrl": "https://sergiotoledo.com.br",
     "email": "contato@sergiotoledo.com.br",
-    "title": "Obrigado por usar o \napp Toki Pona!",
+    "title": "Obrigado por usar o app Toki Pona!",
     "content": "Olá! Meu nome é Sérgio Toledo, sou Engenheiro de Software e apaixonado por programação. \n\nEste app gratuito foi desenvolvido para te auxiliar no aprendizado da lingua Toki Pona.",
     "playStoreUrl": "https://play.google.com/store/apps/developer?id=S%C3%A9rgio+Toledo",
-    "myApps": "Conheça meus aplicativos:"
+    "myApps": "Conheça meus aplicativos"
   },
   "tokiPona": {
     "title": "O que é Toki Pona?",

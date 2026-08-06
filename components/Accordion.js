@@ -11,12 +11,13 @@ import { Ionicons } from "@expo/vector-icons";
  *   th         - theme object
  *   children   - content rendered inside when open
  */
-const Accordion = ({ title, badge, th, children }) => {
+const Accordion = ({ title, badge, th, children, titleSize, scrollRef }) => {
   const [open, setOpen]             = useState(false);
   const [bodyHeight, setBodyHeight] = useState(0);
   const animHeight  = useRef(new Animated.Value(0)).current;
   const animOpacity = useRef(new Animated.Value(0)).current;
   const measured    = useRef(false);
+  const yOffset     = useRef(0);
 
   const onBodyLayout = useCallback((e) => {
     const h = e.nativeEvent.layout.height;
@@ -27,20 +28,30 @@ const Accordion = ({ title, badge, th, children }) => {
   }, []);
 
   const toggle = () => {
-    const toValue = open ? 0 : bodyHeight;
+    const opening = !open;
+    const toValue = opening ? bodyHeight : 0;
     Animated.parallel([
-      Animated.timing(animHeight,  { toValue,                 duration: 300, useNativeDriver: false }),
-      Animated.timing(animOpacity, { toValue: open ? 0 : 1,  duration: 300, useNativeDriver: false }),
+      Animated.timing(animHeight,  { toValue,                    duration: 300, useNativeDriver: false }),
+      Animated.timing(animOpacity, { toValue: opening ? 1 : 0,  duration: 300, useNativeDriver: false }),
     ]).start();
-    setOpen((v) => !v);
+    setOpen(opening);
+
+    if (opening && scrollRef?.current) {
+      setTimeout(() => {
+        scrollRef.current.scrollTo({ y: Math.max(0, yOffset.current - 16), animated: true });
+      }, 120);
+    }
   };
 
   return (
-    <View style={[styles.card, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}>
+    <View
+      onLayout={(e) => { yOffset.current = e.nativeEvent.layout.y; }}
+      style={[styles.card, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}
+    >
       {/* Header */}
       <TouchableOpacity onPress={toggle} style={styles.header} activeOpacity={0.7}>
         <View style={styles.titleRow}>
-          <Text style={[styles.title, { color: th.text }]}>{title}</Text>
+          <Text style={[styles.title, { color: th.text, fontSize: titleSize ?? 15 }]}>{title}</Text>
           {badge != null && (
             <Text style={[styles.badge, { color: th.textMuted }]}>{badge}</Text>
           )}

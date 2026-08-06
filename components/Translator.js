@@ -20,10 +20,12 @@ const Translator = ({
   onEnterText,
   onClearTranslation,
   screenWidth,
+  fontSizeId,
   theme,
 }) => {
-  const titleFontSize = screenWidth < 400 ? 20 : 26;
-  const fontSize = screenWidth < 400 ? 15 : 18;
+  const fo = fontSizeId === "large" ? 4 : 0;
+  const titleFontSize = (screenWidth < 400 ? 20 : 26) + fo;
+  const fontSize = (screenWidth < 400 ? 15 : 18) + fo;
   const th = theme ?? {};
 
   return (
@@ -56,6 +58,7 @@ const Translator = ({
             text={translation}
             key={index}
             screenWidth={screenWidth}
+            fontSizeId={fontSizeId}
             theme={theme}
           />
         ))}
