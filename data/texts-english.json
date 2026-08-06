@@ -70,7 +70,10 @@
     "resetSubtitle": "Delete all quiz points on this device",
     "resetConfirm": "Delete all quiz points on this device?",
     "cancel": "Cancel",
-    "reset": "Reset"
+    "reset": "Reset",
+    "sectionAbout": "About",
+    "appVersion": "App version",
+    "feedback": "Feedback"
   },
   "grammar": {
     "title": "Grammar",
@@ -139,7 +142,7 @@
   },
   "sentences": {
     "title": "Sentences",
-    "search": "Search phrases...",
+    "search": "Search word...",
     "noResults": "No results found.",
     "content": {
       "simple_sentences": {

@@ -70,7 +70,10 @@
     "resetSubtitle": "Borrar todos los puntos del quiz en este dispositivo",
     "resetConfirm": "¿Borrar todos los puntos del quiz en este dispositivo?",
     "cancel": "Cancelar",
-    "reset": "Resetear"
+    "reset": "Resetear",
+    "sectionAbout": "Sobre",
+    "appVersion": "Versión de la aplicación",
+    "feedback": "Feedback"
   },
   "grammar": {
     "title": "Gramática",
@@ -139,7 +142,7 @@
   },
   "sentences": {
     "title": "Frases",
-    "search": "Buscar frases...",
+    "search": "Buscar palabra...",
     "noResults": "No se encontraron resultados.",
     "content": {
       "simple_sentences": {

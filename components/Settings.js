@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Share, Alert, Linking, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import Accordion from "./Accordion";
+
+const APP_VERSION = Constants.expoConfig?.version ?? "—";
+const FEEDBACK_EMAIL = "contato@sergiotoledo.com.br";
 
 const APP_URL = "https://play.google.com/store/apps/details?id=com.seralto.tokipona";
 const WEB_URL = "https://learn-toki-pona.vercel.app/";
@@ -180,6 +184,20 @@ const Settings = ({
           </TouchableOpacity>
         </View>
 
+        {/* About */}
+        <SectionLabel label={s.sectionAbout ?? "About"} t={t} fo={fo} />
+        <View style={[styles.extraCard, { backgroundColor: t.surface, borderColor: t.surfaceBorder }]}>
+          <View style={styles.aboutRow}>
+            <Text style={[styles.aboutLabel, { fontSize: 15 + fo, color: t.textMuted }]}>{s.appVersion ?? "App version"}</Text>
+            <Text style={[styles.aboutValue, { fontSize: 15 + fo, color: t.text }]}>{APP_VERSION}</Text>
+          </View>
+          <View style={[styles.rowDivider, { backgroundColor: t.surfaceBorder }]} />
+          <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL(`mailto:${FEEDBACK_EMAIL}`)} activeOpacity={0.7}>
+            <Text style={[styles.aboutLabel, { fontSize: 15 + fo, color: t.textMuted }]}>{s.feedback ?? "Feedback"}</Text>
+            <Text style={[styles.aboutValue, styles.aboutLink, { fontSize: 15 + fo, color: t.link }]}>{FEEDBACK_EMAIL}</Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Toki Pona info */}
         <Accordion title={tp.title ?? "O que é Toki Pona?"} th={t} titleSize={15 + fo} scrollRef={scrollRef}>
           <View style={styles.accordionBody}>
@@ -207,7 +225,6 @@ const Settings = ({
               ))}
             </View>
             <Text style={[styles.accordionLink, { fontSize: 14 + fo, color: t.link }]} onPress={() => Linking.openURL(ab.siteUrl)}>{ab.site}</Text>
-            <Text style={[styles.accordionText, { fontSize: 14 + fo, color: t.textMuted }]}>{ab.email}</Text>
             <TouchableOpacity onPress={() => Linking.openURL(ab.playStoreUrl)} style={styles.playStoreBtn}>
               <Text style={[styles.accordionText, { fontSize: 14 + fo, color: t.textMuted }]}>{ab.myApps}</Text>
               <Image source={require("../assets/play-store-icon.png")} style={styles.playStoreIcon} />
@@ -238,6 +255,10 @@ const styles = StyleSheet.create({
   shareTitle:   { fontSize: 15, fontWeight: "600", marginBottom: 2 },
   shareSubtitle:{ fontSize: 13 },
   trashCircle:   { width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center" },
+  aboutRow:      { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingVertical: 16, paddingHorizontal: 16 },
+  aboutLabel:    { fontSize: 15 },
+  aboutValue:    { fontSize: 15, fontWeight: "600" },
+  aboutLink:     { textDecorationLine: "underline" },
   accordionBody: { paddingHorizontal: 16, paddingVertical: 14, gap: 8 },
   accordionText: { fontSize: 14, lineHeight: 21 },
   accordionLink: { fontSize: 14, fontWeight: "600" },

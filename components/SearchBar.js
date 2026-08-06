@@ -30,6 +30,7 @@ const SearchBar = ({ value, onChangeText, placeholder, fontSize, th, style }) =>
         placeholder={placeholder}
         placeholderTextColor={th.textMuted}
         autoCorrect={false}
+        spellCheck={false}
         autoCapitalize="none"
         autoComplete="off"
         returnKeyType="search"

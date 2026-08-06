@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -31,6 +31,11 @@ const Translator = ({
   const [focused, setFocused] = useState(false);
   const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
 
+  useEffect(() => {
+    const t = setTimeout(() => inputRef?.current?.focus(), 150);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <View style={styles.translator}>
       <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
@@ -45,8 +50,10 @@ const Translator = ({
           placeholder={pageTexts.placeholder}
           placeholderTextColor={th.textDim}
           ref={inputRef}
-          autoFocus={true}
+          autoCorrect={false}
+          spellCheck={false}
           autoCapitalize="none"
+          autoComplete="off"
           value={enteredText}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
