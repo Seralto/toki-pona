@@ -1,27 +1,86 @@
-import React, { useState } from "react";
-import { View, ScrollView, Text, TextInput, StyleSheet } from "react-native";
+import React, { useState, useRef, useCallback } from "react";
+import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity, Animated } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-/**
- * Parses a raw phrase string ("Translation\ntoki pona.\n\n") into
- * { translation, tokiPona } objects.
- */
 function parsePhrase(raw) {
   const lines = raw.split("\n").filter((l) => l.trim().length > 0);
   return { translation: lines[0] ?? "", tokiPona: lines[1] ?? "" };
 }
 
+const AccordionGroup = ({ title, phrases, fontSize, th }) => {
+  const [open, setOpen]       = useState(false);
+  const [bodyHeight, setBodyHeight] = useState(0);
+  const animHeight = useRef(new Animated.Value(0)).current;
+  const animOpacity = useRef(new Animated.Value(0)).current;
+  const measured = useRef(false);
+
+  const onBodyLayout = useCallback((e) => {
+    const h = e.nativeEvent.layout.height;
+    if (!measured.current && h > 0) {
+      measured.current = true;
+      setBodyHeight(h);
+    }
+  }, []);
+
+  const toggle = () => {
+    const toValue = open ? 0 : bodyHeight;
+    Animated.parallel([
+      Animated.timing(animHeight, { toValue, duration: 300, useNativeDriver: false }),
+      Animated.timing(animOpacity, { toValue: open ? 0 : 1, duration: 300, useNativeDriver: false }),
+    ]).start();
+    setOpen((v) => !v);
+  };
+
+  return (
+    <View style={[styles.accordionCard, { backgroundColor: th.surface, borderColor: th.surfaceBorder }]}>
+      {/* Header */}
+      <TouchableOpacity onPress={toggle} style={styles.accordionHeader} activeOpacity={0.7}>
+        <View style={styles.accordionTitleRow}>
+          <Text style={[styles.accordionTitle, { color: th.text }]}>{title}</Text>
+          <Text style={[styles.accordionCount, { color: th.textMuted }]}>({phrases.length})</Text>
+        </View>
+        <Ionicons name={open ? "chevron-up" : "chevron-down"} size={18} color={th.textMuted} />
+      </TouchableOpacity>
+
+      {/* Animated body */}
+      <Animated.View style={{ height: animHeight, overflow: "hidden", opacity: animOpacity }}>
+        {/* Hidden measure pass */}
+        {!measured.current && (
+          <View onLayout={onBodyLayout} style={styles.measureLayer}>
+            {phrases.map((p, idx) => (
+              <View key={idx}>
+                <View style={[styles.separator, { backgroundColor: th.surfaceBorder }]} />
+                <View style={styles.phraseBlock}>
+                  <Text style={[styles.tokiPona, { fontSize, color: th.exampleToki }]}>{p.tokiPona}</Text>
+                  <Text style={[styles.translation, { fontSize: fontSize - 1, color: th.exampleTranslation }]}>{p.translation}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+        {/* Visible content */}
+        {measured.current && phrases.map((p, idx) => (
+          <View key={idx}>
+            <View style={[styles.separator, { backgroundColor: th.surfaceBorder }]} />
+            <View style={styles.phraseBlock}>
+              <Text style={[styles.tokiPona, { fontSize, color: th.exampleToki }]}>{p.tokiPona}</Text>
+              <Text style={[styles.translation, { fontSize: fontSize - 1, color: th.exampleTranslation }]}>{p.translation}</Text>
+            </View>
+          </View>
+        ))}
+      </Animated.View>
+    </View>
+  );
+};
+
 const Sentences = ({ pageTexts, screenWidth, theme }) => {
   const content = pageTexts.content;
   const [query, setQuery] = useState("");
 
-  const titleFontSize = screenWidth < 400 ? 20 : 24;
-  const subtitleFontSize = screenWidth < 400 ? 16 : 18;
   const fontSize = screenWidth < 400 ? 15 : 17;
   const th = theme ?? {};
-
   const q = query.trim().toLowerCase();
 
-  // Build filtered groups
   const groups = Object.keys(content).reduce((acc, key) => {
     const parsed = content[key].phrases.map(parsePhrase);
     const filtered = q
@@ -39,58 +98,70 @@ const Sentences = ({ pageTexts, screenWidth, theme }) => {
 
   return (
     <View style={styles.sentences}>
-      <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
-        {pageTexts.title}
-      </Text>
+      <Text style={[styles.title, { color: th.text }]}>{pageTexts.title}</Text>
 
-      <TextInput
-        style={[styles.searchInput, { fontSize, backgroundColor: th.cardBg, color: th.text }]}
-        value={query}
-        onChangeText={setQuery}
-        placeholder="Search..."
-        placeholderTextColor={th.inactive}
-        autoCorrect={false}
-        autoCapitalize="none"
-        autoComplete="off"
-        returnKeyType="search"
-      />
+      {/* Search */}
+      <View style={[styles.searchBox, { backgroundColor: th.inputBg, borderColor: th.surfaceBorder }]}>
+        <Ionicons name="search-outline" size={18} color={th.textMuted} style={styles.searchIcon} />
+        <TextInput
+          style={[styles.searchInput, { fontSize, color: th.text }]}
+          value={query}
+          onChangeText={setQuery}
+          placeholder={pageTexts.search ?? "Search phrases..."}
+          placeholderTextColor={th.inactive}
+          autoCorrect={false}
+          autoCapitalize="none"
+          autoComplete="off"
+          returnKeyType="search"
+        />
+      </View>
 
-      <ScrollView style={styles.scroll}>
+      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         {groups.length === 0 ? (
-          <Text style={[styles.empty, { fontSize, color: th.inactive }]}>No results found.</Text>
+          <Text style={[styles.empty, { fontSize, color: th.inactive }]}>{pageTexts.noResults ?? "No results found."}</Text>
         ) : (
-          groups.map(({ key, title, phrases }) => (
-            <View style={[styles.sentencesBox, { backgroundColor: th.cardBg }]} key={key}>
-              <Text style={[styles.subtitle, { fontSize: subtitleFontSize, color: th.textMuted }]}>
-                {title}
-              </Text>
-              {phrases.map((p, idx) => (
-                <View key={idx} style={styles.phraseBlock}>
-                  <Text style={[styles.tokiPona, { fontSize, color: th.exampleToki }]}>{p.tokiPona}</Text>
-                  <Text style={[styles.translation, { fontSize: fontSize - 1, color: th.exampleTranslation }]}>
-                    {p.translation}
-                  </Text>
-                </View>
-              ))}
-            </View>
+          groups.map(({ key, title, phrases }, idx) => (
+            <AccordionGroup
+              key={key}
+              title={title}
+              phrases={phrases}
+              fontSize={fontSize}
+              th={th}
+              openByDefault={false}
+            />
           ))
         )}
+        <View style={{ height: 48 }} />
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sentences: { flex: 1, paddingHorizontal: 20 },
-  title: { marginVertical: 10, textAlign: "center" },
-  searchInput: { borderRadius: 10, paddingHorizontal: 14, paddingVertical: 10, marginBottom: 12 },
-  scroll: { flex: 1 },
-  sentencesBox: { padding: 16, borderRadius: 10, marginBottom: 16 },
-  subtitle: { marginBottom: 12, fontWeight: "600" },
-  phraseBlock: { marginBottom: 12 },
-  tokiPona: { fontWeight: "bold" },
-  translation: { marginTop: 2 },
-  empty: { textAlign: "center", marginTop: 40 },
+  sentences:      { flex: 1, paddingHorizontal: 20 },
+  title:          { fontSize: 26, fontWeight: "bold", marginBottom: 16, marginTop: 8 },
+
+  /* Search */
+  searchBox:      { flexDirection: "row", alignItems: "center", borderRadius: 12, borderWidth: 1, paddingHorizontal: 12, marginBottom: 12 },
+  searchIcon:     { marginRight: 8 },
+  searchInput:    { flex: 1, paddingVertical: 12 },
+
+  scroll:         { flex: 1 },
+  empty:          { textAlign: "center", marginTop: 40 },
+
+  /* Accordion */
+  accordionCard:  { borderRadius: 12, borderWidth: 1.5, marginBottom: 10, overflow: "hidden" },
+  accordionHeader:{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, paddingVertical: 14 },
+  accordionTitleRow: { flexDirection: "row", alignItems: "center", gap: 8 },
+  accordionTitle: { fontSize: 15, fontWeight: "700" },
+  accordionCount: { fontSize: 14 },
+
+  /* Phrases */
+  measureLayer:   { position: "absolute", opacity: 0, pointerEvents: "none" },
+  separator:      { height: 1 },
+  phraseBlock:    { paddingHorizontal: 16, paddingVertical: 14 },
+  tokiPona:       { fontWeight: "bold", marginBottom: 4 },
+  translation:    { },
 });
 
 export default Sentences;

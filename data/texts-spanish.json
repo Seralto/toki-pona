@@ -123,6 +123,8 @@
   },
   "sentences": {
     "title": "Frases",
+    "search": "Buscar frases...",
+    "noResults": "No se encontraron resultados.",
     "content": {
       "simple_sentences": {
         "title": "Oraciones simples",

@@ -123,6 +123,8 @@
   },
   "sentences": {
     "title": "Sentences",
+    "search": "Search phrases...",
+    "noResults": "No results found.",
     "content": {
       "simple_sentences": {
         "title": "Simple Sentences",
