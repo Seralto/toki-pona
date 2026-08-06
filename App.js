@@ -174,8 +174,8 @@ export default class App extends Component {
     this.setState({ isModalVisible: state });
   }
 
-  changeScore() {
-    const newScore = parseInt(this.state.score) + 10;
+  changeScore(points = 10) {
+    const newScore = parseInt(this.state.score) + points;
     this.setState({ score: newScore });
     AsyncStorage.setItem("@TokiPona:score", newScore.toString());
   }
@@ -282,7 +282,7 @@ export default class App extends Component {
               score={this.state.score}
               screenWidth={this.state.screenWidth}
               theme={theme}
-              onChangeScore={() => this.changeScore()}
+              onChangeScore={(points) => this.changeScore(points)}
               language={this.state.language}
             />
           )}

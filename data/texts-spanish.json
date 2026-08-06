@@ -32,7 +32,17 @@
   },
   "quiz": {
     "title": "Quiz",
-    "next": "Siguiente"
+    "score": "Puntuación",
+    "next": "Siguiente",
+    "wordPrompt": "¿Qué significa esto?",
+    "translationPrompt": "¿Cuál palabra significa…",
+    "modeRandom": "Aleatorio",
+    "modeWord": "Palabra → Traducción",
+    "modeDef": "Traducción → Palabra",
+    "modeGlyphWord": "sitelen pona → Palabra",
+    "modeWordGlyph": "Palabra → sitelen pona",
+    "glyphPrompt": "¿Qué palabra es este glifo?",
+    "wordGlyphPrompt": "Elige el sitelen pona para…"
   },
   "settings": {
     "title": "Configuraciones",
