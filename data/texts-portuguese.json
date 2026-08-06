@@ -30,6 +30,13 @@
       "number": "número"
     }
   },
+  "dictionary": {
+    "search": "Buscar palavras...",
+    "noResults": "Nenhum resultado encontrado.",
+    "wordCount": "palavras",
+    "showFavorites": "Favoritos",
+    "showAll": "Mostrar Todos"
+  },
   "quiz": {
     "title": "Quiz",
     "score": "Pontuação",

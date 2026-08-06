@@ -30,6 +30,13 @@
       "number": "number"
     }
   },
+  "dictionary": {
+    "search": "Search words...",
+    "noResults": "No results found.",
+    "wordCount": "words",
+    "showFavorites": "Favorites",
+    "showAll": "Show All"
+  },
   "quiz": {
     "title": "Quiz",
     "score": "Score",
