@@ -1,36 +1,69 @@
 import React from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
+import Accordion, { accordionShared } from "./Accordion";
 
-/**
- * Renders a grammar content block.
- * Lines containing " = " are treated as examples and split into two lines:
- *   - Toki Pona phrase (bold, primary color)
- *   - Translation (lighter color, below)
- * Other lines are rendered as plain text paragraphs.
- */
-function GrammarContent({ text, fontSize, theme }) {
-  const lines = text.split("\n").filter((l) => l.trim().length > 0);
-  const th = theme ?? {};
+/** One example line: "toki pona phrase = Translation" */
+function ExampleLine({ line, fontSize, th }) {
+  const eqIdx = line.indexOf(" = ");
+  const tp          = line.slice(0, eqIdx).trim();
+  const translation = line.slice(eqIdx + 3).trim();
+  return (
+    <View style={styles.exampleRow}>
+      <Text style={[styles.exampleToki, { fontSize, color: th.exampleToki }]}>{tp}</Text>
+      <Text style={{ fontSize: fontSize - 1, color: th.exampleTranslation }}>{translation}</Text>
+    </View>
+  );
+}
+
+/** Mirrors PWA SectionContent: splits on \n\n, groups examples into cards */
+function SectionContent({ text, fontSize, th }) {
+  const paragraphs = text.split("\n\n").filter(Boolean);
 
   return (
-    <View>
-      {lines.map((line, idx) => {
-        const eqIdx = line.indexOf(" = ");
-        if (eqIdx !== -1) {
-          const tp = line.slice(0, eqIdx).trim();
-          const translation = line.slice(eqIdx + 3).trim();
+    <View style={styles.sectionContent}>
+      {paragraphs.map((paragraph, pi) => {
+        const lines = paragraph.split("\n").filter((l) => l.trim().length > 0);
+        if (lines.length === 0) return null;
+
+        const allExamples = lines.every((l) => l.includes(" = "));
+        const hasExample  = lines.some((l) => l.includes(" = "));
+
+        // All lines are examples → grouped card
+        if (allExamples) {
           return (
-            <View key={idx} style={styles.exampleBlock}>
-              <Text style={[styles.exampleToki, { fontSize, color: th.exampleToki }]}>{tp}</Text>
-              <Text style={{ fontSize: fontSize - 1, color: th.exampleTranslation }}>
-                {translation}
-              </Text>
+            <View key={pi} style={[styles.exampleCard, { backgroundColor: th.cardBg }]}>
+              {lines.map((line, li) => (
+                <ExampleLine key={li} line={line} fontSize={fontSize} th={th} />
+              ))}
             </View>
           );
         }
+
+        // Mixed paragraph (text + examples) → line by line
+        if (hasExample) {
+          return (
+            <View key={pi} style={styles.mixedParagraph}>
+              {lines.map((line, li) =>
+                line.includes(" = ") ? (
+                  <View key={li} style={[styles.exampleCard, { backgroundColor: th.cardBg }]}>
+                    <ExampleLine line={line} fontSize={fontSize} th={th} />
+                  </View>
+                ) : (
+                  <Text key={li} style={[styles.contentText, { fontSize, color: th.text }]}>{line}</Text>
+                )
+              )}
+            </View>
+          );
+        }
+
+        // Pure text paragraph — highlight (parenthesised) spans
         return (
-          <Text key={idx} style={[styles.contentText, { fontSize, color: th.textMuted }]}>
-            {line}
+          <Text key={pi} style={[styles.contentText, { fontSize, color: th.text }]}>
+            {lines.join(" ").split(/(\([^)]+\))/).map((part, i) =>
+              /^\([^)]+\)$/.test(part) ? (
+                <Text key={i} style={[styles.highlight, { color: th.accent }]}>{part}</Text>
+              ) : part
+            )}
           </Text>
         );
       })}
@@ -41,39 +74,35 @@ function GrammarContent({ text, fontSize, theme }) {
 const Grammar = ({ pageTexts, screenWidth, theme }) => {
   const content = pageTexts.content;
   const th = theme ?? {};
-
-  const titleFontSize = screenWidth < 400 ? 20 : 24;
-  const subtitleFontSize = screenWidth < 400 ? 18 : 22;
-  const fontSize = screenWidth < 400 ? 15 : 18;
+  const fontSize = screenWidth < 400 ? 15 : 17;
 
   return (
     <View style={styles.grammar}>
-      <Text style={[styles.title, { fontSize: titleFontSize, color: th.textMuted }]}>
-        {pageTexts.title}
-      </Text>
+      <Text style={[styles.title, { color: th.text }]}>{pageTexts.title}</Text>
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {Object.keys(content).map((key) => (
-          <View style={[styles.grammarBox, { backgroundColor: th.cardBg }]} key={key}>
-            <Text style={[styles.subtitle, { fontSize: subtitleFontSize, color: th.textMuted }]}>
-              {content[key].title}
-            </Text>
-            <GrammarContent text={content[key].content} fontSize={fontSize} theme={th} />
-          </View>
+          <Accordion key={key} title={content[key].title} th={th}>
+            <View style={[accordionShared.separator, { backgroundColor: th.surfaceBorder }]} />
+            <SectionContent text={content[key].content} fontSize={fontSize} th={th} />
+          </Accordion>
         ))}
+        <View style={{ height: 48 }} />
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  grammar: { alignItems: "center", paddingHorizontal: 20 },
-  title: { marginVertical: 10, textAlign: "center" },
-  grammarBox: { padding: 20, borderRadius: 10, marginBottom: 15 },
-  subtitle: { marginBottom: 10 },
-  contentText: { marginBottom: 4 },
-  exampleBlock: { marginBottom: 10 },
-  exampleToki: { fontWeight: "bold", fontFamily: "monospace" },
+  grammar:         { flex: 1, paddingHorizontal: 20 },
+  title:           { fontSize: 26, fontWeight: "bold", marginBottom: 16, marginTop: 8 },
+  sectionContent:  { paddingHorizontal: 16, paddingVertical: 14, gap: 10 },
+  contentText:     { lineHeight: 22 },
+  mixedParagraph:  { gap: 8 },
+  exampleCard:     { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 10, gap: 10 },
+  exampleRow:      { gap: 2 },
+  exampleToki:     { fontWeight: "bold", fontFamily: "monospace" },
+  highlight:       { fontWeight: "600", fontFamily: "monospace" },
 });
 
 export default Grammar;
