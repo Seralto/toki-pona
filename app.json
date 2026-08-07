@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -34,7 +36,12 @@
         "projectId": "3a6ab407-71bb-4c49-a8b5-571735259005"
       }
     },
-    "assets": ["./assets/fonts/"],
-    "plugins": ["expo-font"]
+    "assets": [
+      "./assets/fonts/"
+    ],
+    "plugins": [
+      "expo-font",
+      "expo-localization"
+    ]
   }
 }

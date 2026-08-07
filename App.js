@@ -26,6 +26,18 @@ const texts = {
   spanish: require("./data/texts-spanish.json"),
 };
 
+import * as Localization from "expo-localization";
+
+const LOCALE_TO_LANGUAGE = {
+  pt: "portuguese",
+  es: "spanish",
+};
+
+function getDeviceLanguage() {
+  const locale = Localization.getLocales?.()?.[0]?.languageCode ?? "";
+  return LOCALE_TO_LANGUAGE[locale] ?? "english";
+}
+
 const DEFAULT_LANGUAGE = "english";
 const DEFAULT_PAGE = "home";
 const DEFAULT_THEME = "dark";
@@ -66,7 +78,7 @@ export default class App extends Component {
 
   getDefaultLanguage() {
     AsyncStorage.getItem("@TokiPona:defaultLanguage").then((language) => {
-      const currentLanguage = language ? language : DEFAULT_LANGUAGE;
+      const currentLanguage = language ?? getDeviceLanguage();
       this.changeLanguage(currentLanguage);
       const texts = this.loadText(currentLanguage);
       this.setState({ appTexts: texts });
