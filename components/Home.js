@@ -9,6 +9,7 @@ import {
 import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SCREENSHOT_MODE, FIXED_WORD, FIXED_SCORE, FIXED_STREAK } from "../automation/screenshotConfig";
 
 const SCORE_KEY  = "@TokiPona:score";
 const STREAK_KEY = "@TokiPona:streak";
@@ -42,6 +43,11 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
   });
 
   useEffect(() => {
+    if (SCREENSHOT_MODE) {
+      setScore(FIXED_SCORE);
+      setStreak(FIXED_STREAK);
+      return;
+    }
     AsyncStorage.getItem(SCORE_KEY).then((v)  => setScore(v ? parseInt(v, 10) : 0));
     AsyncStorage.getItem(STREAK_KEY).then((v) => setStreak(v ? parseInt(v, 10) : 0));
   }, []);
@@ -50,7 +56,7 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
   const t = pageTexts?.home ?? {};
   const wordClasses = t.wordClasses ?? {};
 
-  const word         = dictionary ? getWordOfTheDay(dictionary) : null;
+  const word         = SCREENSHOT_MODE ? FIXED_WORD : (dictionary ? getWordOfTheDay(dictionary) : null);
   const definition   = word ? dictionary[word] : null;
   const wordClassKey = word ? (WORD_CLASS_KEYS[word] ?? "noun") : null;
   const wordClass    = wordClassKey ? (wordClasses[wordClassKey] ?? wordClassKey) : null;

@@ -1,0 +1,8 @@
+appId: com.seralto.tokipona
+---
+# Quiz screen: active question.
+# In SCREENSHOT_MODE the question is always "toki" with fixed options.
+- tapOn:
+    id: "nav-quiz"
+- waitForAnimationToEnd
+- takeScreenshot: 06-quiz

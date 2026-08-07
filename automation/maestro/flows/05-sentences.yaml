@@ -1,0 +1,7 @@
+appId: com.seralto.tokipona
+---
+# Sentences screen: example phrases.
+- tapOn:
+    id: "nav-sentences"
+- waitForAnimationToEnd
+- takeScreenshot: 05-sentences

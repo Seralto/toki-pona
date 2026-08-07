@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaVi
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import themes from "./themes";
+import { SCREENSHOT_MODE, FIXED_SCORE } from "./automation/screenshotConfig";
 
 import Home from "./components/Home";
 import Translator from "./components/Translator";
@@ -52,13 +53,15 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    const init = () => {
       this.getDefaultLanguage();
       this.getDictionary();
       this.getScore();
       this.getTheme();
       this.getFontSizeId();
-    }, 500);
+    };
+    // Remove artificial delay in screenshot mode for faster, reliable captures.
+    SCREENSHOT_MODE ? init() : setTimeout(init, 500);
   }
 
   getDefaultLanguage() {
@@ -72,6 +75,10 @@ export default class App extends Component {
   }
 
   getScore() {
+    if (SCREENSHOT_MODE) {
+      this.setState({ score: FIXED_SCORE, isLoading: false });
+      return;
+    }
     AsyncStorage.getItem("@TokiPona:score").then((totalScore) => {
       this.setState({ score: totalScore ? totalScore.toString() : "0", isLoading: false });
     });
@@ -200,6 +207,7 @@ export default class App extends Component {
             <TouchableOpacity
               onPress={() => this.changePage("home")}
               accessibilityLabel="Home"
+              testID="nav-home"
               style={styles.headerButton}
             >
               <Ionicons
@@ -211,6 +219,7 @@ export default class App extends Component {
             <TouchableOpacity
               onPress={() => this.changePage("settings")}
               accessibilityLabel="Settings"
+              testID="nav-settings"
               style={styles.headerButton}
             >
               <Ionicons

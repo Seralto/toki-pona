@@ -1,0 +1,12 @@
+appId: com.seralto.tokipona
+---
+# Sets the app language to Spanish (Español).
+- tapOn:
+    id: "nav-settings"
+- waitForAnimationToEnd
+- tapOn:
+    text: "Español"
+- waitForAnimationToEnd
+- tapOn:
+    id: "nav-home"
+- waitForAnimationToEnd

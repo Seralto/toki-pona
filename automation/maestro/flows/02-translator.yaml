@@ -1,0 +1,12 @@
+appId: com.seralto.tokipona
+---
+# Translator screen with sample Toki Pona words typed in.
+- tapOn:
+    id: "nav-translator"
+- waitForAnimationToEnd
+- tapOn:
+    id: "input-translator"
+- clearText
+- inputText: "toki pona kili"
+- waitForAnimationToEnd
+- takeScreenshot: 02-translator

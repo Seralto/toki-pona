@@ -1,0 +1,13 @@
+appId: com.seralto.tokipona
+---
+# Sets the app language to Portuguese (Português).
+# Language buttons always show the same text regardless of current locale.
+- tapOn:
+    id: "nav-settings"
+- waitForAnimationToEnd
+- tapOn:
+    text: "Português"
+- waitForAnimationToEnd
+- tapOn:
+    id: "nav-home"
+- waitForAnimationToEnd

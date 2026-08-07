@@ -1,0 +1,8 @@
+appId: com.seralto.tokipona
+---
+# Home screen: word of the day + quiz score.
+# In SCREENSHOT_MODE the word is always "pona" and score is 1250.
+- tapOn:
+    id: "nav-home"
+- waitForAnimationToEnd
+- takeScreenshot: 01-home

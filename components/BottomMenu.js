@@ -25,6 +25,7 @@ const BottomMenu = ({ pageTexts, currentPage, theme, onChangePage }) => {
             style={styles.navItem}
             onPress={() => onChangePage(key)}
             accessibilityLabel={label}
+            testID={`nav-${key}`}
           >
             <Ionicons
               name={isActive ? iconActive : icon}

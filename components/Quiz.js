@@ -3,6 +3,7 @@ import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable 
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { SCREENSHOT_MODE, FIXED_QUIZ_WORD, FIXED_QUIZ_OPTIONS } from "../automation/screenshotConfig";
 
 const NUM_OPTIONS = 4;
 const LABELS = ["A", "B", "C", "D"];
@@ -59,6 +60,15 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
   const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
   const newWordsSet = (currentMode = mode) => {
+    if (SCREENSHOT_MODE) {
+      // Fixed, deterministic question — always "word → translation" mode.
+      setRandomWord(FIXED_QUIZ_WORD);
+      setOptions(FIXED_QUIZ_OPTIONS);
+      setGlyphMode(null);
+      setReversed(false);
+      return;
+    }
+
     const word = getRandomWord();
     setRandomWord(word);
     const opts = [word];
@@ -68,7 +78,6 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
     }
     setOptions(shuffle(opts));
 
-    // Determine effective sub-mode
     const SUB_MODES = ["word", "def", "glyph-word", "word-glyph"];
     const effective = currentMode === "random"
       ? SUB_MODES[Math.floor(Math.random() * SUB_MODES.length)]

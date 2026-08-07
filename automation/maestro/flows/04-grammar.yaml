@@ -1,0 +1,7 @@
+appId: com.seralto.tokipona
+---
+# Grammar screen: lesson content with collapsible sections.
+- tapOn:
+    id: "nav-grammar"
+- waitForAnimationToEnd
+- takeScreenshot: 04-grammar

@@ -50,6 +50,7 @@ const Translator = ({
           placeholder={pageTexts.placeholder}
           placeholderTextColor={th.textDim}
           ref={inputRef}
+          testID="input-translator"
           autoCorrect={false}
           spellCheck={false}
           autoCapitalize="none"

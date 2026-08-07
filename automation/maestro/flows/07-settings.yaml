@@ -1,0 +1,7 @@
+appId: com.seralto.tokipona
+---
+# Settings screen: language, appearance, font size options.
+- tapOn:
+    id: "nav-settings"
+- waitForAnimationToEnd
+- takeScreenshot: 07-settings

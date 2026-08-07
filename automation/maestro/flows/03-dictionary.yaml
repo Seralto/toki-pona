@@ -1,0 +1,7 @@
+appId: com.seralto.tokipona
+---
+# Dictionary screen: full scrollable word list.
+- tapOn:
+    id: "nav-dictionary"
+- waitForAnimationToEnd
+- takeScreenshot: 03-dictionary
