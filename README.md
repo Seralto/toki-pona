@@ -71,11 +71,16 @@ Offset `fo = fontSizeId * 2` is added to base font sizes.
 ```
 1. Develop and test locally (npm run android)
 2. Increment version/versionCode in app.json
-3. eas build --profile preview --platform android --auto-submit
-4. Wait for the build and automatic submission to Internal Testing
+3. eas build --profile production --platform android
+4. eas submit --platform android --profile production
 5. Install from the Play Store (Internal Testing tab) and validate
 6. If OK → Play Console → promote the release to Production
 7. If bugs found → fix, go back to step 2
+```
+
+Steps 3 and 4 can be combined with `--auto-submit`:
+```bash
+eas build --profile production --platform android --auto-submit
 ```
 
 > **Important:** increment `versionCode` in `app.json` on every cycle —
@@ -86,8 +91,8 @@ Offset `fo = fontSizeId * 2` is added to base font sizes.
 | Profile | Build type | Submit destination |
 |---|---|---|
 | `development` | Dev client (custom Expo Go) | — |
-| `preview` | Standard release | Internal Testing (automatic with `--auto-submit`) |
-| `production` | Optimized release | Manual upload in Play Console |
+| `preview` | APK for direct distribution (no Play Store) | — |
+| `production` | AAB for Play Store | Internal Testing (automatic with `--auto-submit`) |
 
 Promoting from Internal Testing → Production is done directly in Play Console with no rebuild — the exact AAB that was tested goes to production.
 

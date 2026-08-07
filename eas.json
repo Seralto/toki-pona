@@ -13,7 +13,7 @@
     "production": {}
   },
   "submit": {
-    "preview": {
+    "production": {
       "android": {
         "track": "internal"
       }
