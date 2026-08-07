@@ -6,7 +6,9 @@ appId: com.seralto.tokipona
 - waitForAnimationToEnd
 - tapOn:
     id: "input-translator"
-- clearText
-- inputText: "toki pona kili"
+- eraseText: 50
+- inputText: "mi moku e telo"
+- waitForAnimationToEnd
+- pressKey: Escape
 - waitForAnimationToEnd
 - takeScreenshot: 02-translator

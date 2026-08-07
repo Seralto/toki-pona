@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import themes from "./themes";
@@ -199,15 +199,16 @@ export default class App extends Component {
         />
       </View>
     ) : (
-      <SafeAreaView style={[styles.app, { backgroundColor: theme.background }]}>
+      <SafeAreaView style={[styles.app, { backgroundColor: theme.background, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 }]}>
         {/* Top header */}
         <View style={[styles.header, { backgroundColor: theme.header, borderBottomColor: theme.headerBorder }]}>
           <Text style={[styles.headerTitle, { color: theme.text }]}>Toki Pona</Text>
-          <View style={styles.headerRight}>
+          <View style={styles.headerRight} importantForAccessibility="yes">
             <TouchableOpacity
               onPress={() => this.changePage("home")}
               accessibilityLabel="Home"
               testID="nav-home"
+              accessible={true}
               style={styles.headerButton}
             >
               <Ionicons
@@ -220,6 +221,7 @@ export default class App extends Component {
               onPress={() => this.changePage("settings")}
               accessibilityLabel="Settings"
               testID="nav-settings"
+              accessible={true}
               style={styles.headerButton}
             >
               <Ionicons
