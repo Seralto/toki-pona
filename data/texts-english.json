@@ -32,7 +32,10 @@
     "noResults": "No results found.",
     "wordCount": "words",
     "showFavorites": "Favorites",
-    "showAll": "Show All"
+    "showAll": "Show All",
+    "examples": "Usage examples",
+    "noExamples": "No examples available",
+    "close": "Close"
   },
   "quiz": {
     "title": "Quiz",

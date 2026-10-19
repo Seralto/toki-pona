@@ -32,7 +32,10 @@
     "noResults": "No se encontraron resultados.",
     "wordCount": "palabras",
     "showFavorites": "Favoritos",
-    "showAll": "Mostrar Todo"
+    "showAll": "Mostrar Todo",
+    "examples": "Ejemplos de uso",
+    "noExamples": "No hay ejemplos disponibles",
+    "close": "Cerrar"
   },
   "quiz": {
     "title": "Quiz",
