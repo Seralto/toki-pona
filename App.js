@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, Platform } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import themes from "./themes";
@@ -42,7 +43,7 @@ const DEFAULT_LANGUAGE = "english";
 const DEFAULT_PAGE = "home";
 const DEFAULT_THEME = "dark";
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -340,6 +341,14 @@ export default class App extends Component {
       </SafeAreaView>
     );
   }
+}
+
+export default function AppWithSafeArea() {
+  return (
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
+  );
 }
 
 const styles = StyleSheet.create({
