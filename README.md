@@ -3,7 +3,7 @@
 A free app for learning the Toki Pona language. Built with React Native + Expo (Android).
 
 - **Play Store:** [com.seralto.tokipona](https://play.google.com/store/apps/details?id=com.seralto.tokipona)
-- **Current version:** `2.1.0` (versionCode 26)
+- **Current version:** `2.1.1` (versionCode 27)
 
 ---
 
@@ -51,16 +51,16 @@ All components consume color tokens via `th = themes[themeId]`.
 Never use hardcoded colors — always use `th.background`, `th.text`, `th.accent`, etc.
 
 ### Fonts
-- `sitelen-pona` → `linja-pona` font (loaded via `useFonts` in `Translator.js`)
-- `useFonts` must be called **only once** in the tree (not per child component)
+- `sitelen-pona` → `linja-pona` font, loaded with the `useGlyphFont()` hook in `utils/typography.js`
+- Glyph for variant words (e.g. `ale/ali`) comes from `glyphOf()` in `utils/glyph.js`
 
 ### Internationalization
 Texts in `data/texts-{portuguese,english,spanish}.json`.
 Thousands separator in scores: `.` for PT/ES, `,` for EN.
 
 ### Font scaling
-`fontSizeId` (0–2) is stored in `AsyncStorage` and passed as a prop.
-Offset `fo = fontSizeId * 2` is added to base font sizes.
+`fontSizeId` (`normal` | `large`) is stored in `AsyncStorage` and passed as a prop.
+Use `fontOffset()` / `bodyFontSize()` from `utils/typography.js` to size text.
 
 ---
 
