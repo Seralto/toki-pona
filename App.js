@@ -147,7 +147,7 @@ class App extends Component {
   }
 
   sanitizeInput(input) {
-    return input.replace(/[^a-z\s]/g, "");
+    return input.toLowerCase().replace(/[^a-z\s]/g, "");
   }
 
   loadText(language) {
