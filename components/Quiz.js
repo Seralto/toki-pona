@@ -4,6 +4,7 @@ import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { glyphOf } from "../utils/glyph";
+import { recordPlayedToday } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_QUIZ_WORD, FIXED_QUIZ_OPTIONS } from "../automation/screenshotConfig";
 
 const NUM_OPTIONS = 4;
@@ -104,6 +105,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
     setOptionsDisabled(true);
     setUserAnswer(answer);
     setRevealed(true);
+    if (!SCREENSHOT_MODE) recordPlayedToday();
 
     if (answer === randomWord) {
       playSound("right");

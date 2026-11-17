@@ -9,11 +9,10 @@ import {
 import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { STREAK_KEY, DAY_KEY, localDayNumber } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_WORD, FIXED_SCORE, FIXED_STREAK } from "../automation/screenshotConfig";
 
 const SCORE_KEY  = "@TokiPona:score";
-const STREAK_KEY = "@TokiPona:streak";
-const DAY_KEY    = "@TokiPona:lastPlayedDay";
 
 const WORD_CLASS_KEYS = {
   a: "particle", e: "particle", en: "conjunction", la: "particle",
@@ -27,12 +26,7 @@ const INTL_LOCALE = { english: "en-US", portuguese: "pt-BR", spanish: "es-ES" };
 
 function getWordOfTheDay(dictionary) {
   const words = Object.keys(dictionary).filter((w) => !w.includes("/")).sort();
-  const day = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-  return words[day % words.length];
-}
-
-function todayStr() {
-  return new Date().toISOString().slice(0, 10);
+  return words[localDayNumber() % words.length];
 }
 
 export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth, fontSizeId, theme }) {
@@ -49,7 +43,11 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
       return;
     }
     AsyncStorage.getItem(SCORE_KEY).then((v)  => setScore(v ? parseInt(v, 10) : 0));
-    AsyncStorage.getItem(STREAK_KEY).then((v) => setStreak(v ? parseInt(v, 10) : 0));
+    AsyncStorage.multiGet([STREAK_KEY, DAY_KEY]).then(([[, streakValue], [, dayValue]]) => {
+      const lastDay = parseInt(dayValue, 10);
+      const isActive = lastDay >= localDayNumber() - 1;
+      setStreak(isActive ? parseInt(streakValue, 10) || 0 : 0);
+    });
   }, []);
 
   const fo = fontSizeId === "large" ? 4 : 0;
