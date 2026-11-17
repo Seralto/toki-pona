@@ -93,7 +93,8 @@ class App extends Component {
       return;
     }
     AsyncStorage.getItem("@TokiPona:score").then((totalScore) => {
-      this.setState({ score: totalScore ? totalScore.toString() : "0", isLoading: false });
+      const parsed = parseInt(totalScore, 10);
+      this.setState({ score: Number.isNaN(parsed) ? 0 : parsed, isLoading: false });
     });
   }
 
@@ -184,7 +185,7 @@ class App extends Component {
   }
 
   changeScore(points = 10) {
-    const newScore = parseInt(this.state.score) + points;
+    const newScore = this.state.score + points;
     this.setState({ score: newScore });
     AsyncStorage.setItem("@TokiPona:score", newScore.toString());
   }
