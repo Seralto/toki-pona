@@ -2,7 +2,7 @@
   "expo": {
     "name": "Toki Pona",
     "slug": "TokiPona",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 27,
+      "versionCode": 28,
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -38,7 +38,16 @@
     },
     "plugins": [
       "expo-font",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-audio",
+        {
+          "recordAudioAndroid": false,
+          "enableBackgroundRecording": false,
+          "enableBackgroundPlayback": false
+        }
+      ],
+      "expo-asset"
     ]
   }
 }

@@ -3,7 +3,7 @@
 A free app for learning the Toki Pona language. Built with React Native + Expo (Android).
 
 - **Play Store:** [com.seralto.tokipona](https://play.google.com/store/apps/details?id=com.seralto.tokipona)
-- **Current version:** `2.1.1` (versionCode 27)
+- **Current version:** `2.1.2` (versionCode 28)
 
 ---
 
