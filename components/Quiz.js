@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
@@ -23,7 +23,6 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
   const [randomWord, setRandomWord] = useState("");
   const [options, setOptions]       = useState([]);
   const [revealed, setRevealed]     = useState(false);
-  const [startNewGame, setStartNewGame] = useState(true);
   const [optionsDisabled, setOptionsDisabled] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [showNext, setShowNext]     = useState(false);
@@ -33,6 +32,8 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
   const [mode, setMode]             = useState("random");
   const [showModeMenu, setShowModeMenu] = useState(false);
   const [glyphMode, setGlyphMode]   = useState(null); // null | "glyph-word" | "word-glyph"
+
+  const advanceTimer = useRef(null);
 
   const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
 
@@ -91,7 +92,15 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
     setReversed(effective === "def");
   };
 
+  const clearAdvanceTimer = () => clearTimeout(advanceTimer.current);
+
+  useEffect(() => {
+    newWordsSet();
+    return clearAdvanceTimer;
+  }, []);
+
   const changeMode = (m) => {
+    clearAdvanceTimer();
     setMode(m);
     setShowModeMenu(false);
     setRevealed(false);
@@ -114,11 +123,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
       const points = 10 * multiplier;
       onChangeScore(points);
       setStreak(newStreak);
-      setTimeout(() => {
-        setRevealed(false);
-        setStartNewGame(true);
-        setOptionsDisabled(false);
-      }, 1500);
+      advanceTimer.current = setTimeout(nextQuestion, 1500);
     } else {
       playSound("wrong");
       setStreak(0);
@@ -129,15 +134,9 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
   const nextQuestion = () => {
     setRevealed(false);
     setShowNext(false);
-    setStartNewGame(true);
     setOptionsDisabled(false);
-  };
-
-  if (startNewGame) {
-    setShowNext(false);
-    setStartNewGame(false);
     newWordsSet();
-  }
+  };
 
   /* ── Option colours ─────────────────────────────────────────── */
   const optionColors = (key) => {
