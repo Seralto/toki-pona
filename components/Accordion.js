@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -16,16 +16,17 @@ const Accordion = ({ title, badge, th, children, titleSize, scrollRef }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const animHeight  = useRef(new Animated.Value(0)).current;
   const animOpacity = useRef(new Animated.Value(0)).current;
-  const measured    = useRef(false);
+  const openRef     = useRef(false);
   const yOffset     = useRef(0);
 
   const onBodyLayout = useCallback((e) => {
-    const h = e.nativeEvent.layout.height;
-    if (!measured.current && h > 0) {
-      measured.current = true;
-      setBodyHeight(h);
-    }
+    setBodyHeight(e.nativeEvent.layout.height);
   }, []);
+
+  // Keep an open accordion in sync when its content height changes or is measured late.
+  useEffect(() => {
+    if (openRef.current) animHeight.setValue(bodyHeight);
+  }, [bodyHeight]);
 
   const toggle = () => {
     const opening = !open;
@@ -34,6 +35,7 @@ const Accordion = ({ title, badge, th, children, titleSize, scrollRef }) => {
       Animated.timing(animHeight,  { toValue,                    duration: 300, useNativeDriver: false }),
       Animated.timing(animOpacity, { toValue: opening ? 1 : 0,  duration: 300, useNativeDriver: false }),
     ]).start();
+    openRef.current = opening;
     setOpen(opening);
 
     if (opening && scrollRef?.current) {
@@ -61,14 +63,9 @@ const Accordion = ({ title, badge, th, children, titleSize, scrollRef }) => {
 
       {/* Animated body */}
       <Animated.View style={{ height: animHeight, overflow: "hidden", opacity: animOpacity }}>
-        {/* Hidden measure pass */}
-        {!measured.current && (
-          <View onLayout={onBodyLayout} style={styles.measureLayer}>
-            {children}
-          </View>
-        )}
-        {/* Visible content */}
-        {measured.current && children}
+        <View onLayout={onBodyLayout} style={styles.body}>
+          {children}
+        </View>
       </Animated.View>
     </View>
   );
@@ -84,7 +81,7 @@ const styles = StyleSheet.create({
   titleRow:    { flexDirection: "row", alignItems: "center", gap: 8 },
   title:       { fontSize: 15, fontWeight: "700" },
   badge:       { fontSize: 14 },
-  measureLayer:{ position: "absolute", opacity: 0, pointerEvents: "none" },
+  body:        { position: "absolute", left: 0, right: 0 },
 });
 
 export default Accordion;
