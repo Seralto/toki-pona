@@ -3,13 +3,13 @@ import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable 
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { INTL_LOCALE } from "../utils/locale";
 import { glyphOf } from "../utils/glyph";
 import { recordPlayedToday } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_QUIZ_WORD, FIXED_QUIZ_OPTIONS } from "../automation/screenshotConfig";
 
 const NUM_OPTIONS = 4;
 const LABELS = ["A", "B", "C", "D"];
-const INTL_LOCALE = { english: "en-US", portuguese: "pt-BR", spanish: "es-ES" };
 const MODES = ["random", "word", "def", "glyph-word", "word-glyph"];
 
 const getModeLabel = (m, t) =>

@@ -9,6 +9,7 @@ import {
 import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { INTL_LOCALE } from "../utils/locale";
 import { STREAK_KEY, DAY_KEY, localDayNumber } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_WORD, FIXED_SCORE, FIXED_STREAK } from "../automation/screenshotConfig";
 
@@ -21,8 +22,6 @@ const WORD_CLASS_KEYS = {
   wan: "number", tu: "number", ale: "number", ali: "number",
   mute: "number", luka: "number",
 };
-
-const INTL_LOCALE = { english: "en-US", portuguese: "pt-BR", spanish: "es-ES" };
 
 function getWordOfTheDay(dictionary) {
   const words = Object.keys(dictionary).filter((w) => !w.includes("/")).sort();
