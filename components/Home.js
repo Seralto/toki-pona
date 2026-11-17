@@ -55,7 +55,7 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
 
   const word         = SCREENSHOT_MODE ? FIXED_WORD : (dictionary ? getWordOfTheDay(dictionary) : null);
   const definition   = word ? dictionary[word] : null;
-  const wordClassKey = word ? (WORD_CLASS_KEYS[word] ?? "noun") : null;
+  const wordClassKey = word ? (WORD_CLASS_KEYS[word] ?? null) : null;
   const wordClass    = wordClassKey ? (wordClasses[wordClassKey] ?? wordClassKey) : null;
   const intlLocale   = INTL_LOCALE[language] ?? "en-US";
   const formattedScore = score !== null ? score.toLocaleString(intlLocale) : "—";
@@ -79,9 +79,11 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
             <View style={styles.wotdLeft}>
               <Text style={[styles.wotdWord, { fontSize: 40 + fo, color: th.text }]}>{word}</Text>
               <Text style={[styles.wotdDef, { fontSize: 16 + fo, color: th.textMuted }]}>{definition}</Text>
-              <View style={[styles.badge, { backgroundColor: th.surfaceBorder }]}>
-                <Text style={[styles.badgeText, { fontSize: 12 + fo, color: th.textMuted }]}>{wordClass}</Text>
-              </View>
+              {wordClass && (
+                <View style={[styles.badge, { backgroundColor: th.surfaceBorder }]}>
+                  <Text style={[styles.badgeText, { fontSize: 12 + fo, color: th.textMuted }]}>{wordClass}</Text>
+                </View>
+              )}
             </View>
             {fontsLoaded && <Text style={[styles.glyph, { color: th.accentBg }]}>{word}</Text>}
           </View>
