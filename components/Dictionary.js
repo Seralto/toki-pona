@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Modal, Pressable } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Modal, Pressable, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -153,17 +153,18 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) =
         transparent
         visible={selectedEntry !== null}
         animationType="slide"
+        statusBarTranslucent={Platform.OS === "android"}
+        navigationBarTranslucent={Platform.OS === "android"}
         onRequestClose={() => setSelectedEntry(null)}
       >
-        <View style={styles.modalRoot}>
-          <Pressable
-            style={styles.modalBackdrop}
-            onPress={() => setSelectedEntry(null)}
-            accessibilityRole="button"
-            accessibilityLabel={labels.close ?? "Close"}
-          />
+        <Pressable
+          style={styles.modalRoot}
+          onPress={() => setSelectedEntry(null)}
+          accessibilityRole="button"
+          accessibilityLabel={labels.close ?? "Close"}
+        >
           {selectedEntry && (
-            <View
+            <Pressable
               style={[
                 styles.modalSheet,
                 {
@@ -172,6 +173,7 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) =
                   paddingBottom: Math.max(insets.bottom, 16) + 16,
                 },
               ]}
+              onPress={(event) => event.stopPropagation()}
               accessibilityViewIsModal
             >
               <View style={styles.modalTopBar}>
@@ -233,9 +235,9 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) =
                   )}
                 </View>
               </ScrollView>
-            </View>
+            </Pressable>
           )}
-        </View>
+        </Pressable>
       </Modal>
     </View>
   );
@@ -266,8 +268,7 @@ const styles = StyleSheet.create({
   definition:     { lineHeight: 18 },
   starBtn:        { padding: 4 },
   empty:          { textAlign: "center", marginTop: 40 },
-  modalRoot:      { flex: 1, justifyContent: "flex-end" },
-  modalBackdrop:  { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.5)" },
+  modalRoot:      { flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.5)" },
   modalSheet:     { maxHeight: "75%", borderTopLeftRadius: 20, borderTopRightRadius: 20, borderTopWidth: 1, overflow: "hidden" },
   modalTopBar:    { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, paddingTop: 12, paddingBottom: 4 },
   modalSideSpacer:{ width: 36 },
