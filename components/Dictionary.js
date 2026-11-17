@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Modal, Pressable, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchBar from "./SearchBar";
 import { glyphOf } from "../utils/glyph";
+import { fontOffset, bodyFontSize, useGlyphFont } from "../utils/typography";
 
 const FAV_KEY = "tokipona:favorites";
 
@@ -25,12 +25,12 @@ function findExamples(content, word) {
 
 const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) => {
   const th = theme ?? {};
-  const fo = fontSizeId === "large" ? 4 : 0;
-  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
+  const fo = fontOffset(fontSizeId);
+  const fontSize = bodyFontSize(screenWidth, fontSizeId);
   const labels = pageTexts.dictionary ?? {};
   const insets = useSafeAreaInsets();
 
-  const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
+  const fontsLoaded = useGlyphFont();
 
   const [query, setQuery]       = useState("");
   const [favOnly, setFavOnly]   = useState(false);

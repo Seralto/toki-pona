@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import Accordion, { accordionShared } from "./Accordion";
 import SearchBar from "./SearchBar";
+import { fontOffset, bodyFontSize } from "../utils/typography";
 
 function parsePhrase(raw) {
   const lines = raw.split("\n").filter((l) => l.trim().length > 0);
@@ -27,8 +28,8 @@ const Sentences = ({ pageTexts, screenWidth, fontSizeId, theme }) => {
   const [query, setQuery] = useState("");
   const scrollRef = useRef(null);
 
-  const fo = fontSizeId === "large" ? 4 : 0;
-  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
+  const fo = fontOffset(fontSizeId);
+  const fontSize = bodyFontSize(screenWidth, fontSizeId);
   const th = theme ?? {};
   const q = query.trim().toLowerCase();
 

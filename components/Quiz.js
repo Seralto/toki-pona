@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
 import { INTL_LOCALE } from "../utils/locale";
 import { glyphOf } from "../utils/glyph";
 import { recordPlayedToday } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_QUIZ_WORD, FIXED_QUIZ_OPTIONS } from "../automation/screenshotConfig";
+import { useGlyphFont } from "../utils/typography";
 
 const NUM_OPTIONS = 4;
 const LABELS = ["A", "B", "C", "D"];
@@ -35,7 +35,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
 
   const advanceTimer = useRef(null);
 
-  const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
+  const fontsLoaded = useGlyphFont();
 
   const fontSize = screenWidth < 400 ? 15 : 17;
   const th = theme ?? {};

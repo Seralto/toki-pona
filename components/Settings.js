@@ -3,6 +3,7 @@ import { View, ScrollView, Text, TouchableOpacity, StyleSheet, Share, Alert, Lin
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import Accordion from "./Accordion";
+import { fontOffset } from "../utils/typography";
 
 const APP_VERSION = Constants.expoConfig?.version ?? "—";
 const FEEDBACK_EMAIL = "contato@sergiotoledo.com.br";
@@ -43,7 +44,7 @@ const Settings = ({
   onResetScore,
 }) => {
   const t = theme ?? {};
-  const fo = currentFontSize === "large" ? 4 : 0;
+  const fo = fontOffset(currentFontSize);
   const scrollRef = useRef(null);
   const s = pageTexts?.settings ?? {};
   const tp = pageTexts?.tokiPona ?? {};

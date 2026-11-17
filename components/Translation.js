@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { glyphOf } from "../utils/glyph";
+import { fontOffset, bodyFontSize } from "../utils/typography";
 
 const Translation = ({ word, text, screenWidth, fontSizeId, fontsLoaded, theme }) => {
-  const fo = fontSizeId === "large" ? 4 : 0;
-  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
+  const fo = fontOffset(fontSizeId);
+  const fontSize = bodyFontSize(screenWidth, fontSizeId);
   const th = theme ?? {};
 
   const glyph = glyphOf(word);

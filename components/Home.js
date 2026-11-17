@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { INTL_LOCALE } from "../utils/locale";
 import { STREAK_KEY, DAY_KEY, localDayNumber } from "../utils/dailyStreak";
 import { SCREENSHOT_MODE, FIXED_WORD, FIXED_SCORE, FIXED_STREAK } from "../automation/screenshotConfig";
+import { fontOffset, useGlyphFont } from "../utils/typography";
 
 const SCORE_KEY  = "@TokiPona:score";
 
@@ -31,9 +31,7 @@ function getWordOfTheDay(dictionary) {
 export default function Home({ dictionary, language, pageTexts, onGoToQuiz, screenWidth, fontSizeId, theme }) {
   const [score, setScore]   = useState(null);
   const [streak, setStreak] = useState(0);
-  const [fontsLoaded] = useFonts({
-    "sitelen-pona": require("../assets/fonts/linja-pona.otf"),
-  });
+  const fontsLoaded = useGlyphFont();
 
   useEffect(() => {
     if (SCREENSHOT_MODE) {
@@ -49,7 +47,7 @@ export default function Home({ dictionary, language, pageTexts, onGoToQuiz, scre
     });
   }, []);
 
-  const fo = fontSizeId === "large" ? 4 : 0;
+  const fo = fontOffset(fontSizeId);
   const t = pageTexts?.home ?? {};
   const wordClasses = t.wordClasses ?? {};
 

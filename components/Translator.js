@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from "expo-font";
 
 import Translation from "./Translation";
+import { fontOffset, useGlyphFont } from "../utils/typography";
 
 const Translator = ({
   pageTexts,
@@ -24,12 +24,12 @@ const Translator = ({
   fontSizeId,
   theme,
 }) => {
-  const fo = fontSizeId === "large" ? 4 : 0;
+  const fo = fontOffset(fontSizeId);
   const titleFontSize = (screenWidth < 400 ? 20 : 26) + fo;
   const fontSize = (screenWidth < 400 ? 15 : 18) + fo;
   const th = theme ?? {};
   const [focused, setFocused] = useState(false);
-  const [fontsLoaded] = useFonts({ "sitelen-pona": require("../assets/fonts/linja-pona.otf") });
+  const fontsLoaded = useGlyphFont();
 
   useEffect(() => {
     const t = setTimeout(() => inputRef?.current?.focus(), 150);

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import Accordion, { accordionShared } from "./Accordion";
+import { fontOffset, bodyFontSize } from "../utils/typography";
 
 /** One example line: "toki pona phrase = Translation" */
 function ExampleLine({ line, fontSize, th }) {
@@ -74,8 +75,8 @@ function SectionContent({ text, fontSize, th }) {
 const Grammar = ({ pageTexts, screenWidth, fontSizeId, theme }) => {
   const content = pageTexts.content;
   const th = theme ?? {};
-  const fo = fontSizeId === "large" ? 4 : 0;
-  const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
+  const fontSize = bodyFontSize(screenWidth, fontSizeId);
+  const fo = fontOffset(fontSizeId);
   const scrollRef = useRef(null);
 
   return (
