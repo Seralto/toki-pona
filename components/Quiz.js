@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
-import { useAudioPlayer } from "expo-audio";
+import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { INTL_LOCALE } from "../utils/locale";
 import { glyphOf } from "../utils/glyph";
@@ -35,8 +35,6 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
 
   const advanceTimer = useRef(null);
 
-  const rightSound = useAudioPlayer(require("../assets/right-answer.wav"));
-  const wrongSound = useAudioPlayer(require("../assets/wrong-answer.wav"));
   const fontsLoaded = useGlyphFont();
 
   const fontSize = screenWidth < 400 ? 15 : 17;
@@ -46,14 +44,14 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
   /* ── Sound ─────────────────────────────────────────────────── */
   const playSound = async (result) => {
     if (muted) return;
-
-    const player = result === "right" ? rightSound : wrongSound;
     try {
-      await player.seekTo(0);
-      player.play();
-    } catch (error) {
-      console.warn("Could not play quiz sound.", error);
-    }
+      const sound = new Audio.Sound();
+      sound.setOnPlaybackStatusUpdate((s) => { if (s.didJustFinish) sound.unloadAsync(); });
+      await sound.loadAsync(result === "right"
+        ? require("../assets/right-answer.wav")
+        : require("../assets/wrong-answer.wav"));
+      await sound.playAsync();
+    } catch (_) {}
   };
 
   /* ── Game logic ─────────────────────────────────────────────── */
