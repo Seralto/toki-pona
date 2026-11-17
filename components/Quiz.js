@@ -3,6 +3,7 @@ import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Modal, Pressable 
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { glyphOf } from "../utils/glyph";
 import { SCREENSHOT_MODE, FIXED_QUIZ_WORD, FIXED_QUIZ_OPTIONS } from "../automation/screenshotConfig";
 
 const NUM_OPTIONS = 4;
@@ -231,7 +232,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
         {glyphMode === "glyph-word" ? (
           /* Show ONLY the glyph — user must name it */
           fontsLoaded && (
-            <Text style={[styles.glyph, { color: th.accent, fontSize: 72, lineHeight: 80 }]}>{randomWord}</Text>
+            <Text style={[styles.glyph, { color: th.accent, fontSize: 72, lineHeight: 80 }]}>{glyphOf(randomWord)}</Text>
           )
         ) : glyphMode === "word-glyph" ? (
           /* Show only the word name — user must pick the glyph */
@@ -245,7 +246,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
             {revealed && (
               <View style={[styles.revealRow, { borderTopColor: th.surfaceBorder }]}>
                 {fontsLoaded && (
-                  <Text style={[styles.revealGlyph, { color: th.accent }]}>{randomWord}</Text>
+                  <Text style={[styles.revealGlyph, { color: th.accent }]}>{glyphOf(randomWord)}</Text>
                 )}
                 <Text style={[styles.revealWord, { color: th.accent }]}>{randomWord}</Text>
               </View>
@@ -255,7 +256,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
           /* Show word + glyph → ask for definition */
           <View style={styles.wordRow}>
             {fontsLoaded && (
-              <Text style={[styles.glyph, { color: th.accent }]}>{randomWord}</Text>
+              <Text style={[styles.glyph, { color: th.accent }]}>{glyphOf(randomWord)}</Text>
             )}
             <Text style={[styles.questionWord, { color: th.text }]}>{randomWord}</Text>
           </View>
@@ -268,7 +269,7 @@ const Quiz = ({ pageTexts, dictionary, score, language, onChangeScore, screenWid
           const c = optionColors(key);
           // word-glyph: options are glyphs; glyph-word: options are word names; others: translation or word
           const isGlyphOption = glyphMode === "word-glyph";
-          const optText = isGlyphOption ? key : reversed ? key : dictionary[key];
+          const optText = isGlyphOption ? glyphOf(key) : reversed ? key : dictionary[key];
           return (
             <TouchableOpacity
               key={key}

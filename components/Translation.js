@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { glyphOf } from "../utils/glyph";
 
 const Translation = ({ word, text, screenWidth, fontSizeId, fontsLoaded, theme }) => {
   const fo = fontSizeId === "large" ? 4 : 0;
   const fontSize = (screenWidth < 400 ? 15 : 17) + fo;
   const th = theme ?? {};
 
-  const glyph = word === "ale/ali" ? "ale" : word.split("/")[0];
+  const glyph = glyphOf(word);
 
   return (
     <View style={[styles.row, { backgroundColor: th.surface ?? th.cardBg, borderColor: th.surfaceBorder }]}>

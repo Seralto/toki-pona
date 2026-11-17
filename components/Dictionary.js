@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import SearchBar from "./SearchBar";
+import { glyphOf } from "../utils/glyph";
 
 const FAV_KEY = "tokipona:favorites";
 
@@ -54,7 +55,7 @@ const Dictionary = ({ pageTexts, dictionary, screenWidth, fontSizeId, theme }) =
   const entries = Object.entries(dictionary).map(([word, definition]) => ({
     word,
     definition,
-    glyph: word.split("/")[0],
+    glyph: glyphOf(word),
   }));
 
   const q = query.trim().toLowerCase();
