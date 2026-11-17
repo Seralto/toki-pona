@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet, Platform } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,6 +11,8 @@ const NAV_ITEMS = [
   { key: "quiz",       icon: "game-controller-outline", iconActive: "game-controller" },
 ];
 
+const BASE_PADDING_BOTTOM = 10;
+
 const BottomMenu = ({ pageTexts, currentPage, theme, onChangePage }) => {
   const t = theme ?? {};
   const insets = useSafeAreaInsets();
@@ -19,7 +21,7 @@ const BottomMenu = ({ pageTexts, currentPage, theme, onChangePage }) => {
     <View style={[styles.bottomMenu, {
       backgroundColor: t.bottomMenu,
       borderTopColor: t.bottomMenuBorder,
-      paddingBottom: Platform.OS === "android" ? insets.bottom + 10 : 10,
+      paddingBottom: insets.bottom + BASE_PADDING_BOTTOM,
     }]}>
       {NAV_ITEMS.map(({ key, icon, iconActive }) => {
         const isActive = currentPage === key;
@@ -54,7 +56,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopWidth: 1,
     paddingVertical: 6,
-    paddingBottom: 10,
   },
   navItem: {
     flex: 1,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, Platform } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import themes from "./themes";
@@ -212,7 +212,10 @@ class App extends Component {
         />
       </View>
     ) : (
-      <SafeAreaView style={[styles.app, { backgroundColor: theme.background, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 }]}>
+      <SafeAreaView
+        edges={["top"]}
+        style={[styles.app, { backgroundColor: theme.background }]}
+      >
         {/* Top header */}
         <View style={[styles.header, { backgroundColor: theme.header, borderBottomColor: theme.headerBorder }]}>
           <Text style={[styles.headerTitle, { color: theme.text }]}>Toki Pona</Text>
